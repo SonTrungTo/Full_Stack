@@ -3,23 +3,47 @@
     <title>Forms</title>
   </head>
   <body>
-    <p>Username:
-      <input type="text" name="Username" maxlength="15" />
-    </p>
-    <p>Password:
-      <input type="password" name="Password" maxlength="30">
-    </p>
-    <p>Your favorite CS department: <br />
-      <input type="checkbox" name="CS department" value="Stanford" checked="checked" />
-      Stanford
-      <input type="checkbox" name="CS department" value="Harvard" />
-      Harvard
-      <input type="checkbox" name="CS department" value="MIT" />
-      MIT
-      <input type="checkbox" name="CS department" value="UC Berkeley" />
-      UC Berkeley
-      <input type="checkbox" name="CS department" value="CMU" />
-      CMU
-    </p>
+    <form action="http://www.example.org/subscribe.php" method="post">
+      <fieldset>
+        <legend>Account information</legend>
+        <label>Username:<input type="text" name="Username" maxlength="15" required /></label>
+        <br />
+        <label>Password:<input type="password" name="Password" maxlength="30" required></label>
+        <br />
+        <label for="username">Departure date:<input type="date" name="depart" /> </label>
+        <br />
+        <label for="username">Email address:<input type="email" name="email" /> </label>
+        <br />
+        <label for="username">Website:<input type="url" name="website" /> </label>
+        <br />
+        <label for="username">Search:<input type="search" name="search"
+          placeholder="Search something"> </label>
+        <br />
+        <input type="submit" value="Submit">
+        <br />
+      </fieldset>
+      Your favorite CS department:
+      <br />
+        <input id="S" type="checkbox" name="CS department" value="Stanford" checked="checked" />
+        <label for="S">Stanford</label>
+        <input id="H" type="checkbox" name="CS department" value="Harvard" />
+        <label for="H">Harvard</label>
+        <input id="M" type="checkbox" name="CS department" value="MIT" />
+        <label for="M">MIT</label>
+        <input id="UCB" type="checkbox" name="CS department" value="UC Berkeley" />
+        <label for="UCB">UC Berkeley</label>
+        <input id="CMU" type="checkbox" name="CS department" value="CMU" />
+        <label for="CMU">CMU</label>
+      <p>Your undergraduate institution: (Hold down the control key in PC or command
+        key in MAC to select multiple institutions) </p>
+        <select name="Undergrad school" size="2" multiple="multiple">
+          <option value="University of Helsinki" selected="selected">University of Helsinki</option>
+          <option value="Aalto University">Aalto University</option>
+          <option value="University of Eastern Finland">University of Eastern Finland</option>
+          <option value="Åbo Akademi">Åbo Akademi</option>
+        </select>
+        <p><button><img src="../images/SW_JFO_cover.jpg" alt="add"
+          heigh="10" width="10">Add </button></p>
+    </form>
   </body>
 </html>

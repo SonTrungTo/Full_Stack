@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Forms</title>
+  </head>
+  <body>
+    <form action="http://www.example.com/review.php"
+    method="post">
+      <fieldset>
+        <legend>Your Details:</legend>
+        <label>Name: <input type="text" name="Name" /> </label>
+        <br />
+        <label>Email: <input type="email" name="Email" /> </label>
+        <br />
+      </fieldset>
+      <fieldset>
+        <legend>Your Review:</legend>
+        <label>How did your hear about us?
+          <select name="Sponsored Company">
+            <option value="Google">Google</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Amazon">Amazon</option>
+          </select></label>
+        <br />
+        <p>
+        Would you visit again? <br />
+        <input type="radio" name="interested" value="yes" id="yes">
+        <label for="yes">Yes</label>
+        <input type="radio" name="interested" value="no" id="no">
+        <label for="no">No</label>
+        <input type="radio" name="interested" value="may_be" id="may_be">
+        <label for="may_be">Maybe</label>
+        <br />
+        <label for="comments">Comments:</label> <br />
+        <textarea name="comments" rows="3" cols="30" id="comments"></textarea>
+        </p>
+        <input type="checkbox" name="sign_up" value="yes" id="sign_up" />
+        <label for="sign_up">Sign me up for email updates</label>
+        <br />
+        <input type="submit" value="Submit review" />
+      </fieldset>
+    </form>
+  </body>
+</html>
