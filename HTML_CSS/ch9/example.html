@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Adding a Flash Movie </title>
+    <script type="text/javascript"
+    src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <object type="application/x-shockwave-flash" data="app.swf">
+    <param name='movie' value="app.swf"/>
+    </object> <!-- SWFObject 2.2 does not work properly anymore. -->
+    <script type="text/javascript">
+      swfobject.embedSWF("flash/bird.swf","bird","400","300","8.0.0");
+    </script>
+  </head>
+  <body>
+    <div id="bird">
+      <p>An animation of a bird taking a shower.</p>
+    </div>
+  </body>
+</html>
