@@ -1,0 +1,27 @@
+* {
+  font-family: Arial, Verdana, sans-serif;}
+body {
+  color: #665544;
+  padding: 10px;}
+h1 {
+  font-family: "Courier New", monospace;
+  border: inherit;
+  padding: inherit;}
+i {
+  color: green;}
+i {
+  color: red;}
+b {
+  color: pink;}
+p b {
+  color: blue !important;}
+p b {
+  color: violet;}
+p#intro {
+  font-size: 75%;}
+p {
+  font-size: 100%;}
+.page {
+  border: 1px solid #665544;
+  background-color: #efefef;
+  padding: inherit;}
