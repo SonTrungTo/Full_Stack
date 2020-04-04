@@ -8,4 +8,7 @@ h2 {background-color: #ee3e80;
 p  {background-color: rgb(255,255,255);
     color: black;
     padding: inherit;
-    background-color: rgba(255,255,255,0.65);}
+    background-color: rgba(255,255,255,0.65);
+    margin: 0px;}
+p.note {background-color: #7fd7a6;
+        background-color: hsla(147,52%,67%,1);}
