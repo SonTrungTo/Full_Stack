@@ -1,0 +1,41 @@
+body {
+      font-family: "Times New Roman", Georgia, serif;
+      font-size:  16px;}
+h1,h2,h3,a {
+      font-family: Arial, Verdana, sans-serif;
+      font-size: 200%;
+      font-weight: bold;
+      color: #14bdff;}
+h2 {
+    font-size: 100%;
+    text-transform: capitalize;
+    font-weight: normal;}
+a:link {
+  text-decoration: none;}
+a:hover {
+  text-decoration: underline;}
+.credits {
+      font-family: Courier, "Courier New", monospace;
+      text-align: right;}
+.intro {
+      font-family: 'Dancing Script',cursive;}
+#sub   {vertical-align: sub;}
+#super {vertical-align: super;}
+#top   {vertical-align: top;}
+.sexy {text-shadow: 9px 5px 7px #d02f2f;}
+p.intro::first-line {
+        font-family: "Times New Roman", Georgia, serif;
+        font-weight: bold;}
+p.intro::first-letter {
+        font-size: 200%;}
+input {
+      padding: 6px 12px 6px 12px;
+      border:  1px solid #665544;}
+input.submit:hover {
+      background-color: #665544;}
+input.submit:active {
+      background-color: #e72323;}
+input.text {
+      color: #cccccc;}
+input.text:focus {
+      color: #665544;}
