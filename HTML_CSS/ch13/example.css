@@ -1,0 +1,47 @@
+#page {
+  font-family: "Times New Roman", Times, sans-serif;
+  min-width: 600px;
+  max-width: 1000px;
+  min-height: 600px;
+  max-height: 1000px;
+  border: 3px double #666666;
+  padding: 10px;
+  margin: 20px auto 20px auto;
+  }
+#images, p {
+  width: 600px;
+  margin: 10px auto 10px auto;}
+p {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;}
+h1, h2, h3 {
+  text-align: center;
+  width: 300px;
+  margin: 0px auto 0px auto;
+  text-transform: uppercase;
+  color: #665544;}
+h1 {
+    font-size: 85%;}
+h2 {
+    font-size: 250%;
+    color: black;}
+h3 {
+    letter-spacing: 0.2em;}
+a  {
+    text-transform: uppercase;
+    font-weight: bold;}
+a:link {
+  text-decoration: none;
+  color: black;}
+a:hover {
+  text-decoration: underline;}
+ul {
+  padding: 20px;
+  text-align: center;
+  width: 700px;
+  margin: 20px auto 20px auto;
+  border-width: 2px 0px 2px 0px;
+  border-style: solid;}
+li {
+  display: inline;
+  margin-right: 45px;}
