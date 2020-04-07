@@ -1,0 +1,22 @@
+fieldset {
+  width: 350px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: right;
+  margin: 5px auto 5px auto;}
+legend {
+  background-color: #efefefef;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-align: left;
+  text-transform: uppercase;}
+div {
+  padding-bottom: 10px;}
+.title {
+  float: left; /* Needed because full box is not drawn fully */
+  width: 100px;
+  text-align: right;}
+input {
+  cursor: move;}
