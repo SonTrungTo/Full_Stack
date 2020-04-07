@@ -1,0 +1,67 @@
+body {
+      font-family: Arial, sans-serif;
+      font-size: 80%;
+      padding: 5px;
+      margin: 10px;
+      color: #444444;
+      line-height: 1.4em;}
+ul {
+    list-style: none url("https://img.icons8.com/bubbles/15/000000/image.png") outside;}
+table {
+       width: 800px;
+       border-collapse: collapse;
+       margin-bottom: 10px;}
+th:first-child{
+       border-top-left-radius: 5px;
+       border-left: #111111 solid 1px;}
+th:last-child {
+       border-top-right-radius: 5px;
+       border-right: #111111 solid 1px;}
+td {
+       border: 1px solid #333333;
+       background-color: #80e1ff;
+       padding: 5px;}
+th {
+       background-color: #56a2dc;
+       color: #ffffff;
+       padding: 5px;
+       border-bottom-width: 2px;
+       border-bottom-style: solid;
+       border-bottom-color: #2a85cb;}
+th:first-child+th {
+       border-left-color: #111111;
+       border-right-color: #111111;
+       border-left-width: 1px;
+       border-right-width: 1px;
+       border-style: solid;}
+th:first-child+th+th {
+      border-left-color: #111111;
+      border-right-color: #111111;
+      border-left-width: 1px;
+      border-right-width: 1px;
+      border-style: solid;}
+tr.even>td {
+       background-color: #b3edff;}
+td:first-child {
+       font-weight: bold;}
+legend {
+       font-style: italic;
+       background-color: #efefef;}
+fieldset {
+       width: 600px;
+       text-align: left;}
+div {
+       padding: 5px;
+       margin: 5px;}
+.register {
+       text-align: right;}
+.title {
+       float: left;
+       width: 200px;
+       text-align: right;}
+input:focus {
+       background-color: #cb2ab0;}
+input:hover {
+       color: #ffffff;
+       background-color: #555555;
+       cursor: move;}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Lists, Tables and Forms</title>
+    <link rel="stylesheet" href="example.css" type="text/css" />
+  </head>
+  <body>
+    <h1>Poetry Workshops</h1>
+    <p>We will be conducting a number of poetry workshops and
+    symposiums throughout the year.</p>
+    <p>Please note that the following events are free to members:</p>
+    <ul>
+      <li>A Poetic Perspective</li>
+      <li>Walt Whitman at War</li>
+      <li>Found Poems and Outsider Poetry</li>
+    </ul>
+    <div>
+      <table>
+        <thead>
+          <tr class="heading">
+            <th></th>
+            <th class="second">New York</th>
+            <th class="third-head">Chicago</th>
+            <th>San Francisco</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A Poetic Perspective</td>
+            <td>Sat, 4 Feb 2012 <br />
+            11am - 2pm</td>
+            <td>Sat, 3 Mar 2012 <br />
+            11am - 2pm</td>
+            <td>Sat, 17 Mar 2012 <br />
+            11am - 2pm</td>
+          </tr>
+          <tr class="even">
+            <td>Walt Whitman at War</td>
+            <td>Sat, 7 Apr 2012, <br />
+            11am - 1pm</td>
+            <td>Sat, 5 May 2012, <br />
+            11am - 1pm</td>
+            <td>Sat, 19 May 2012 <br />
+            11am - 1pm</td>
+          </tr>
+          <tr>
+            <td>Found Poems & Outsider Poetry</td>
+            <td>Sat, 9 Jun 2012 <br />
+            11am - 2pm</td>
+            <td>Sat, 7 Jul 2012 <br />
+            11am - 2pm</td>
+            <td>Sat, 21 Jul 2012 <br />
+            11am - 2pm</td>
+          </tr>
+          <tr class="even">
+            <td>Natural Death: An Exploration</td>
+            <td>Sat, 4 Aug 2012 <br />
+            11am - 4pm</td>
+            <td>Sat, 8 Sep 2012 <br />
+            11am - 4pm</td>
+            <td>Sat, 15 Sep 2012 <br />
+            11am - 4pm</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="">
+      <form action="index.html" method="post">
+        <fieldset>
+          <legend>Register your interest</legend>
+          <div>
+            <label for="text" class="title">Your name:</label>
+            <input type="text" name="name" />
+          </div>
+          <div>
+            <label for="email" class="title">Your email:</label>
+            <input type="email" name="email" />
+          </div>
+          <div>
+            <label for="select" class="title">Your closest center:</label>
+            <select class="" name="center">
+              <option value="New York">New York</option>
+              <option value="Massachusetts">Massachusetts</option>
+              <option value="California">California</option>
+              <option value="Helsinki">Helsinki</option>
+              <option value="Espoo">Espoo</option>
+              <option value="Vantaa">Vantaa</option>
+            </select>
+          </div>
+          <div>
+            <span class="title">Are you a member?</span>
+            <input type="radio" name="member" value="Y" />
+            <label for="radio">Yes</label>
+            <input type="radio" name="member" value="N" />
+            <label for="radio">No</label>
+          </div>
+          <div class="register">
+            <input type="submit" name="submit" value="Register" />
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>
