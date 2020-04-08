@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, Verdana, sans-serif;
+  color: #665544;
+}
+p {
+  width: 450px;
+}
+h1 {
+  position: fixed;
+  top: 0px;
+  left: 50px;
+  width: 100%;
+  padding: 10px;
+  margin: 0px;
+  background-color: #efefef;}
+p.example {
+  margin-top: 75px;}
