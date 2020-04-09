@@ -1,0 +1,22 @@
+body {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;}
+#content {overflow: auto;}
+#nav, #feature, #footer {
+  margin: 1%;}
+.col1, .col2, .col3 {
+  width: 31.3%;
+  float: left;
+  margin: 1%;}
+.col3 {margin-right: 0%;}
+li {
+  display: inline;
+  padding: 0.5em;}
+#nav, #footer {
+  background-color: #efefef;
+  padding: 0.5em 0;}
+#feature, .article {
+  background-color: #efefef;
+  margin-bottom: 1em;
+  height: 10em;}
