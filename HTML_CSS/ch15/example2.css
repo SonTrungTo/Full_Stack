@@ -1,0 +1,7 @@
+div {
+      border: 1px solid #665544;
+      width: 100%;
+      overflow: auto;}
+p {
+      float: left;
+      width: 500px;}
