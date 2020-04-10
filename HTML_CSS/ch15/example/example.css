@@ -1,0 +1,45 @@
+body {
+  background-image: url("images/book.jpg");
+  background-repeat: no-repeat;
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 90%;
+  margin: 0px;
+  text-align: center;}
+a {
+    padding: 10px;
+    text-decoration: none;
+    color: #b5c1ad;}
+a:hover {
+    color: #dab3ff;
+    font-size: 105%;}
+.header {
+    padding: 0px 0px 0px 0px;
+    height: 100px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: rgba(68,68,68,0.5);
+}
+.nav {
+    float: right;
+    font-family: Arial, sans-serif;
+    padding: 45px 0px 0px 0px;
+    text-align: right;
+}
+.wrapper {
+    width: 100%;
+    margin: 0px auto;
+    background-image: url("images/book.jpg");
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    text-align: left;}
+h1 {
+    margin-top: 140px;
+    font-size: 240%;}
+.intro {
+    clear: left;
+    font-size: 90%;
+    line-height: 1.4em;
+    width: 100%;
+    overflow: auto;}
