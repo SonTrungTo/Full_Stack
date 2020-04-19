@@ -63,6 +63,12 @@ figure {
   padding: 1rem;
 }
 
+#emoji img {
+  height: 200px;
+  width: 200px;
+}
+
+
 /*
 Extra small (xs) devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap
