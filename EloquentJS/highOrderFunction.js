@@ -47,3 +47,14 @@ function some(array, test) {
 
   return false;
 }
+
+// array.findIndex(f) => ~ indexOf(value) but takes function
+function findIndex(array, find) {
+  for (let element of array) {
+    if(find(element)) {
+      return array.indexOf(element);
+    }
+  }
+
+  return -1;
+}
