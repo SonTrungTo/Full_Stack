@@ -42,4 +42,4 @@ function textScripts(text) {
 }
 
 console.log(textScripts(`わたしは、あなたを愛しています, Tôi mến bạn, tyttöystävä.
-  Haluan panna sinua. Tiếng việt không xấu, nhưng cũng không tốt`));
+  Tiếng việt không xấu, nhưng cũng không tốt`));
