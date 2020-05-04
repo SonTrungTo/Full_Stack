@@ -26,6 +26,7 @@ console.log([1,2][toStringProperty]());
 // received to be iterable. It returns the second interface, interator with next() =>
 // an object with value and done property.
 let okIterator = "OK"[Symbol.iterator]();
+console.log(okIterator);
 console.log(okIterator.next());
 console.log(okIterator.next());
 console.log(okIterator.next());
