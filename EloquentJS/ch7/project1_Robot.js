@@ -28,3 +28,17 @@ function buildGraph(edges) {
 
 let roadGraph = buildGraph(roads);
 console.log(roadGraph);
+
+// We demonstrate world event with only minimal measurements: the robot's current location
+// and a collection of parcels, each of which has a current location and its address.
+// Also, we don't *change* the world event, but compute a *new* event.
+class VillageState {
+  constructor(location, parcels) {
+    this.location = location;
+    this.parcels = parcels;
+  }
+
+  move(destination) {
+    
+  }
+}
