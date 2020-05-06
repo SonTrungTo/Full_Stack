@@ -27,7 +27,6 @@ function buildGraph(edges) {
 }
 
 let roadGraph = buildGraph(roads);
-console.log(roadGraph);
 
 // We demonstrate world event with only minimal measurements: the robot's current location
 // and a collection of parcels, each of which has a current location and its address.
@@ -38,7 +37,24 @@ class VillageState {
     this.parcels = parcels;
   }
 
-  move(destination) {
-    
+  move(destination) { // where the delivery happens
+    if (!roadGraph[this.location].includes(destination)) {
+      return this;
+    } else {
+      let parcels = this.parcels.map(p => {
+        if(p.place != this.location) return p;
+        else return {place: destination, address: p.address};
+      }).filter(p => p.place != p.address);
+
+      return new VillageState(destination, parcels);
+    }
   }
 }
+
+let first = new VillageState(
+  "Post Office",
+  [{place: "Post Office", address: "Alice's House"}]
+);
+let next = first.move("Alice's House");
+console.log(next);
+console.log(first);
