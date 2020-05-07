@@ -81,7 +81,7 @@ function runRobot(state, robot, memory) {
 }
 
 // ? Strategy in each state of the robot? How to decide direction?
-// Strategy #1: Random walks.
+// Strategy #1: Random walks. (A.K.A, Worst strategy ever!)
 function randomPick(array) {
   let choice = Math.floor(Math.random() * array.length);
   return array[choice];
@@ -94,5 +94,5 @@ function randomRobot(state) {
 // We next initialize a world state where some parcels are laid around, waiting
 // to be picked up, by adding a static method inside VillageState.
 
-// Testing...
-runRobot(VillageState.random(), randomRobot);
+// Strategy #2: Mail-truck delivery: Follow a route such that the robot visits all.
+const mailRoute = ["Alice's House",""];
