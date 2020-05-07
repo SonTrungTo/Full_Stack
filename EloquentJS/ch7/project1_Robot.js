@@ -95,4 +95,17 @@ function randomRobot(state) {
 // to be picked up, by adding a static method inside VillageState.
 
 // Strategy #2: Mail-truck delivery: Follow a route such that the robot visits all.
-const mailRoute = ["Alice's House",""];
+// We need the robot to memorize the fixed route. (A.K.A, the not-so-smart robot)
+const mailRoute = ["Alice's House", "Cabin", "Alice's House", "Bob's House",
+"Town Hall","Dick's House","Erina's House", "George's House", "Shop", "Market",
+"Farm", "Market", "Post Office"];
+
+function mailRobot(state, memory) {
+  if (memory.length == 0) {
+    memory = mailRoute;
+  }
+
+  return {direction: memory[0] , memory: memory.slice(1) };
+}
+
+runRobot(VillageState.random(), mailRobot, []);
