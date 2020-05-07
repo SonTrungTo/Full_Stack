@@ -37,7 +37,7 @@ class VillageState {
     this.parcels = parcels;
   }
 
-  move(destination) { // where the delivery happens
+  move(destination) { // updates after certain robot location and parcels position, given its destination.
     if (!roadGraph[this.location].includes(destination)) {
       return this;
     } else {
@@ -49,12 +49,43 @@ class VillageState {
       return new VillageState(destination, parcels);
     }
   }
+  static random(parcelsCount = 5) {
+    let parcels = [];
+    for (let count = 0; count < parcelsCount; count++) {
+      let address = randomPick(Object.keys(roadGraph));
+      let place;
+      do {
+        
+      } while (place == address);
+    }
+  }
 }
 
-let first = new VillageState(
-  "Post Office",
-  [{place: "Post Office", address: "Alice's House"}]
-);
-let next = first.move("Alice's House");
-console.log(next);
-console.log(first);
+// We now build a robot such that robot(state, memory) => object that has
+// *direction*, which describes the next place it wants to go to, and *memory*, which
+// returns a value for planning its action, properties.
+function runRobot(state, robot, memory) {
+  for (turn = 0;;++turn) {
+    if (state.parcels.length == 0) {
+      console.log(`Finished in ${turn} moves.`);
+      break;
+    }
+    let action = robot(state, memory);
+    state  = state.move(action.direction);
+    memory = action.memory;
+  }
+}
+
+// ? Strategy in each state of the robot? How to decide direction?
+// Strategy #1: Random walks.
+function randomPick(array) {
+  let choice = Math.floor(Math.random() * array.length);
+  return array[choice];
+}
+
+function randomRobot(state) {
+  return {direction: randomPick(roadGraph[state.location])};
+}
+
+// We next initialize a world state where some parcels are laid around, waiting
+// to be picked up, by adding a static method inside VillageState.
