@@ -55,9 +55,12 @@ class VillageState {
       let address = randomPick(Object.keys(roadGraph));
       let place;
       do {
-        
+        place = randomPick(Object.keys(roadGraph));
       } while (place == address);
+      parcels.push({place, address});
     }
+
+    return new VillageState("Post Office", parcels);
   }
 }
 
@@ -65,7 +68,7 @@ class VillageState {
 // *direction*, which describes the next place it wants to go to, and *memory*, which
 // returns a value for planning its action, properties.
 function runRobot(state, robot, memory) {
-  for (turn = 0;;++turn) {
+  for (let turn = 0;;++turn) {
     if (state.parcels.length == 0) {
       console.log(`Finished in ${turn} moves.`);
       break;
@@ -73,6 +76,7 @@ function runRobot(state, robot, memory) {
     let action = robot(state, memory);
     state  = state.move(action.direction);
     memory = action.memory;
+    console.log(`Moved to ${action.direction}`);
   }
 }
 
@@ -89,3 +93,6 @@ function randomRobot(state) {
 
 // We next initialize a world state where some parcels are laid around, waiting
 // to be picked up, by adding a static method inside VillageState.
+
+// Testing...
+runRobot(VillageState.random(), randomRobot);
