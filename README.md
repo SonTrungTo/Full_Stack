@@ -9,6 +9,7 @@
 
 ## Projects
 1. [Son's Website](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/Bootstrap_Flexbox/project.html)
+2. [Robot Delivery](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch7/project1.html)
 
 ## License
 MIT
