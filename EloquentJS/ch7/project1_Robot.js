@@ -108,4 +108,31 @@ function mailRobot(state, memory) {
   return {direction: memory[0] , memory: memory.slice(1) };
 }
 
-runRobot(VillageState.random(), mailRobot, []);
+// Strategy #3: We aim to solve search problem: the problem of finding a route
+// on a graph. This way, the robot will behave more intelligently.
+function findRoute(graph, from, to) {
+  let work = [{at: from, route: []}];
+  for (let i = 0; i < work.length; ++i) {
+    let {at, route} = work[i]; // === (let at = object.at, route = object.route;)
+    for (let place of roadGraph[at]) {
+      if (to == place) return route.concat(place);
+      if (!work.some(w => w.at == place)) {
+        work.push({at: place, route: route.concat(place)});
+      }
+    }
+  }
+}
+
+function searchProblemRobot(state, memory) {
+  if (memory.length == 0) {
+    let parcel = state.parcels[0];
+    if (state.location != parcel.place) {
+      memory = findRoute(roadGraph, state.location, parcel.place);
+    } else {
+      memory = findRoute(roadGraph, state.location, parcel.address);
+    }
+  }
+  return {direction: memory[0], memory: memory.slice(1)};
+}
+
+runRobot(VillageState.random(), searchProblemRobot, []);
