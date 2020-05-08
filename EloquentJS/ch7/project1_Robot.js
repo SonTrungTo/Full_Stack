@@ -134,5 +134,3 @@ function searchProblemRobot(state, memory) {
   }
   return {direction: memory[0], memory: memory.slice(1)};
 }
-
-runRobot(VillageState.random(), searchProblemRobot, []);
