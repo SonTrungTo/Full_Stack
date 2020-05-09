@@ -1,11 +1,14 @@
 // Roads form a graph
-const roads = ["Cabin-Alice's House", "Alice's House-Bob's House",
-               "Alice's House-Post Office", "Bob's House-Town Hall",
-               "Dick's House-Erina's House", "Dick's House-Town Hall",
-               "Erina's House-George's House", "George's House-Farm",
-               "George's House-Shop", "Farm-Market",
-               "Market-Post Office", "Market-Shop",
-               "Market-Town Hall", "Town Hall-Shop"];
+var roads = [
+  "Alice's House-Bob's House",   "Alice's House-Cabin",
+  "Alice's House-Post Office",   "Bob's House-Town Hall",
+  "Dick's House-Erina's House", "Dick's House-Town Hall",
+  "Erina's House-George's House", "George's House-Farm",
+  "George's House-Shop",          "Marketplace-Farm",
+  "Marketplace-Post Office",     "Marketplace-Shop",
+  "Marketplace-Town Hall",       "Shop-Town Hall"
+];
+
 // Convert to a data structure that tells what places can be reached from a certain node.
 function buildGraph(edges) {
   let graph = Object.create(null);
@@ -49,7 +52,7 @@ class VillageState {
       return new VillageState(destination, parcels);
     }
   }
-  static random(parcelsCount = 5) {
+  static random(parcelsCount = 10) {
     let parcels = [];
     for (let count = 0; count < parcelsCount; count++) {
       let address = randomPick(Object.keys(roadGraph));
@@ -134,5 +137,3 @@ function searchProblemRobot(state, memory) {
   }
   return {direction: memory[0], memory: memory.slice(1)};
 }
-
-runRobot(VillageState.random(), searchProblemRobot, []);
