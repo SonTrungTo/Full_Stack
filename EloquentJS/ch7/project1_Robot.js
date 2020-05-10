@@ -139,7 +139,7 @@ function searchProblemRobot(state, memory) {
   return {direction: memory[0], memory: memory.slice(1)};
 }
 
-// Exercise 6.1: compareRobots(state, robot_1, robot_2, memory_1, memory_2)
+// Exercise 7.1: compareRobots(state, robot_1, robot_2, memory_1, memory_2)
 function compareRobots(robot_1, robot_2, memory_1, memory_2) {
   let totalTasks = VillageState.random(100);
   let n_1 = runRobot(totalTasks, robot_1, memory_1);
@@ -149,4 +149,22 @@ function compareRobots(robot_1, robot_2, memory_1, memory_2) {
 robot_2 finished ${n_2/totalTasks.parcels.length} steps per task.`);
 }
 
-//compareRobots(searchProblemRobot, mailRobot, [], []);
+compareRobots(searchProblemRobot, mailRobot, [], []);
+
+// Exercise 7.2: optimizedRobot(state, memory) can improve upon searchProblemRobot
+// - the shortest path to a package
+function optimizedRobot({location, parcels}, memory) {
+  if (memory.length == 0) {
+    let route, maxLength = 0;
+    for (let parcel of parcels) {
+      if (location != parcel.place) {
+        route = findRoute(roadGraph, location, parcel.place);
+        if (route.length > maxLength) {
+          maxLength = route.length;
+        }
+      } else {
+
+      }
+    }
+  }
+}
