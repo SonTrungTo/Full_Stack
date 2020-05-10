@@ -168,18 +168,19 @@ compareRobots(searchProblemRobot, mailRobot, [], []);
 
 // Exercise 7.2: optimizedRobot(state, memory) can improve upon searchProblemRobot
 // - the shortest path to a package
+// - if there are multiple shortest, pick the pick-up one.
 function optimizedRobot({location, parcels}, memory) {
   if (memory.length == 0) {
-    let route, maxLength = 0;
+    let routes = [];
     for (let parcel of parcels) {
-      if (location != parcel.place) {
-        route = findRoute(roadGraph, location, parcel.place);
-        if (route.length > maxLength) {
-          maxLength = route.length;
-        }
+      if (parcel.place != location) {
+        routes.push(findRoute(roadGraph, location, parcel.place));
       } else {
-
+        routes.push(findRoute(roadGraph, location, parcel.address));
       }
     }
+    memory = routes.reduce((r1, r2) => r1.length < r2.length ? r1 : r2);
   }
+
+  return {direction: memory[0], memory: memory.slice(1)};
 }

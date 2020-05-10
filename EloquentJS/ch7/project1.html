@@ -9,7 +9,18 @@
     <script src="project1_AnimatedVillage.js" charset="utf-8"></script>
     <script src="project1_Robot.js" charset="utf-8"></script>
     <script>
-      runRobotAnimation(VillageState.random(), searchProblemRobot, []);
+      let task = VillageState.random();
+      runRobotAnimation(task, searchProblemRobot, []);
+    </script>
+    <p>Note that the robot is a little bit under-optimized. Can you (the viewers)
+    explain why?</p>
+    <p>Click <button type="button" name="button" id="show">here</button>
+      to see a better, more optimized version of the robot.</p>
+    <script>
+      document.getElementById("show").addEventListener("click", () => {
+        runRobotAnimation(task, optimizedRobot, []);
+        document.getElementById("show").remove();
+      });
     </script>
   </body>
 </html>
