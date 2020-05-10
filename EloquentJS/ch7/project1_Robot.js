@@ -75,7 +75,7 @@ function runRobot(state, robot, memory) {
   for (let turn = 0;;++turn) {
     if (state.parcels.length == 0) {
       console.log(`Finished in ${turn} moves.`);
-      return turn;
+      break;
     }
     let action = robot(state, memory);
     state  = state.move(action.direction);
@@ -140,13 +140,28 @@ function searchProblemRobot(state, memory) {
 }
 
 // Exercise 7.1: compareRobots(state, robot_1, robot_2, memory_1, memory_2)
+function countSteps(state, robot, memory) {
+  for (let step = 0; ; step++) {
+    if (state.parcels.length == 0) {
+      return step;
+    }
+    let action = robot(state, memory);
+    state = state.move(action.direction);
+    memory = action.memory;
+  }
+}
+
 function compareRobots(robot_1, robot_2, memory_1, memory_2) {
-  let totalTasks = VillageState.random(100);
-  let n_1 = runRobot(totalTasks, robot_1, memory_1);
-  let n_2 = runRobot(totalTasks, robot_2, memory_2);
+  let stepsRobot1 = 0, stepsRobot2 = 0;
+  let totalTasks = 100;
+  for (let count = 0; count < totalTasks; count++) {
+    let task = VillageState.random();
+    stepsRobot1 += countSteps(task, robot_1, memory_1);
+    stepsRobot2 += countSteps(task, robot_2, memory_2);
+  }
   console.log(
-`robot_1 finished ${n_1/totalTasks.parcels.length} steps per task.
-robot_2 finished ${n_2/totalTasks.parcels.length} steps per task.`);
+`Robot_1 finished ${stepsRobot1/totalTasks} steps per task.
+Robot_2 finished ${stepsRobot2/totalTasks} steps per task.`);
 }
 
 compareRobots(searchProblemRobot, mailRobot, [], []);
