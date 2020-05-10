@@ -75,7 +75,7 @@ function runRobot(state, robot, memory) {
   for (let turn = 0;;++turn) {
     if (state.parcels.length == 0) {
       console.log(`Finished in ${turn} moves.`);
-      break;
+      return turn;
     }
     let action = robot(state, memory);
     state  = state.move(action.direction);
@@ -101,8 +101,8 @@ function randomRobot(state) {
 // Strategy #2: Mail-truck delivery: Follow a route such that the robot visits all.
 // We need the robot to memorize the fixed route. (A.K.A, the not-so-smart robot)
 const mailRoute = ["Alice's House", "Cabin", "Alice's House", "Bob's House",
-"Town Hall","Dick's House","Erina's House", "George's House", "Shop", "Market",
-"Farm", "Market", "Post Office"];
+"Town Hall","Dick's House","Erina's House", "George's House", "Shop", "Marketplace",
+"Farm", "Marketplace", "Post Office"];
 
 function mailRobot(state, memory) {
   if (memory.length == 0) {
@@ -139,8 +139,14 @@ function searchProblemRobot(state, memory) {
   return {direction: memory[0], memory: memory.slice(1)};
 }
 
-runRobot(VillageState.random(), searchProblemRobot, []);
 // Exercise 6.1: compareRobots(state, robot_1, robot_2, memory_1, memory_2)
-function compareRobots(state, robot_1, robot_2, memory_1, memory_2) {
-  
+function compareRobots(robot_1, robot_2, memory_1, memory_2) {
+  let totalTasks = VillageState.random(100);
+  let n_1 = runRobot(totalTasks, robot_1, memory_1);
+  let n_2 = runRobot(totalTasks, robot_2, memory_2);
+  console.log(
+`robot_1 finished ${n_1/totalTasks.parcels.length} steps per task.
+robot_2 finished ${n_2/totalTasks.parcels.length} steps per task.`);
 }
+
+//compareRobots(searchProblemRobot, mailRobot, [], []);
