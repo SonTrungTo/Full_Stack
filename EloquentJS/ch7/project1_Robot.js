@@ -52,6 +52,7 @@ class VillageState {
       return new VillageState(destination, parcels);
     }
   }
+
   static random(parcelsCount = 10) {
     let parcels = [];
     for (let count = 0; count < parcelsCount; count++) {
@@ -136,4 +137,10 @@ function searchProblemRobot(state, memory) {
     }
   }
   return {direction: memory[0], memory: memory.slice(1)};
+}
+
+runRobot(VillageState.random(), searchProblemRobot, []);
+// Exercise 6.1: compareRobots(state, robot_1, robot_2, memory_1, memory_2)
+function compareRobots(state, robot_1, robot_2, memory_1, memory_2) {
+  
 }
