@@ -164,12 +164,10 @@ function compareRobots(robot_1, robot_2, memory_1, memory_2) {
 Robot_2 finished ${stepsRobot2/totalTasks} steps per task.`);
 }
 
-compareRobots(searchProblemRobot, mailRobot, [], []);
-
 // Exercise 7.2: optimizedRobot(state, memory) can improve upon searchProblemRobot
 // - the shortest path to a package
-// - if there are multiple shortest, pick the pick-up one.
-function optimizedRobot({location, parcels}, memory) {
+// - I CANNOT OPTIMIZE THIS ANYMORE.
+function myOptimizedRobot({location, parcels}, memory) {
   if (memory.length == 0) {
     let routes = [];
     for (let parcel of parcels) {
@@ -184,3 +182,34 @@ function optimizedRobot({location, parcels}, memory) {
 
   return {direction: memory[0], memory: memory.slice(1)};
 }
+
+// the BEST optimized robot.
+//     - the shortest path to a package
+// *** - if multiple shortest paths available, pick the pick-up over the delivery one. ***
+function bestOptimizedRobot({location, parcels}, memory) {
+  if (memory.length == 0) {
+    let newParcels = parcels.map(p => { // Computing shortest route for each package with pickUp Boolean.
+      if (p.place != location) {
+        return {route: findRoute(roadGraph, location, p.place),
+               pickUp: true};
+      } else {
+        return {route: findRoute(roadGraph, location, p.address),
+               pickUp: false};
+      }
+    });
+
+    // We now calculate **the score** for each package: the longer the route to
+    // each package, more negative the score will be; a small bonus is counted
+    // for a package that has pickUp priority.
+    function score({route, pickUp}) {
+      return (pickUp ? 0.5 : 0) - route.length;
+    }
+    memory = newParcels.reduce((p1, p2) => score(p1) > score(p2) ? p1 : p2).route;
+  }
+
+  return {direction: memory[0], memory: memory.slice(1)};
+}
+
+compareRobots(searchProblemRobot, mailRobot, [], []);
+compareRobots(bestOptimizedRobot, myOptimizedRobot, [], []);
+compareRobots(bestOptimizedRobot, searchProblemRobot, [], []);

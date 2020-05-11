@@ -18,9 +18,18 @@
       to see a better, more optimized version of the robot.</p>
     <script>
       document.getElementById("show").addEventListener("click", () => {
-        runRobotAnimation(task, optimizedRobot, []);
+        runRobotAnimation(task, myOptimizedRobot, []);
         document.getElementById("show").remove();
       });
     </script>
+    <p>And the best optimized robot is <button type="button" name="button"
+      id="show2">here</button>: </p>
+    <script>
+      document.getElementById("show2").addEventListener("click", () => {
+        runRobotAnimation(task, bestOptimizedRobot, []);
+        document.getElementById("show2").remove();
+      });
+    </script>
+    <p>Let me know if you have any idea how the robot can be optimized further!</p>
   </body>
 </html>
