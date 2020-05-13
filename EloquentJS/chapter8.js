@@ -103,3 +103,12 @@ for (;;) {
     }
   }
 }
+
+// Assertions
+function firstElement(array) {
+  if (array.length == 0) {
+    throw new Error("Empty array []. Make sure array has elements.");
+  } else {
+    return array[0];
+  }
+}
