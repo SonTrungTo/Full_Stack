@@ -38,7 +38,7 @@ function promptDirection(question) {
   if(result.toLowerCase() == "left")   return "L";
   if(result.toLowerCase() == "right")  return "R";
 
-  throw new Error("Invalid direction: " + result);
+  throw new InputError("Invalid direction: " + result);
 }
 
 function look() {
@@ -86,3 +86,20 @@ function transfer(from, amount) {
 }
 
 transfer("a", 10);
+
+// Selectively catching in JS
+class InputError extends Error {}
+
+for (;;) {
+  try {
+    let dir = promptDirection("Where?");
+    console.log("You chose", dir);
+    break;
+  } catch (e) {
+    if (e instanceof InputError) {
+      console.log("Wrong direction. Try again.");
+    } else {
+      throw e;
+    }
+  }
+}
