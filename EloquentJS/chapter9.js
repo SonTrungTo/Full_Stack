@@ -15,3 +15,17 @@ let match = /(\d)?/.exec("one two 100");
 console.log(cartoonCrying.exec("Boohooooooohoohoooo"));
 console.log(match);
 console.log(/bad(ly)?/.exec("bad"));
+
+// Creating a date object
+function getDate(string) {
+  let [_, month, day, year] =
+    /(\d{1,2})-(\d{1,2})-(\d{4})/.exec(string);
+  return new Date(year, month - 1, day);
+}
+
+console.log(getDate("10-01-1992"));
+console.log(getDate("100-1-30000")); // Nonsense!
+console.log(getDate("00-1-1992"));
+
+// word boundary
+console.log(/\bcat\b/.test("con cat enate"));
