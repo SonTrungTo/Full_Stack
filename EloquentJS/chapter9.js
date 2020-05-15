@@ -29,3 +29,7 @@ console.log(getDate("00-1-1992"));
 
 // word boundary
 console.log(/\bcat\b/.test("con cat enate"));
+
+// replace method with regex,
+let bigNames = "Liskov, Barbara\nMcCarthy,John\nWadler, Philip";
+console.log(bigNames.replace(/\b(\w+),\s?(\w+)\b/g, "$2 $1"));
