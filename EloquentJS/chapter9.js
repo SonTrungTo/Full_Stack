@@ -87,3 +87,31 @@ pattern.lastIndex = 3;
 match = pattern.exec("xyxxy");
 console.log(match.index);
 console.log(pattern.lastIndex);
+
+// global vs sticky
+let globe = /abc/g;
+console.log(globe.test("xyz abc"));
+let sticky = /abc/y;
+console.log(sticky.test("xyz abc"));
+
+// Be careful when sharing a regular expression value (for multiple exec calls)
+pattern = /\d/g;
+console.log(pattern.exec("Here is what is is: 1"));
+console.log(pattern.exec("Now bye bye: 1"));
+
+// Also weird behavior of match when g is enabled (returns array of all matched)
+console.log("I AM SON TO".match(/\w/g));
+
+// We can now write a looping over occurences of a pattern in a string,
+// with lastIndex and exec mechanism behind it...
+let input = "A string with 3 numbers in it... 42 and 88.";
+let number = /\b\d+\b/g;
+while (match = number.exec(input)) {
+  console.log("Found", match[0], "at", match.index);
+}
+
+let date = "01-10-1992 22-11-1988";
+console.log(date.match(/\b(\d+)-(\d+)-(\d+)\b/));
+let regexp3 = /\b(\d+)-(\d+)-(\d+)\b/g
+console.log(regexp3.exec(date));
+console.log(regexp3.exec(date));
