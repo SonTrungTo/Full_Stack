@@ -33,3 +33,57 @@ console.log(/\bcat\b/.test("con cat enate"));
 // replace method with regex,
 let bigNames = "Liskov, Barbara\nMcCarthy,John\nWadler, Philip";
 console.log(bigNames.replace(/\b(\w+),\s?(\w+)\b/g, "$2 $1"));
+
+// replace with functions
+let s = "the cia and fbi";
+console.log(/\b(fbi|cia)\b/.exec(s));
+console.log(s.replace(/\b(fbi|cia)\b/g, str => str.toUpperCase()));
+
+let stock = "1 lemon, 2 cabbages, 101 eggs and 2 kingcrabs";
+function minusOne(match, amount, unit) {
+  amount = Number(amount) - 1;
+  if (amount == 1) { // remove the 's'
+    unit = unit.slice(0, unit.length - 1);
+  } else if (amount == 0) {
+    amount = "no";
+  }
+
+  return  amount + " " + unit;
+}
+console.log(stock.replace(/(\d+) (\w+)/g, minusOne));
+
+// Greedy operators? How to become ungreedy?
+// Let's try to write a stripComment function
+function stripComment(code) {
+  return code.replace(/\/\/.*|\/\*[^]*?\*\//g,"");
+}
+console.log(stripComment("1 + /* 2 */3"));
+console.log(stripComment("x = 10; // ten!"));
+console.log(stripComment("1 /* a */+/* b */ 1"));
+
+// Patterns known ex-post. Can't use slash-based notation.
+let name = "harry";
+let text = "Harry Potter is a horny teenager";
+let regexp = RegExp("\\b(" + name + ")\\b", "gi");
+console.log(regexp);
+console.log(text.replace(regexp, "_$1_"));
+
+// Unusual name (name with special characters)?
+let specialName = "dea+hl\\[]{}rd";
+let specialText = "This dea+hl\\[]{}rd is an annoying kid";
+// Solution: escape the special characters
+let escaped = specialName.replace(/[\\()+*.{[|^$]/g, "\\$&");
+console.log(escaped);
+let regexp2 = RegExp("\\b(" + escaped + ")\\b", "gi");
+console.log(regexp2);
+console.log(specialText.replace(regexp2, "_$1_"));
+// P/S : It's beautiful!
+
+// 2 properties of regex additionally: source and lastIndex, the latter
+// needs to: 1. have option (global/sticky) 2. match done by exec method.
+let pattern = /y/g;
+console.log(pattern.source);
+pattern.lastIndex = 3;
+match = pattern.exec("xyxxy");
+console.log(match.index);
+console.log(pattern.lastIndex);
