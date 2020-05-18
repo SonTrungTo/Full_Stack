@@ -1,22 +1,50 @@
 // car and cat
-console.log("ThereIsAcatInsideAcar".match(/ca[rt]/g));
-console.log(/ca[rt]/.test("ThereIsAcatInsideAcart"));
+verify(/ca[rt]/,
+       ["my car", "bad cats"],
+       ["camper", "high art"]);
 
 // prop and pop
-console.log(/pr?op/.test("I love prop, pop music"));
+verify(/pr?op/,
+       ["pop culture", "mad props"],
+       ["plop", "prrrop"]);
 
 // ferret, ferry and ferrari
-console.log(/ferr(et|y|ari)/.test("ferry"));
+verify(/ferr(et|y|ari)/,
+       ["ferret", "ferry", "ferrari"],
+       ["ferrum", "transfer A"]);
 
 // ending in 'ious'
-let anyWordInIous = "CautiousAmbitiousFastidiousHarmonious"
-console.log(anyWordInIous.match(/\w+?ious/g));
+verify(/\w+?ious\b/,
+       ["how delicious", "spacious room"],
+       ["ruinous", "consciousness"]);
 
 // whitespace followed by .,;:
-console.log(/\s[,.;:]/.test("SUBARU-KUN ."));
+verify(/\s[,.;:]/,
+       ["bad punctuation ."],
+       ["escape the period"]);
 
 // words longer than 6 letters.
-console.log(/\w{7,}/.test("alibaba"));
+verify(/\w{7,}/,
+       ["hottentottententen"],
+       ["no", "hotten totten tenten"]);
 
 // words without e/E
-console.log("Kick asse mayonese MAYURI!".match(/\b[^eE ]+\b/g));
+verify(/\b[^eE ]+\b/,
+       ["red platypus", "wobbling nest"],
+       ["earth bed", "learning ape", "BEET"]);
+
+// Automate verification
+function verify(regexp, yes, no) {
+  // Ignore unfinished verification
+  if (regexp.source == "...") return;
+  for (let str of yes) {
+    if (!regexp.test(str)) {
+      console.log(`Failure to match '${str}'`);
+    }
+  }
+  for (let str of no) {
+    if (regexp.test(str)) {
+      console.log(`Unexpected match for '${str}'`);
+    }
+  }
+}
