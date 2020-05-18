@@ -115,3 +115,7 @@ console.log(date.match(/\b(\d+)-(\d+)-(\d+)\b/));
 let regexp3 = /\b(\d+)-(\d+)-(\d+)\b/g
 console.log(regexp3.exec(date));
 console.log(regexp3.exec(date));
+
+// Finally, add option "u" for Unicode for non-English characters
+console.log(/\p{Alphabetic}/u.test("ärsyttävä"));
+console.log(/\p{Number}/u.test("&"));
