@@ -18,3 +18,36 @@ console.log(weekDay.name(weekDay.number("Thursday")));
 // Fortunately, CommonJS module loads the module, wraps it in a function and
 // exports its interface. (with NPM for massive scale development.)
 const ordinal = require('ordinal');
+const {days, months} = require('date-names');
+
+exports.formatDate = function(date, template) {
+  return template.replace(/YYYY|M(MMM)?|Do?|dddd/g, tag => {
+    if (tag == "YYYY") return date.getFullYear();
+    if (tag == "M")    return date.getMonth();
+    if (tag == "MMMM") return months[date.getMonth()];
+    if (tag == "D")    return date.getDate();
+    if (tag == "Do")   return ordinal(date.getDate());
+    if (tag == "dddd") return days[date.getDays()];
+  });
+}
+
+// const {formatDate} = require('./chapter10.js');
+// console.log(formatDate(new Date(),
+//                       "MMMM Do YYYY"));
+
+// We can define 'require'
+// Then there is import, export from ECMAScript (it's a binding, unlike CommonJS)
+
+// Let's rewrite findRoute from chapter 7, using 'dijkstrajs'
+const {find_path} = require('dijkstrajs');
+const {roadGraph} = require('./ch7/project1_Robot.js');
+
+let graph = {};
+for (let node of Object.keys(roadGraph)) {
+  let edges = graph[node] = {};
+  for (let dest of roadGraph[node]) {
+    edges[dest] = 1;
+  }
+}
+
+console.log(find_path(graph, "George's House", "Cabin"));

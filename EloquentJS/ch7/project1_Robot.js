@@ -30,6 +30,7 @@ function buildGraph(edges) {
 }
 
 let roadGraph = buildGraph(roads);
+exports.roadGraph = roadGraph; // for chapter 10 demonstration of module composability.
 
 // We demonstrate world event with only minimal measurements: the robot's current location
 // and a collection of parcels, each of which has a current location and its address.
