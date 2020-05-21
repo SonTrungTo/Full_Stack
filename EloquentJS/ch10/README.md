@@ -33,3 +33,11 @@ decide to upgrade the package, I would have to upgrade my own software.
 See roadModule directory. If I have time, I will come back and write a full
 modular version of the robot. For now, robot.js tests the modular structure.
 # Circular Dependencies
+My guess is `if(!(name in require.cache))` supports the circular dependencies.
+If a module is loaded first, it will return the object `exports` without interfering
+with other modules (calling too many `require.cache[names]`, hence out of stack!).
+
+When the object `exports` is overwritten in *circular dependencies*, it returns
+an empty object. It is so because the wrapper is expecting an object to wrap
+the codes with it (?) (hence, not the interface value it is expecting, and because
+it has got the object {} before it finishes loading ????)
