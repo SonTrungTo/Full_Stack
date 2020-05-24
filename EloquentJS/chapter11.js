@@ -60,3 +60,41 @@ new Promise((_,reject) => reject(new Error("Fail")))
   return "nothing";
 })
 .then(value => console.log("Handler 2", value));
+
+// Let's write automatic retry (request) callback, for network may fail to deliver(timeout)
+// or should I say, the callback function was never called due to accidental reasons.
+// Define request and requestType
+class Timeout extends Error {};
+
+function request(nest, type, source, content) {
+  return new Promise((resolve, reject) => {
+    let done = false;
+    function attempt(n) {
+      nest.send(nest, type, content, (failure, success) => {
+        done = true;
+        if(failure) reject(failure);
+        else if(success) resolve(success);
+      });
+      setTimeout( () => {
+        if(done) return;
+        else if(n < 4) attempt(n + 1);
+        else reject(new Timeout("Timed out"));
+      } , 250);
+    }
+    attempt(1);
+  });
+}
+
+// Let's write a definition for requestType, which is the wrapper for defineRequestType
+// so that its handler can returns a promise or a raw value wired to the callback.
+function requestType(type, handler) {
+  defineRequestType(type, (nest, content, source, callback) => {
+    try {
+      Promise.resolve(handler(nest, content, source))
+      .then(response => callback(null, response),
+            reject => callback(reject));
+    } catch (exception) {
+      callback(exception);                            // Otherwise, unexpected exception can slip through the callback. This is awkward.
+    }
+  });
+}
