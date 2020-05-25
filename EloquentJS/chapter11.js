@@ -66,11 +66,11 @@ new Promise((_,reject) => reject(new Error("Fail")))
 // Define request and requestType
 class Timeout extends Error {};
 
-function request(nest, type, source, content) {
+function request(nest, target, type, content) {
   return new Promise((resolve, reject) => {
     let done = false;
     function attempt(n) {
-      nest.send(nest, type, content, (failure, success) => {
+      nest.send(target, type, content, (failure, success) => {
         done = true;
         if(failure) reject(failure);
         else if(success) resolve(success);
@@ -96,5 +96,19 @@ function requestType(type, handler) {
     } catch (exception) {
       callback(exception);                            // Otherwise, unexpected exception can slip through the callback. This is awkward.
     }
+  });
+}
+
+// Promise.all returns a promise that resolves to an array of values produced by
+// an array of promises.
+requestType("ping", () => "pong");
+
+function availableNeighbors(nest) {
+  let requests = nest.neighbors.map(neighbor => {
+    return request(nest, neighbor, "ping").then(() => true, () => false);
+  });
+
+  return Promise.all(requests).then(result => {
+    return nest.neighbors.filter((_,i) => result[i]);
   });
 }
