@@ -112,3 +112,28 @@ function availableNeighbors(nest) {
     return nest.neighbors.filter((_,i) => result[i]);
   });
 }
+
+// Network flooding
+import {everywhere} from './crow-tech'
+
+everywhere(nest => {
+  nest.state.message = [];
+});
+
+function sendGossip(nest, content, exceptFor = null) {
+  nest.state.message.push(content);
+  for (let neighbor of nest.neighbors) {
+    if (neighbor == exceptFor) continue;
+    request(nest, neighbor, "gossip", content);
+  }
+}
+
+requestType("gossip", (nest, content, source) => { // nest here is the receiver.
+  if(nest.state.message.includes(content)) return;
+  console.log(`${nest.name} has successfully received
+"${message}" from ${source}`);
+
+  sendGossip(nest, content, source);
+});
+
+// sendGossip(bigOak, "I want to be King");
