@@ -6,48 +6,48 @@ let fifteen = Promise.resolve(15);
 fifteen.then(value => console.log(`Got ${value}`));
 fifteen.then(s => console.log(`Got ${s}`));
 
-// // Let's write some pseudo-code for the crow-tech module (to illustrate asynchronous)
-// // First, to read food caches, an array of names, each of which can refer to
-// // another piece of data, which will eventually lead to the whole cache.
-// // NOTE: This is an awkward piece of code to illustrate later how Promise can simplify this problem.
-// import {bigOak} from './crow-tech';
-//
-// bigOak.readStorage("food caches", caches => {
-//   let firstCache = caches[0];
-//   bigOak.readStorage(firstCache, info => {
-//     console.log(info);
-//   });
-// });
-//
-// // Note how awkward it can be: multiple callbacks nested for a single action.
-// // Crow nests communicate using request-response pairs. We can start using
-// // a method *send*: It expects the name of the target nest, the *type* of the
-// // request, the content of the request and a callback function to signify
-// // a request is done.
-// bigOak.send("Cow Pasture", "note", "Let's caw loudly at Stanford on 9:00 AM",
-//             () => console.log("Note delivered!"));
-//
-// // Note that we have to define the type "note" here. It needs to be defined
-// // on all the nests, so that our handler can use it.
-// import {defineRequestType} from './crow-tech';
-//
-// defineRequestType("note", (nest, content, source, done) => {
-//   console.log(`${nest.name} received note: ${content}`);
-//   done();
-// });
-//
-// // In this way, asynchronicity is contagious. Yet, there are ways to simplify
-// // and express the abstract concepts in value: Promise.
-//
-// // note that it has the method then()
-// // the constructor Promise(f(g(x))) such that f(x) resolves the promise.
-// function storeData(nest, name) {
-//   return new Promise(resolve => {
-//     readStorage(name, result => resolve(result));
-//   });
-// }
-//
-// storeData(bigOak, "enemies").then(value => console.log("Got", value));
+// Let's write some pseudo-code for the crow-tech module (to illustrate asynchronous)
+// First, to read food caches, an array of names, each of which can refer to
+// another piece of data, which will eventually lead to the whole cache.
+// NOTE: This is an awkward piece of code to illustrate later how Promise can simplify this problem.
+import {bigOak} from './crow-tech';
+
+bigOak.readStorage("food caches", caches => {
+  let firstCache = caches[0];
+  bigOak.readStorage(firstCache, info => {
+    console.log(info);
+  });
+});
+
+// Note how awkward it can be: multiple callbacks nested for a single action.
+// Crow nests communicate using request-response pairs. We can start using
+// a method *send*: It expects the name of the target nest, the *type* of the
+// request, the content of the request and a callback function to signify
+// a request is done.
+bigOak.send("Cow Pasture", "note", "Let's caw loudly at Stanford on 9:00 AM",
+            () => console.log("Note delivered!"));
+
+// Note that we have to define the type "note" here. It needs to be defined
+// on all the nests, so that our handler can use it.
+import {defineRequestType} from './crow-tech';
+
+defineRequestType("note", (nest, content, source, done) => {
+  console.log(`${nest.name} received note: ${content}`);
+  done();
+});
+
+// In this way, asynchronicity is contagious. Yet, there are ways to simplify
+// and express the abstract concepts in value: Promise.
+
+// note that it has the method then()
+// the constructor Promise(f(g(x))) such that f(x) resolves the promise.
+function storeData(nest, name) {
+  return new Promise(resolve => {
+    readStorage(name, result => resolve(result));
+  });
+}
+
+storeData(bigOak, "enemies").then(value => console.log("Got", value));
 
 // Failure. When everything proceeds normally, a non-promise value is returned.
 // However, when exception is thrown, the value of the exception is the reason
@@ -164,4 +164,36 @@ everywhere( nest => {
   nest.state.connections = new Map();
   nest.state.connections.set(nest.name, nest.neighbors);
   sendConnections(nest, nest.name);
+});
+
+// Now that an abstract of the network layout is known. It's time to write
+// a route-finding function that finds the shortest length between the sender
+// and the getter.
+function findRoute(from, to, connections) {
+  let work = [{at: from, via: null}];
+  for (let i = 0; i < work.length; i++) {
+    let {at, via} = work[i];
+    for (let next of connections.get(at) || []) {
+      if(next == to) return via;
+      if(!work.some(w => w.at == next)) {
+        work.push({at: next, via: via || next});
+      }
+    }
+  }
+  return null;
+}
+
+// We can now write a message routing program between a sender and a receiver.
+function messageRouting(nest, target, type, content) {
+  if (nest.neighbors.includes(target)) {
+    request(nest, target, type, content);
+  } else {
+    let via = findRoute(nest.name, target, nest.state.connections);
+    if (!via) throw new Error(`Unable to find a route to ${target}`);
+    request(nest, via, "routing", {target, type, content});
+  }
+}
+
+requestType("routing", (nest, {target, type,content}, source) => {
+  return messageRouting(nest, target, type, content);
 });
