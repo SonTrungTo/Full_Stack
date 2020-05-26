@@ -1,4 +1,4 @@
-# Eloquent JavaScript
+# Eloquent JavaScript, 3rd edition
 
 This directory contains all of *my* solutions to the text.
 
