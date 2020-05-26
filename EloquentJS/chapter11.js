@@ -137,3 +137,31 @@ requestType("gossip", (nest, content, source) => { // nest here is the receiver.
 });
 
 // sendGossip(bigOak, "I want to be King");
+
+// Message routing: If a nest needs to communicate with some other nest directly,
+// flooding is not a nice strategy. Unlike chapter 7, the exact layout of the network
+// is not known. Still, a partial info can be obtained: by flooding all pieces of info
+// to all nests in a way that those can be updated if needed.
+requestType("connections", (nest, {name, neighbors}, source) => {
+  let connections = nest.state.connections;
+  if(JSON.stringify(connections.get(name)) == JSON.stringify(neighbors)) return;
+  connections.set(name, neighbors);
+
+  sendConnections(nest, name, source);
+});
+
+function sendConnections(nest, name, exceptFor = null) {
+  for (let neighbor of nest.neighbors) {
+    if (neighbor == exceptFor) continue;
+    request(nest, neighbor, "connections", {
+      name,
+      neighbors: nest.state.connections.get(name);
+    });
+  }
+}
+
+everywhere( nest => {
+  nest.state.connections = new Map();
+  nest.state.connections.set(nest.name, nest.neighbors);
+  sendConnections(nest, nest.name);
+});
