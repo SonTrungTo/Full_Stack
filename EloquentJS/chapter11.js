@@ -197,3 +197,8 @@ function messageRouting(nest, target, type, content) {
 requestType("routing", (nest, {target, type,content}, source) => {
   return messageRouting(nest, target, type, content);
 });
+
+// If an info isn't found in a storage bulb, it will be search in another random
+// neighborhood nest until it is either found or not.
+requestType("storage", (nest, name) => storage(nest,name));
+// version 1:
