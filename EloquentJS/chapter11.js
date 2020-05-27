@@ -198,7 +198,36 @@ requestType("routing", (nest, {target, type,content}, source) => {
   return messageRouting(nest, target, type, content);
 });
 
-// If an info isn't found in a storage bulb, it will be search in another random
-// neighborhood nest until it is either found or not.
-requestType("storage", (nest, name) => storage(nest,name));
+// If an info isn't found in a storage bulb, it will be search in random
+// other nests until it is either found or not.
+requestType("storage", (nest, name) => storage(nest,name)); // name == info
 // version 1:
+function findInStorage(nest, name) {
+  return storage(nest, name).then(value => {
+    if(value != null) return value;          // One
+    else findInRemoteStorage(nest, name);
+  });
+}
+
+function network(nest) {
+  return Array.from(nest.state.connections.keys()); // .keys() only returns an iterator.
+}
+
+function findInRemoteStorage(nest, name) {
+  let sources = network(nest).filter(n => n != nest.name);
+  function next() {
+    if (sources.length == 0) {
+      return Promise.reject(new Error("Not found!")); // Two
+    } else {
+      let source = sources[Math.floor(Math.random() * sources.length)];
+      sources = sources.filter(n => n != source);
+      return messageRouting(nest, source, "storage", name)
+             .then(value => value != null ? value : next(),   // Three
+                   next);
+    }
+  }
+  return next();
+}
+// This is awkward: multiple promises are chained in a non-obvious way.
+// Note that the code is linear: it waits for the previous action to finish before
+// continue to a new one. Solution: Async with await
