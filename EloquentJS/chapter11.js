@@ -239,5 +239,11 @@ async function findInStorage(nest, name) {
   let sources = network(nest).filter(n => n != nest.name);
   while (sources.length > 0) {
     let source = sources[Math.floor(Math.random() * sources.length)];
+    sources = sources.filter(n => n != source);
+    try {
+      let found = await messageRouting(nest, source, "storage", name);
+      if(found != null) return found;
+    } catch (_) {}
   }
+  throw new Error("Not found!");
 }
