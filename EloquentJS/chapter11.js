@@ -231,3 +231,13 @@ function findInRemoteStorage(nest, name) {
 // This is awkward: multiple promises are chained in a non-obvious way.
 // Note that the code is linear: it waits for the previous action to finish before
 // continue to a new one. Solution: Async with await
+// version 2:
+async function findInStorage(nest, name) {
+  let local = await storage(nest, name);
+  if(local != null) return local;
+
+  let sources = network(nest).filter(n => n != nest.name);
+  while (sources.length > 0) {
+    let source = sources[Math.floor(Math.random() * sources.length)];
+  }
+}
