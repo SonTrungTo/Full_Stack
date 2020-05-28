@@ -247,3 +247,11 @@ async function findInStorage(nest, name) {
   }
   throw new Error("Not found!");
 }
+
+// I will give it a try to write GroupIterator from page 114 with generator
+Group.prototype[Symbol.iterator] = function* () {
+  for (let index = 0; index < this.member.length; ++index) {
+    yield this.member[index];
+  }
+}
+// which is correct!
