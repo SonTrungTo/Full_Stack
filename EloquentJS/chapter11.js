@@ -255,3 +255,5 @@ Group.prototype[Symbol.iterator] = function* () {
   }
 }
 // which is correct!
+
+// Asynchronous gap... A gap in executions can break your code.
