@@ -257,3 +257,31 @@ Group.prototype[Symbol.iterator] = function* () {
 // which is correct!
 
 // Asynchronous gap... A gap in executions can break your code.
+// Let's say you are writing a program to enumerate the number of chickens that
+// hatch over the years stored in all nests.
+function anyStorage(nest, target, name) {
+  if(target == nest.name) return storage(nest, name);
+  else messageRouting(nest, target, "storage", name);
+}
+
+async function chicks(nest, year) {
+  let list = "";
+  await Promise.all(network(nest).map(async name => {
+    list += `${name}: ${
+      await anyStorage(nest, name, `chicks in ${year}`)
+    }\n`
+  }));
+
+  return list;
+}
+// This code is seriously broken!
+// Output: *name*: # chicks (slowest to response)
+// this is due to list = "" + `...` (asynchronous gap).
+// Fix:
+async function chicks(nest, year) {
+  let lines = network(nest).map(async name => {
+    return `${name}: ${await anyStorage(nest, name, `chicks in ${year}`)}`;
+  });
+
+  return (await Promise.all(lines)).join("\n");
+}
