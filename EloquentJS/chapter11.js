@@ -43,7 +43,7 @@ defineRequestType("note", (nest, content, source, done) => {
 // the constructor Promise(f(g(x))) such that f(x) resolves the promise.
 function storeData(nest, name) {
   return new Promise(resolve => {
-    readStorage(name, result => resolve(result));
+    nest.readStorage(name, result => resolve(result));
   });
 }
 
@@ -155,7 +155,7 @@ function sendConnections(nest, name, exceptFor = null) {
     if (neighbor == exceptFor) continue;
     request(nest, neighbor, "connections", {
       name,
-      neighbors: nest.state.connections.get(name);
+      neighbors: nest.state.connections.get(name)
     });
   }
 }
@@ -200,10 +200,10 @@ requestType("routing", (nest, {target, type,content}, source) => {
 
 // If an info isn't found in a storage bulb, it will be search in random
 // other nests until it is either found or not.
-requestType("storage", (nest, name) => storage(nest,name)); // name == info
+requestType("storage", (nest, name) => storeData(nest,name)); // name == info
 // version 1:
 function findInStorage(nest, name) {
-  return storage(nest, name).then(value => {
+  return storeData(nest, name).then(value => {
     if(value != null) return value;          // One
     else findInRemoteStorage(nest, name);
   });
@@ -233,7 +233,7 @@ function findInRemoteStorage(nest, name) {
 // continue to a new one. Solution: Async with await
 // version 2:
 async function findInStorage(nest, name) {
-  let local = await storage(nest, name);
+  let local = await storeData(nest, name);
   if(local != null) return local;
 
   let sources = network(nest).filter(n => n != nest.name);
@@ -249,18 +249,18 @@ async function findInStorage(nest, name) {
 }
 
 // I will give it a try to write GroupIterator from page 114 with generator
-Group.prototype[Symbol.iterator] = function* () {
-  for (let index = 0; index < this.member.length; ++index) {
-    yield this.member[index];
-  }
-}
+// Group.prototype[Symbol.iterator] = function* () {
+//   for (let index = 0; index < this.member.length; ++index) {
+//     yield this.member[index];
+//   }
+// }
 // which is correct!
 
 // Asynchronous gap... A gap in executions can break your code.
 // Let's say you are writing a program to enumerate the number of chickens that
 // hatch over the years stored in all nests.
 function anyStorage(nest, target, name) {
-  if(target == nest.name) return storage(nest, name);
+  if(target == nest.name) return storeData(nest, name);
   else messageRouting(nest, target, "storage", name);
 }
 
@@ -285,3 +285,7 @@ async function chicks(nest, year) {
 
   return (await Promise.all(lines)).join("\n");
 }
+
+chicks(bigOak, 2017).then(console.log);
+findInStorage(bigOak, "events on 2017-12-21")
+  .then(console.log);

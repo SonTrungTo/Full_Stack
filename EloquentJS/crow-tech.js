@@ -50,7 +50,7 @@
       }
       this.nodes = Object.create(null);
       for (let name of Object.keys(reachable)) {
-        this.nodes[name] = new Node(name, reachable[name], this, storageFor(name));
+        this.nodes[name] = new Node(name, reachable[name], this, storageFor(name)); // Node class
       }
       this.types = Object.create(null);
     }
@@ -64,5 +64,93 @@
         f(node);
       }
     }
+  }
+
+  const $storage = Symbol("storage"), $network = Symbol("network");
+
+  function ser(value) {
+    return value == null ? null : JSON.parse(JSON.stringify(value));
+  }
+
+  class Node {
+    constructor(name, neighbors, network, storage) {
+      this.name       = name;
+      this.neighbors  = neighbors;
+      this[$network]  = network;
+      this.state      = Object.create(null);
+      this[$storage]  = storage;
+    }
+
+    send(to, type, message, callback) {
+      let toNode = this[$network].nodes[to];
+      if (!toNode || !this.neighbors.includes(to)) {
+        return callback(new Error(`${to} is not reachable from ${this.name}`));
+      }
+      let handler = this[$network].types[type];
+      if (!handler) {
+        return callback(new Error(`Undefined request type ` + type));
+      }
+      if (Math.random() > 0.03) {
+        setTimeout(() => {
+          try {
+            handler(toNode, ser(message), this.name, (error, response) => {
+              setTimeout(() => callback(error, ser(response)) ,10);
+            });
+          } catch (e) {
+            callback(e);
+          }
+        }, 10 + Math.floor(Math.random() * 10));
+      }
+    }
+
+    readStorage(name, callback) {
+      let value = this[$storage][name];
+      setTimeout(() => callback(value && JSON.parse(value)) ,20);
+    }
+
+    writeStorage(name, value, callback) {
+      setTimeout(() => {
+        this[$storage][name] = JSON.stringify(value);
+        callback();
+      }, 20);
+    }
+  }
+
+  let network = new Network(connections, storageFor);
+  exports.bigOak      = network.nodes["Big Oak"];
+  exports.everywhere  = network.everywhere.bind(network);
+  exports.defineRequestType = network.defineRequestType.bind(network);
+
+
+  if (typeof __sandbox != "undefined") {
+    __sandbox.handleDeps = false;
+    __sandbox.notify.onLoad = () => {
+      // Kludge to make sure some functions are delayed until the nodes
+      // have been running for 500ms, to give them a chance to propagate
+      // network information.
+      let waitFor = Date.now() + 500;
+      function wrapWaiting(f) {
+        return function(...args) {
+          let wait = waitFor - Date.now();
+          if(wait <= 0) return f(...args);
+          return new Promise(ok => setTimeout(ok, wait)).then(() => f(...args));
+        };
+      }
+
+      for (let n of ["messageRouting", "findInStorage", "chicks"]) {
+        window[n] = wrapWaiting(window[n]);
+      }
+    };
+  }
+
+  if (typeof window != "undefined") {
+    window.require = name => {
+      if (name != "./crow-tech") {
+        throw new Error("Crow nests can only require \"./crow-tech\"");
+      }
+      return exports;
+    };
+  } else if(typeof module != "undefined" && module.exports) {
+    module.exports = exports;
   }
 })();
