@@ -117,7 +117,6 @@
   }
 
   let network = new Network(connections, storageFor);
-  exports.churchTower = network.nodes["Church Tower"];
   exports.bigOak      = network.nodes["Big Oak"];
   exports.everywhere  = network.everywhere.bind(network);
   exports.defineRequestType = network.defineRequestType.bind(network);

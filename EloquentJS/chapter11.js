@@ -290,3 +290,6 @@ async function chicks(nest, year) {
 chicks(bigOak, 2017).then(console.log);
 findInStorage(bigOak, "events on 2017-12-21")
   .then(console.log);
+
+// import{allNests} from './crow-tech.js';
+// console.log(allNests);
