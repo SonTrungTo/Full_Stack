@@ -13,16 +13,16 @@
     let storage = Object.create(null);
     storage["food caches"] = ["cache in the oak", "cache in the meadow", "cache under the hedge"];
     storage["cache in the oak"] = "A hollow above the third big branch from the bottom.\
-    Several pieces of bread and a pile of acorns.";
+ Several pieces of bread and a pile of acorns.";
     storage["cache in the meadow"] = "Buried below the patch of nettles (south side).\
-    A dead snake";
+ A dead snake";
     storage["cache under the hedge"] = "Middle of the hedge at Gilles' garden. Marked\
-    with a forked twig. Two bottles of peer."
+ with a forked twig. Two bottles of peer."
     storage["enemies"] = ["Farmer Jacques' dog", "The butcher", "That one-legged jackdaw",
     "The boy with the airgun"];
     if (name == ("Church Tower" || "Hawthorn" || "Chateau")) {
       storage["events on 2017-12-21"] = "Deep snow. Butcher's garbage can fell over.\
-      We chased off the ravens from Saint-Vulbas."
+ We chased off the ravens from Saint-Vulbas."
     }
     let hash = 0;
     for (let i = 0; i < name.length; i++) {
@@ -117,6 +117,7 @@
   }
 
   let network = new Network(connections, storageFor);
+  exports.churchTower = network.nodes["Church Tower"];
   exports.bigOak      = network.nodes["Big Oak"];
   exports.everywhere  = network.everywhere.bind(network);
   exports.defineRequestType = network.defineRequestType.bind(network);

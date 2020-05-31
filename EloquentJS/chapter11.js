@@ -11,6 +11,7 @@ fifteen.then(s => console.log(`Got ${s}`));
 // another piece of data, which will eventually lead to the whole cache.
 // NOTE: This is an awkward piece of code to illustrate later how Promise can simplify this problem.
 import {bigOak} from './crow-tech';
+import {churchTower} from './crow-tech';
 
 bigOak.readStorage("food caches", caches => {
   let firstCache = caches[0];
