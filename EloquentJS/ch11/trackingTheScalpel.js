@@ -103,5 +103,9 @@ function findRoute(from, to, connections) {
 }
 
 function routeRequest(nest, target, type, content) {
-  
+  if (nest.neighbors.includes(target))
+    request(nest, target, type, content);
+  else {
+    let via = findRoute();
+  }
 }
