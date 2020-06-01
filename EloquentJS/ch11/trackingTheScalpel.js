@@ -1,6 +1,8 @@
-import {bigOak} from '../crow-tech';
+import {bigOak}  from '../crow-tech';
+import {chateau} from '../crow-tech';
 import {everywhere} from '../crow-tech';
 import {defineRequestType} from '../crow-tech';
+import {butcherShop} from '../crow-tech';
 
 async function locateScalpel() {
 
@@ -65,7 +67,8 @@ availableNeighbors(bigOak).then(value => console.log(value));
 
 requestType("connections", (nest, {name, neighbors}, source) => {
   let connections = nest.state.connections;
-  if(JSON.stringify(connections.get(name)) == JSON.stringify(neighbors)) return;
+  if(JSON.stringify(connections.get(name))
+  == JSON.stringify(neighbors)) return;
   connections.set(name, neighbors);
 
   broadcastConnections(nest, name, source);
@@ -97,15 +100,31 @@ function findRoute(from, to, connections) {
       } else if (!work.some(w => w.at == next)) {
         work.push({at: next, via: via || next});
       }
+      console.log(work);
     }
   }
   return null;
 }
 
 function routeRequest(nest, target, type, content) {
-  if (nest.neighbors.includes(target))
-    request(nest, target, type, content);
+  if (nest.neighbors.includes(target.name))
+    return request(nest, target.name, type, content);
   else {
-    let via = findRoute();
+    let via = findRoute(nest.name, target.name,
+      nest.state.connections); // It doesn't have the time to load.
+    if (!via) throw new Error(`Unable to find a route from ${nest.name} to ${target.name}`);
+    return request(nest, via, "route", {target, type, content});
   }
 }
+
+requestType("route", (nest, {target, type, content}) => {
+  return routeRequest(nest, target, type, content);
+});
+
+requestType("note", (nest, content, source) => {
+  console.log(`${nest.name} received note: \"${content}\"`);
+});
+
+
+setTimeout(() => {routeRequest(bigOak, chateau, "note", "I love you!")
+.then(value => console.log(value));}, 500);

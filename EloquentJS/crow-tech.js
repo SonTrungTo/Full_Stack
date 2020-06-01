@@ -94,7 +94,7 @@
         setTimeout(() => {
           try {
             handler(toNode, ser(message), this.name, (error, response) => {
-              setTimeout(() => callback(error, ser(response)) ,10);
+              setTimeout(() => callback(error, ser(response)) , 10);
             });
           } catch (e) {
             callback(e);
@@ -117,6 +117,8 @@
   }
 
   let network = new Network(connections, storageFor);
+  exports.butcherShop = network.nodes["Butcher Shop"];
+  exports.chateau     = network.nodes["Chateau"];
   exports.bigOak      = network.nodes["Big Oak"];
   exports.everywhere  = network.everywhere.bind(network);
   exports.defineRequestType = network.defineRequestType.bind(network);
