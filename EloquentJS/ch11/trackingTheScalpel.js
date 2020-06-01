@@ -5,17 +5,18 @@ import {defineRequestType} from '../crow-tech';
 import {butcherShop} from '../crow-tech';
 
 async function locateScalpel() {
-
+  
 }
 
 
+// These are codes from chapter11.js, improved version.
 function storage(nest, name) {
   return new Promise(resolve => {
     nest.readStorage(name, result => resolve(result));
   });
 }
 
-storage(bigOak, "food caches").then(value => console.log(value));
+//storage(bigOak, "food caches").then(value => console.log(value));
 
 class Timeout extends Error {};
 
@@ -30,8 +31,8 @@ function request(nest, target, type, content) {
       });
       setTimeout( () => {
         if(done) return;
-        else if(n < 3) attempt(n + 1);
-        else reject(new Error("Timed out!"));
+        //else if(n < 3) attempt(n + 1);
+        //else reject(new Error("Timed out!"));
       }, 250);
     }
     attempt(1);
@@ -63,7 +64,7 @@ function availableNeighbors(nest) {
   });
 }
 
-availableNeighbors(bigOak).then(value => console.log(value));
+//availableNeighbors(bigOak).then(value => console.log(value));
 
 requestType("connections", (nest, {name, neighbors}, source) => {
   let connections = nest.state.connections;
@@ -100,19 +101,18 @@ function findRoute(from, to, connections) {
       } else if (!work.some(w => w.at == next)) {
         work.push({at: next, via: via || next});
       }
-      console.log(work);
     }
   }
   return null;
 }
 
 function routeRequest(nest, target, type, content) {
-  if (nest.neighbors.includes(target.name))
-    return request(nest, target.name, type, content);
+  if (nest.neighbors.includes(target))
+    return request(nest, target, type, content);
   else {
-    let via = findRoute(nest.name, target.name,
+    let via = findRoute(nest.name, target,
       nest.state.connections); // It doesn't have the time to load.
-    if (!via) throw new Error(`Unable to find a route from ${nest.name} to ${target.name}`);
+    if (!via) throw new Error(`Unable to find a route from ${nest.name} to ${target}`);
     return request(nest, via, "route", {target, type, content});
   }
 }
@@ -125,6 +125,45 @@ requestType("note", (nest, content, source) => {
   console.log(`${nest.name} received note: \"${content}\"`);
 });
 
+requestType("storage", (nest, name) => storage(nest, name));
 
-setTimeout(() => {routeRequest(bigOak, chateau, "note", "I love you!")
-.then(value => console.log(value));}, 500);
+function network(nest) {
+  return Array.from(nest.state.connections.keys());
+}
+
+async function findInStorage(nest, name) {
+  let local = await storage(nest, name);
+  if(local != null) return local;
+
+  let sources = network(nest).filter(n => n != nest.name);
+  while (sources.length > 0) {
+    let source = sources[Math.floor(Math.random() * sources.length)];
+    sources = sources.filter(n => n != source);
+    try {
+      let found = await routeRequest(nest, source, "storage", name);
+      if(found != null) return found;
+    } catch (_) {}
+  }
+  throw new Error("Not found!");
+}
+
+// Enumerate counts
+function anyStorage(nest, source, name) {
+  if(source == nest.name) return storage(nest, name);
+  else return routeRequest(nest, source, "storage", name);
+}
+
+async function chicks(nest, year) {
+  let lines = network(nest).map(async name => {
+    return name + ": " +
+    await anyStorage(nest, name, `chicks in ${year}`);
+  });
+
+  return (await Promise.all(lines)).join("\n");
+}
+
+setTimeout(() => {
+  routeRequest(bigOak, "Jacques' Farm", "note", "JavaScript is the best!");
+  findInStorage(bigOak, "events on 2017-12-21").then(console.log);
+  chicks(bigOak, 1992).then(console.log);
+}, 250);
