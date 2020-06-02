@@ -1,10 +1,6 @@
 ## Tracking the scalpel
-I am trying to write a loop that compare
+With async, the `await` converts a rejected promise to an exception. The function itself
+returns the rejected promise when it throws an exception.
 
-the current nest vs previousNest.scalpel
-
-How do I do it?
-
-first:  anyStorage(nest, nest.name,"scalpel").then(value => value);  (returns the location of scalpel, which needs to be updated)
-
-second:
+With non-async, if the promise is rejected, it will be returned in the same way
+as a resolved one. (`then` handler is not run!)

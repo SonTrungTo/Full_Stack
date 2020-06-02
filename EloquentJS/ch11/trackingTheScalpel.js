@@ -5,17 +5,42 @@ import {defineRequestType} from '../crow-tech';
 import {butcherShop} from '../crow-tech';
 
 async function locateScalpel(nest) {
-  let remainingNests = network(nest);
+  let current = nest.name;
 
-  while (remainingNests.length > 0) {
-    remainingNests = remainingNests.filter(n => n != current);
+  while (current != null) {
     try {
-      let match = await anyStorage(current, source,"scalpel");
+      let trackedNest = await anyStorage(nest, current, "scalpel");
+      if(current == trackedNest) return trackedNest;
+      else current = trackedNest;
     } catch (_) {}
   }
   throw new Error("Cannot find the scalpel");
 }
 
+function locateScalpel2(nest) {
+  return anyStorage(nest, nest.name, "scalpel").then(value => {
+    if (value == nest.name) return value;
+    else {
+      let trackedNest = value;
+      function next() {
+        if (trackedNest == null)
+          return Promise.reject(new Error("Scalpel not found!"));
+        else {
+          return anyStorage(nest, trackedNest, "scalpel").then(nextValue => {
+            if (nextValue == trackedNest) {
+              return trackedNest;
+            } else {
+              trackedNest = nextValue;
+              return next();
+            }
+          }, next);
+        }
+      }
+
+      return next();
+    }
+  });
+}
 
 // These are codes from chapter11.js, improved version.
 function storage(nest, name) {
@@ -173,8 +198,6 @@ async function chicks(nest, year) {
 }
 
 setTimeout(() => {
-  routeRequest(bigOak, "Jacques' Farm", "note", "JavaScript is the best!");
-  findInStorage(bigOak, "events on 2017-12-21").then(console.log);
-  chicks(bigOak, 1992).then(console.log);
   locateScalpel(bigOak).then(console.log);
+  locateScalpel2(bigOak).then(console.log);
 }, 250);
