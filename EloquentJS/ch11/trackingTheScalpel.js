@@ -4,8 +4,16 @@ import {everywhere} from '../crow-tech';
 import {defineRequestType} from '../crow-tech';
 import {butcherShop} from '../crow-tech';
 
-async function locateScalpel() {
-  
+async function locateScalpel(nest) {
+  let remainingNests = network(nest);
+
+  while (remainingNests.length > 0) {
+    remainingNests = remainingNests.filter(n => n != current);
+    try {
+      let match = await anyStorage(current, source,"scalpel");
+    } catch (_) {}
+  }
+  throw new Error("Cannot find the scalpel");
 }
 
 
@@ -16,7 +24,9 @@ function storage(nest, name) {
   });
 }
 
-//storage(bigOak, "food caches").then(value => console.log(value));
+// storage(bigOak, "scalpel").then(value => console.log(value));
+// storage(chateau, "scalpel").then(value => console.log(value));
+// storage(butcherShop, "scalpel").then(value => console.log(value));
 
 class Timeout extends Error {};
 
@@ -166,4 +176,5 @@ setTimeout(() => {
   routeRequest(bigOak, "Jacques' Farm", "note", "JavaScript is the best!");
   findInStorage(bigOak, "events on 2017-12-21").then(console.log);
   chicks(bigOak, 1992).then(console.log);
+  locateScalpel(bigOak).then(console.log);
 }, 250);

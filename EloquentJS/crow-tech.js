@@ -117,6 +117,8 @@
   }
 
   let network = new Network(connections, storageFor);
+  exports.butcherShop = network.nodes["Butcher Shop"];
+  exports.chateau     = network.nodes["Chateau"];
   exports.bigOak      = network.nodes["Big Oak"];
   exports.everywhere  = network.everywhere.bind(network);
   exports.defineRequestType = network.defineRequestType.bind(network);
