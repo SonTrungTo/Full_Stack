@@ -7,3 +7,4 @@ as a resolved one. (`then` handler is not run!)
 
 
 ## Building Promise.all (Promise_all)
+Care is given to empty array of promises.
