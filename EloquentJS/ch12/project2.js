@@ -21,3 +21,23 @@ function skipSpace(string) {
   if (first == -1) return "";
   return string.slice(first);
 }
+
+function parseApply(expr, program) {
+  let program = skipSpace(program);
+  if (program[0] != "(")
+    return {expr: expr, rest: program};
+
+  program = skipSpace(program.slice(1));
+  expr = {type: "apply", operator: expr, args: []};
+  while (program[0] != ")") {
+    let arg = parseExpression(program);
+    args.push(arg.expr);
+    program = skipSpace(arg.rest);
+    if (program[0] == ",") {
+      program = program.slice(1); // There is no need to skipSpace, since parseExpression do it for us!
+    } else if (program[0] != ")") {
+      throw new SyntaxError("Was expecting either ',' or ')', but get " + program[0]);
+    }
+  }
+  return parseApply(expr, program.slice(1));
+}
