@@ -45,10 +45,42 @@ function parseApply(expr, program) {
 // The parser is finished!
 function parse(program) {
   let {expr, rest} = parseExpression(program);
-  if (rest.length > 0) {
+  if (skipSpace(rest).length > 0) {
     throw new SyntaxError("Unexpected text after program");
   }
   return expr;
 }
 
 console.log(parse(`+(a, 10)`));
+
+// The evaluator: it evaluates the expression the syntax tree represents and returns
+// the value it produces.
+let specialForms = Object.create(null);
+
+function evaluate(expr, scope) {
+  if(expr.type == "value") {
+    return expr.value;
+  } else if (expr.type == "word") {
+    if (expr.name in scope) {
+      return scope[expr.name];
+    } else {
+      throw new ReferenceError("Binding", expr.name, "is not defined!");
+    }
+  } else if (expr.type == "apply") {
+    let {operator, args} = expr;
+    if (operator.type == "word" &&
+        operator.name in specialForms) {
+      return specialForms[operator.name](args, scope); // no need to write "expr.args" ?
+    }
+    else {
+      op = evaluate(operator, scope);
+      if (typeof op == "function") {
+        return op(...args.map(arg => evaluate(arg, scope)));
+      } else {
+        throw new TypeError(`Applying a non-function`);
+      }
+    }
+  }
+}
+
+// However, it needs additional special forms and a few more values in the environment
