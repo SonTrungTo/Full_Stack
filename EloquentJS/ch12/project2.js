@@ -116,3 +116,11 @@ specialForms.do = function (args, scope) {
   }
   return value; // value produced by the last arg.
 };
+
+specialForms.define = function (args, scope) {
+  if (args[0].type != "word" || args.length != 2) {
+    throw new SyntaxError(`Invalid use of 'define': ${args}`);
+  }
+  scope[args[0].name] = evaluate(args[1], scope);
+  return scope[args[0].name];
+};
