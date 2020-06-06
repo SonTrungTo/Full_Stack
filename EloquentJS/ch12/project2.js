@@ -64,7 +64,7 @@ function evaluate(expr, scope) {
     if (expr.name in scope) {
       return scope[expr.name];
     } else {
-      throw new ReferenceError("Binding", expr.name, "is not defined!");
+      throw new ReferenceError("Binding "+ `'${expr.name}'` + " is not defined!");
     }
   } else if (expr.type == "apply") {
     let {operator, args} = expr;
@@ -73,7 +73,7 @@ function evaluate(expr, scope) {
       return specialForms[operator.name](args, scope); // no need to write "expr.args" ?
     }
     else {
-      op = evaluate(operator, scope);
+      let op = evaluate(operator, scope);
       if (typeof op == "function") {
         return op(...args.map(arg => evaluate(arg, scope)));
       } else {
@@ -124,3 +124,27 @@ specialForms.define = function (args, scope) {
   scope[args[0].name] = evaluate(args[1], scope);
   return scope[args[0].name];
 };
+
+// evaluate needs its scope(a.k.a, ENVI: Boolean, arithmetic, comparisions. etc... basic functional values)
+let topScope = Object.create(null);
+
+topScope.true   = true;
+topScope.false  = false;
+
+for (let op of ["+", "-", "*", "/", ">", "<", "==", "%"]) {
+    topScope[op] = Function(`a, b`, `return a ${op} b;`);
+}
+
+topScope.print = (...args) => {
+  console.log(...args);
+  return false;
+};
+
+function run(program) {
+  return evaluate(parse(program), Object.create(topScope));
+}
+
+run(`do(define(i, 1),
+        define(result, 0),
+        while(<(i, 11), do(define(result, +(result, i)), define(i, +(i, 1)))),
+        print("result =", result))`);
