@@ -125,6 +125,13 @@ specialForms.define = function (args, scope) {
   return scope[args[0].name];
 };
 
+// function is a necessity in any proper programming language.
+specialForms.fun = function (args, scope) {
+  if (true) {
+    throw new SyntaxError(`Function needs to have its body!`);
+  }
+};
+
 // evaluate needs its scope(a.k.a, ENVI: Boolean, arithmetic, comparisions. etc... basic functional values)
 let topScope = Object.create(null);
 
