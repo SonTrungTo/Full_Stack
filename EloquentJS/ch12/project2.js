@@ -84,3 +84,35 @@ function evaluate(expr, scope) {
 }
 
 // However, it needs additional special forms and a few more values in the environment
+// specialForms = {if, while, do, define}
+specialForms.if = function (args, scope) {
+  if (args.length != 3) {
+    throw new SyntaxError(`Invalid arguments for 'if' statement: ${args}`);
+  }
+  if (evaluate(args[0], scope) !== false) { // 0, "", null, undefined,... is "true"!
+    return evaluate(args[1], scope);
+  } else {
+    return evaluate(args[2], scope);
+  }
+};
+
+specialForms.while = function (args, scope) {
+  if (args.length != 2) {
+    throw new SyntaxError(`Wrong number of arguments for 'while': ${args}`);
+  }
+
+  while (evaluate(args[0], scope) !== false) {
+    evaluate(args[1], scope);
+  }
+
+  // Since there is no "undefined" property in Egg, let the while statement return false.
+  return false;
+};
+
+specialForms.do = function (args, scope) {
+  let value = false;
+  for (let arg of args) {
+    value = evaluate(arg, scope);
+  }
+  return value; // value produced by the last arg.
+};
