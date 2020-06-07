@@ -127,9 +127,28 @@ specialForms.define = function (args, scope) {
 
 // function is a necessity in any proper programming language.
 specialForms.fun = function (args, scope) {
-  if (true) {
+  if (!args.length) {
     throw new SyntaxError(`Function needs to have its body!`);
   }
+  let body = args[args.length - 1];
+  let params = args.slice(0, args.length - 1).map(expr => {
+    if (expr.type != "word") {
+      throw new SyntaxError(`Invalid argument: ${expr}. Must be words!`);
+    }
+    return expr.name;
+  });
+
+  return function() { // Note this is the concept of closure! 'arguments' is implicitly defined only in traditional functions and methods
+    // arguments: {'0': value0, '1': value1, ...}
+    if (arguments.length != params.length) {
+      throw new TypeError(`Values entered does not fit the definition!`);
+    }
+    let localScope = Object.create(scope);
+    for (let i = 0; i < arguments.length; i++) {
+      localScope[params[i]] = arguments[i];
+    }
+    return evaluate(body, localScope);
+  };
 };
 
 // evaluate needs its scope(a.k.a, ENVI: Boolean, arithmetic, comparisions. etc... basic functional values)
@@ -155,3 +174,6 @@ run(`do(define(i, 1),
         define(result, 0),
         while(<(i, 11), do(define(result, +(result, i)), define(i, +(i, 1)))),
         print("result =", result))`);
+
+run(`do(define(plusOne, fun(a, +(a, 1))),
+        print(plusOne(10)))`);
