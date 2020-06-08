@@ -65,6 +65,6 @@ specialForms.fun = function (args, scope) {
     }
     return evaluate(body, localScope);
   };
-}
+};
 
 exports.specialForms = specialForms;
