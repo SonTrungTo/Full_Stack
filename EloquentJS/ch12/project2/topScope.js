@@ -8,6 +8,6 @@ for (let op of ["+", "-", "*", "/", "%", "==", "<", ">"]) {
 topScope.print = function(...args) {
   console.log(...args);
   return false;
-}
+};
 
 exports.topScope = topScope;
