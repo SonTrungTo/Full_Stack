@@ -51,8 +51,6 @@ function parse(program) {
   return expr;
 }
 
-console.log(parse(`+(a, 10)`));
-
 // The evaluator: it evaluates the expression the syntax tree represents and returns
 // the value it produces.
 let specialForms = Object.create(null);
@@ -170,6 +168,8 @@ function run(program) {
   return evaluate(parse(program), Object.create(topScope));
 }
 
+console.log(parse(`+(a, 10)`));
+
 run(`do(define(i, 1),
         define(result, 0),
         while(<(i, 11), do(define(result, +(result, i)), define(i, +(i, 1)))),
@@ -177,3 +177,6 @@ run(`do(define(i, 1),
 
 run(`do(define(plusOne, fun(a, +(a, 1))),
         print(plusOne(10)))`);
+
+run(`do(define(pow, fun(base, exp, if(==(exp, 0), 1, *(base, pow(base, -(exp, 1)))))),
+        print(pow(2,10)))`);
