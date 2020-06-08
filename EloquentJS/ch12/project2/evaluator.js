@@ -1,6 +1,6 @@
 const {specialForms} = require('./specialForms');
 
-function evaluate(expr, scope) {
+exports.evaluate = function(expr, scope) {
   if (expr.type == "value") {
     return expr.value;
   } else if (expr.type == "word") {
@@ -23,4 +23,4 @@ function evaluate(expr, scope) {
       }
     }
   }
-}
+};
