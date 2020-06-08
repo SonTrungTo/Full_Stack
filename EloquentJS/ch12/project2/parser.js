@@ -15,5 +15,35 @@ function parseExpression(program) {
 }
 
 function skipSpace(string) {
-  
+  let first = string.search(/\S/);
+  if(first == -1) return "";
+  return string.slice(first);
 }
+
+function parseApply(expr, program) {
+  program = skipSpace(program);
+  if (program[0] != "(") {
+    return {expr: expr, rest: program};
+  }
+  expr = {type: "apply", operator: expr, args: []};
+  program = skipSpace(program.slice(1));
+  while (program[0] != ")") {
+    let arg = parseExpression(program);
+    expr.args.push(arg.expr);
+    program = skipSpace(arg.rest);
+    if (program[0] == ",") {
+      program = skipSpace(program.slice(1));
+    } else if (program[0] != ")") {
+      throw new SyntaxError(`Expected ',' or ')', but got: ${program[0]}`);
+    }
+  }
+  return parseApply(expr, program.slice(1));
+}
+
+exports.parse = function (program) {
+  let {expr, rest} = parseExpression(program);
+  if (skipSpace(rest).length > 0) {
+    throw new SyntaxError(`Unexpected text after program!`);
+  }
+  return expr;
+};
