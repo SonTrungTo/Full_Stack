@@ -35,9 +35,36 @@ specialForms.do = function (args, scope) {
 };
 
 specialForms.define = function (args, scope) {
-  if (args.length != 2 || args[0]) {
-
+  if (args.length != 2 || args[0].type != "word") {
+    throw new SyntaxError(`Wrong arguments to 'define': ${args}`);
   }
+  let value = evaluate(args[1], scope);
+  scope[args[0].name] = value;
+  return value;
 };
+
+specialForms.fun = function (args, scope) {
+  if (!args.length) {
+    throw new SyntaxError(`Function must have its body: ${args}`);
+  }
+  let body = args[args.length - 1];
+  let params = args.slice(0, args.length - 1).map(expr => {
+    if (expr.type != "word") {
+      throw new SyntaxError(`Parameters must be words: ${expr}`);
+    }
+    return expr.name;
+  });
+
+  return function() {
+    if (arguments.length != params.length) {
+      throw new SyntaxError(`Wrong number of arguments to 'fun': ${arguments}`);
+    }
+    let localScope = Object.create(scope);
+    for (let i = 0; i < arguments.length; i++) {
+      localScope[params[i]] = arguments[i];
+    }
+    return evaluate(body, localScope);
+  };
+}
 
 exports.specialForms = specialForms;
