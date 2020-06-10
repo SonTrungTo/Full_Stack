@@ -22,3 +22,12 @@ run(`do(define(sumOfArrays, fun(array,
 
 run(`do(define(f, fun(a, fun(b, +(b, a)))),
         print(f(4)(5)))`);
+
+// Credits of this test go to the author.
+console.log(parse("# hello\nx"));
+// → {type: "word", name: "x"}
+
+console.log(parse("a # one\n   # two\n()"));
+// → {type: "apply",
+//    operator: {type: "word", name: "a"},
+//    args: []}

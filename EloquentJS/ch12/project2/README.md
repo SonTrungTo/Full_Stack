@@ -11,3 +11,9 @@ Added supports for arrays
 Looking at the definition of `fun` inside `specialForms.js`, we see that it returns
 a function that remembers the environment it was created: by saving
 all `params[i]` in `localScope` and later evaluating `body` along with its `localScope`.
+
+### Comments.
+Just need to note that an extra `+` is needed outside the parentheses, since
+there might be two consecutives `\s+` and `#.*`.
+
+### Fixing Scope.
