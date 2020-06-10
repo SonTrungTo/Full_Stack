@@ -2,7 +2,7 @@
 
 This directory contains all of *my* solutions to the text.
 
-## Inconsistency (previous thought an erratum) found in the book
+## Inconsistency ~~an erratum~~ found in the book
 * page 193, at *everywhere* definition, it should be
 `nest.state.connections = new Map()` since you are calling an instance of a class.
 
