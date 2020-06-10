@@ -25,9 +25,6 @@ specialForms.while = function (args, scope) {
 
 specialForms.do = function (args, scope) {
   let value = false;
-  if (!args.length) {
-    throw new SyntaxError(`Empty arguments to 'do'`);
-  }
   for (let arg of args) {
     value = evaluate(arg, scope);
   }
