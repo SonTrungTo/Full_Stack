@@ -17,3 +17,11 @@ Just need to note that an extra `+` is needed outside the parentheses, since
 there might be two consecutives `\s+` and `#.*`.
 
 ### Fixing Scope.
+The main idea is to separate the topScope from the localScope.
+As the way it was, if we try to set up a new value for the
+nonlocal binding, we end up defining a new value for the local
+binding.
+
+With the current `set` functionality, we can define a new value,
+updating the outer scope binding if the local one doesn't exist,
+and throw `ReferenceError` if the binding doesn't exist at all.

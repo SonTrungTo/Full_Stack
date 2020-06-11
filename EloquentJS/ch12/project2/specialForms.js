@@ -64,4 +64,23 @@ specialForms.fun = function (args, scope) {
   };
 };
 
+specialForms.set = function (args, scope) {
+  // scope here is the localScope(i.e, the lowest scope)
+  if (args.length != 2 || args[0].type != "word") {
+    throw new SyntaxError(`Wrong arguments to 'set'`);
+  }
+
+  let varName = args[0].name;
+  let value = evaluate(args[1], scope);
+
+  for (let env = scope; env; env = Object.getPrototypeOf(env)) {
+    if(Object.prototype.hasOwnProperty.call(env, varName)) {
+      env[varName] = value;
+      return value;
+    }
+  }
+
+  throw new ReferenceError(`${varName} is not defined!`);
+};
+
 exports.specialForms = specialForms;

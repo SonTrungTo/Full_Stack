@@ -25,9 +25,26 @@ run(`do(define(f, fun(a, fun(b, +(b, a)))),
 
 // Credits of this test go to the author.
 console.log(parse("# hello\nx"));
-// → {type: "word", name: "x"}
+// -> {type: "word", name: "x"}
 
 console.log(parse("a # one\n   # two\n()"));
-// → {type: "apply",
+// -> {type: "apply",
 //    operator: {type: "word", name: "a"},
 //    args: []}
+
+// --- End of the test
+
+// Inspired from the author's website(not identical).
+run(`do(define(x, 10),
+        define(setx, fun(val, set(x, val))),
+        setx(50),
+        print(x))`);
+// -> 50
+run(`do(define(x, 10),
+        define(setx, fun(val, do(define(x, val), print(x)))),
+        setx(30),
+        print(x))`);
+// -> 30
+// -> 10
+run(`set(x, 10)`);
+// -> ReferenceError
