@@ -12,11 +12,23 @@
   <body>
     <h1>Problem set for chapter 14</h1>
     <h2>Build a Table</h2>
-    <p><span id="table"></span></p>
+    <p><span id="one"></span></p>
+    <table>
+        <tr>
+          <th>name</th>
+          <th>height</th>
+          <th>place</th>
+        </tr>
+        <tr>
+          <td>Kiminajaro</td>
+          <td>5895</td>
+          <td>Tanzania</td>
+        </tr>
+    </table>
 
     <script type="text/javascript" src="buildATable.js"></script>
     <script type="text/javascript">
-      document.getElementById('table').appendChild(buildTable(list));
+      document.getElementById('one').appendChild(buildTable(list));
     </script>
   </body>
 </html>
