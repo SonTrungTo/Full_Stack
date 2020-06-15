@@ -6,3 +6,5 @@ UPDATE: YES! Solved!
 
 ## Elements by Tag Name
 Solved! Through the use of recursive function calling separately from the original one.
+
+## The Cat's Hat
