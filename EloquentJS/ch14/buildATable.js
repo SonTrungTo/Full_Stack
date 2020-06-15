@@ -13,22 +13,33 @@ function buildTable(data) {
   }
   // Now creating table data
   for (let element of data) {
-    let dataFields = Object.values(element);
-    let row = document.createElement("tr");
-    for (let field of dataFields) {
-      let tableData = document.createElement('td');
-      let text      = document.createTextNode(field);
-      if (typeof field == "number") {
-        tableData.style.textAlign = "right";
+    let names = Object.keys(element);
+    let row = document.createElement('tr');
+    // Loading names.length numbers of <td>. NOTE: unable to append old nodes, related to pointers.
+    for (let i = 0; i < names.length; i++) {
+      row.appendChild(document.createElement('td'));
+    }
+    for (let name of names) {
+      let text  = document.createTextNode(element[name]);
+      if (typeof element[name] == "number") {
+        row.childNodes[1].style.textAlign = "right";
       }
-      tableData.appendChild(text);
-      row.appendChild(tableData);
+      if (name == "name") {
+        row.childNodes[0].appendChild(text);
+      } else if (name == "height") {
+        row.childNodes[1].appendChild(text);
+      } else if (name == "place") {
+        row.childNodes[2].appendChild(text);
+      }
+      else {
+        throw new ReferenceError(`Unknown property name: ${name}`);
+      }
     }
     table.appendChild(row);
   }
   table.style.marginLeft = "auto";
   table.style.marginRight = "auto";
-  table.id = "moutains";
+  table.id = "mountains";
   return table;
 }
 
