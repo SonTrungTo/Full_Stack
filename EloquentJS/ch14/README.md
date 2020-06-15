@@ -5,4 +5,4 @@ Basically finished! But I am trying to build a table where the property names ar
 UPDATE: YES! Solved!
 
 ## Elements by Tag Name
-I can't solve this!
+Solved! Through the use of recursive function calling separately from the original one.
