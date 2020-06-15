@@ -14,12 +14,13 @@
     <h2>Build a Table</h2>
       <p><div id="one"></div></p>
     <h2>Elements by Tag Name</h2>
+      <p>Press F12 to see the result.</p>
 
     <script type="text/javascript" src="buildATable.js"></script>
     <script type="text/javascript" src="elementsByTagName.js"></script>
     <script type="text/javascript">
       document.getElementById('one').appendChild(buildTable(list));
-      console.log(getElementsByTagName(document, "h2"));
+      console.log(getElementsByTagName(document.body, "h2", []));
     </script>
   </body>
 </html>
