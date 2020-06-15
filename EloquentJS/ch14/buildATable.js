@@ -12,8 +12,27 @@ function buildTable(data) {
     table.appendChild(row);
   }
   // Now creating table data
-  
+  for (let element of data) {
+    let dataFields = Object.values(element);
+    let row = document.createElement("tr");
+    for (let field of dataFields) {
+      let tableData = document.createElement('td');
+      let text      = document.createTextNode(field);
+      if (typeof field == "number") {
+        tableData.style.textAlign = "right";
+      }
+      tableData.appendChild(text);
+      row.appendChild(tableData);
+    }
+    table.appendChild(row);
+  }
+  table.style.marginLeft = "auto";
+  table.style.marginRight = "auto";
+  table.id = "moutains";
   return table;
 }
 
-let list = [{name: "Kilimanjaro", height: 5895, place: "Tanzania"}];
+let list = [{name: "Kilimanjaro", height: 5895, place: "Tanzania"},
+            {name: "Everest", height: 8848, place: "Asia"},
+            {height: 8611, name: "K2", place: "Asia"},
+            {place: "Japan", name: "Fuji", height: 3776}];
