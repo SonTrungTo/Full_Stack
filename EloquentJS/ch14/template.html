@@ -12,11 +12,14 @@
   <body>
     <h1>Problem set for chapter 14</h1>
     <h2>Build a Table</h2>
-    <p><div id="one"></div></p>
+      <p><div id="one"></div></p>
+    <h2>Elements by Tag Name</h2>
 
     <script type="text/javascript" src="buildATable.js"></script>
+    <script type="text/javascript" src="elementsByTagName.js"></script>
     <script type="text/javascript">
       document.getElementById('one').appendChild(buildTable(list));
+      console.log(getElementsByTagName(document, "h2"));
     </script>
   </body>
 </html>
