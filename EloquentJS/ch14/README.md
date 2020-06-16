@@ -10,4 +10,4 @@ Solved! Through the use of recursive function calling separately from the origin
 ## The Cat's Hat
 Solved! Basic trigonometry and understanding of `postion: absolute;`
 
-A template for the solution can be found [here](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch14/template.html)
+# A template for the solution can be found [here](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch14/template.html)
