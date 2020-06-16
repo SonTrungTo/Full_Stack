@@ -7,6 +7,16 @@
       h1 {
         text-align: center;
       }
+      #img-container {
+        text-align: center;
+        margin-top: 150px;
+        margin-bottom: 150px;
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+      }
     </style>
   </head>
   <body>
@@ -19,8 +29,9 @@
     <h2>The Cat's Hat</h2>
       <p>Instead of using the cat and the hat, we will be using the two book
       images: MWG and Casella-Berger.</p>
-      <p>
-        <img src="codesExample/micro.jpg" alt="Micro" width="50" height="50" />
+      <p id="img-container">
+        <img src="codesExample/micro.jpg" alt="Micro" id="MWG"/>
+        <img src="codesExample/stat.jpg" alt="Casella" id="CB" />
       </p>
 
     <script type="text/javascript" src="buildATable.js"></script>

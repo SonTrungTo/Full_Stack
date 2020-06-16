@@ -8,3 +8,6 @@ UPDATE: YES! Solved!
 Solved! Through the use of recursive function calling separately from the original one.
 
 ## The Cat's Hat
+Solved! Basic trigonometry and understanding of `postion: absolute;`
+
+A template for the solution can be found [here]()
