@@ -13,6 +13,8 @@
 2. [Robot Delivery](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch7/project1.html)
 3. [Crow's Network](https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch11/trackingTheScalpel.js) (mini-project to emulate computer networks!)
 4. [Egg: A programming language in JavaScript](https://github.com/SonTrungTo/Full_Stack/tree/master/EloquentJS/ch12/project2)
+5. [Tic Tac Toe](http://localhost:3000/): A basic project from React Tutorial;
+further improvement can be done by implementing an AI player.
 
 ## License
 MIT
