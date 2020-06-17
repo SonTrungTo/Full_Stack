@@ -4,6 +4,7 @@
 3. Eloquent Javascript
 4. Express.js
 5. Node.js
+6. [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
 
 (to be continued)
 
