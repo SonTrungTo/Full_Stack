@@ -6,4 +6,8 @@ for (let field of Array.from(fields)) {
     let text = field.getAttribute("data-help");
     help.textContent = text;
   });
+
+  field.addEventListener("blur", () => {
+    help.textContent = "";
+  });
 }
