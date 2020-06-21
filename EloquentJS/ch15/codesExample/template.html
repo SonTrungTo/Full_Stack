@@ -22,6 +22,17 @@
         height: 100px;
         width: 100px;
       }
+      #progress {
+        background: blue;
+        width: 0;
+        height: 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      #help {
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -34,9 +45,15 @@
     <p>Drag the bar to change its width:</p>
     <div style="background: blue; width: 60px; height: 20px"></div>
     <p>Touch this screen:</p>
+    <div id="progress"></div>
+    <label for="">Your name</label>:
+    <input type="text" data-help = "* Your name is required" />
+    <br />
+    <label for="">Age</label>:
+    <input type="text" data-help = "* Your age is required" />
+    <p id="help"></p>
 
     <script type="text/javascript" src="handler.js"></script>
-    <script type="text/javascript" src="mousemove.js"></script>
-    <script type="text/javascript" src="touch.js"></script>
+    <script type="text/javascript" src="focus.js"></script>
   </body>
 </html>
