@@ -1,5 +1,6 @@
 let help = document.querySelector("#help");
 let fields = document.querySelectorAll("input");
+let textarea = document.querySelector("textarea");
 
 for (let field of Array.from(fields)) {
   field.addEventListener("focus", () => {
@@ -11,3 +12,11 @@ for (let field of Array.from(fields)) {
     help.textContent = "";
   });
 }
+
+textarea.addEventListener("focus", () => {
+  textarea.textContent = "";
+});
+
+textarea.addEventListener("blur", () => {
+  textarea.textContent = "Type something here...";
+});
