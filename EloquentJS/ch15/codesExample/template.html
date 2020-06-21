@@ -14,6 +14,14 @@
         background: blue;
         position: absolute;
       }
+      dot {
+        position: absolute;
+        display: block;
+        border: 2px solid red;
+        border-radius: 50px;
+        height: 100px;
+        width: 100px;
+      }
     </style>
   </head>
   <body>
@@ -25,8 +33,10 @@
     <p>A paragraph with a <button>button</button>.</p>
     <p>Drag the bar to change its width:</p>
     <div style="background: blue; width: 60px; height: 20px"></div>
+    <p>Touch this screen:</p>
 
     <script type="text/javascript" src="handler.js"></script>
     <script type="text/javascript" src="mousemove.js"></script>
+    <script type="text/javascript" src="touch.js"></script>
   </body>
 </html>
