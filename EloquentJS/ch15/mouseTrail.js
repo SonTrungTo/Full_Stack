@@ -1,6 +1,9 @@
 let trailElements = [];
+let index = 0; // Because of the one-element-only-at-a-time rule on the document.
+let positionX;
+let positionY;
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 15; i++) {
   let trailElement = document.createElement("div");
   trailElement.className = "trailElement";
   trailElement.style.backgroundColor = getRandomColor();
@@ -8,11 +11,8 @@ for (let i = 0; i < 6; i++) {
 }
 
 window.addEventListener("mousemove", event => {
-  for (let i = 0; i < trailElements.length; i++) {
-    trailElements[i].style.top  = (event.pageY + 8 * (i + 2)) + "px";
-    trailElements[i].style.left = (event.pageX + 8 * (i + 1)) + "px";
-    document.body.appendChild(trailElements[i]);
-  }
+  positionX = event.pageX;
+  positionY = event.pageY;
 });
 
 function getRandomColor() {
@@ -24,3 +24,18 @@ function getRandomColor() {
   }
   return color;
 }
+
+function animate(time, lastTime) {
+  if (lastTime != null) {
+    time += (time - lastTime) * 0.001;
+  }
+  index %= trailElements.length;
+  let trailElement = trailElements[index];
+  trailElement.style.top  = (positionY + 10) + "px";
+  trailElement.style.left = (positionX + 2) + "px";
+  document.body.appendChild(trailElement);
+  ++index;
+  requestAnimationFrame(newTime => animate(newTime, time));
+}
+
+requestAnimationFrame(animate);
