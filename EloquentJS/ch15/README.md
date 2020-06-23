@@ -1,4 +1,4 @@
-# Exercise incoming...
+[Solution template is here](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch15/template.html)
 ## Balloon
 Solved! The trick here is to put `size` as global variable to track the numerical
 size of `balloon.style.fontSize` because the latter contains the string `px`.
