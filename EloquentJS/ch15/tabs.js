@@ -12,13 +12,25 @@ function asTabs(node) {
 
   tabs.forEach(tabNode => {
     node.insertBefore(tabNode, node.children[index]);
-    index += 2;
+    index++;
   });
 
+  changingTab(node, tabs, index);
 }
 
-function changingTab() {
-
+function changingTab(panel, tabs, index) {
+  tabs.forEach(tabNode => {
+    tabNode.addEventListener("click", () => {
+      for (let i = index; i < panel.children.length; i++) {
+        let panelName = panel.children[i].getAttribute("data-tabName");
+        if (tabNode.textContent != panelName) {
+          panel.children[i].style.display = "none";
+        } else {
+          panel.children[i].style.display = "";
+        }
+      }
+    });
+  });
 }
 
 asTabs(tabTag);
