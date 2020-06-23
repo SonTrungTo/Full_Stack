@@ -6,3 +6,5 @@ size of `balloon.style.fontSize` because the latter contains the string `px`.
 Solved! I expand my solutions thanks to the hints from the book so that it
 can use `requestAnimationFrame()` for simple physics system.
 ## Tabs
+Solved! Quite hard, but manageable! The key is to group each panel and button
+into an object!
