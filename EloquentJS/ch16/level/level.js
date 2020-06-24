@@ -8,8 +8,8 @@ class Level {
       return row.map((ch, x) => {
         let type = levelChars[ch];
         if (typeof type == "string")  return type;
-        startActors.push(
-          type.create(new Vector(x, y), ch));
+        this.startActors.push(
+          type.create(new Vec(x, y), ch));
         return "empty";
       });
     });

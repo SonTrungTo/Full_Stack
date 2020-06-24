@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Marijn: A platform game</title>
+  </head>
+  <body>
+    <h1>Marijn: A platform game</h1>
+
+    <script type="text/javascript" src="level/level.js"></script>
+    <script type="text/javascript" src="level/state.js"></script>
+    <script type="text/javascript" src="aPlatformGame.js"></script>
+    <script type="text/javascript" src="actors/actors.js"></script>
+    <script type="text/javascript">
+      let simpleLevel = new Level(simpleLevelPlan);
+      console.log(`${simpleLevel.width} by ${simpleLevel.height}`);
+    </script>
+  </body>
+</html>

@@ -28,3 +28,6 @@ the start or just bounces back.
 * class `Coin` to describe gold coins. Since gold coins will fluctuate
 a bit to enliven the game, they keep `basePos` and `wobble` properties as a result,
 which together determine `pos` property.
+
+It also contains the definition of `levelChars` object used by `Level` class
+to map an element of level plan to appropriate type/class.
