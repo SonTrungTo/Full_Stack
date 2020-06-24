@@ -25,4 +25,6 @@ momentum and gravity.
 * class `Lava` to describe different types of lava: dripping lava, horizontal lava
 and vertical lava. `reset` property determines whether a lava is coming back from
 the start or just bounces back.
-* class `Coin`
+* class `Coin` to describe gold coins. Since gold coins will fluctuate
+a bit to enliven the game, they keep `basePos` and `wobble` properties as a result,
+which together determine `pos` property.
