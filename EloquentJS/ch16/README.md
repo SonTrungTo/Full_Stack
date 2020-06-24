@@ -14,3 +14,8 @@ created by a human-readable interpretation of the level design.
 ## state.js
 As the game progresses, things change: actors come and go away, level changes,
 and status of the game changes. The state class is used to update the state of the game.
+
+# actors
+## actors.js
+This contains classes that define the moving elements in the game, a.k.a actors,
+including Vector object to realize movement in 2-dimensional-game.
