@@ -31,3 +31,9 @@ which together determine `pos` property.
 
 It also contains the definition of `levelChars` object used by `Level` class
 to map an element of level plan to appropriate type/class.
+
+# drawing
+Encapsulation is applied. We define DOMDisplay, an interface that returns
+an object that displays a given level and state.
+## DOMDisplay
+1. Define `elt`, a helper function.
