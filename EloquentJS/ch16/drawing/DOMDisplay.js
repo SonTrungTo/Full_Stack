@@ -9,3 +9,11 @@ function elt(element, attrs, ...children) {
   }
   return elementDOM;
 }
+
+// DOMDisplay
+class DOMDisplay {
+  constructor(parent, level) {
+    this.dom = elt("div", {}, drawGrid());
+    this.actorLayer = null;
+  }
+}

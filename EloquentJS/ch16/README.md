@@ -37,3 +37,8 @@ Encapsulation is applied. We define DOMDisplay, an interface that returns
 an object that displays a given level and state.
 ## DOMDisplay
 1. Define `elt`, a helper function.
+1. DOMDisplay: We need to build a display object by giving it a parent to which
+it appends itself and a level object.
+   1. `this.actorLayer` contains elements that track the actors being displayed
+   as a state updates.
+   1. `level` is used to draw a background.
