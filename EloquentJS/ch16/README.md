@@ -48,4 +48,8 @@ it appends itself and a level object.
 ## drawingSystem.js
 `scale` is for enlarging the number of pixels each element of the grid takes per square.
 1. `drawGrid` is drawn using `elt`. `table` tag corresponds nicely with the data
-structure made by `Level`.
+structure made by `Level`. (I want to experience with changing some attrs later,
+like `style: "height: ${level.height * scale}px"`).
+
+# css
+It contains `file.css` to display elements graphically.
