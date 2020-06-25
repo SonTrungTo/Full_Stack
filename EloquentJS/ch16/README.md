@@ -35,7 +35,8 @@ to map an element of level plan to appropriate type/class.
 # drawing
 Encapsulation is applied. We define DOMDisplay, an interface that returns
 an object that displays a given level and state.
-## DOMDisplay
+
+## DOMDisplay.js
 1. Define `elt`, a helper function.
 1. DOMDisplay: We need to build a display object by giving it a parent to which
 it appends itself and a level object.
@@ -43,3 +44,8 @@ it appends itself and a level object.
    as a state updates.
    1. `level` is used to draw a background, which is drawn by `drawGrid`. It is
    drawn once, then actors are redrawn as the state changes.
+
+## drawingSystem.js
+`scale` is for enlarging the number of pixels each element of the grid takes per square.
+1. `drawGrid` is drawn using `elt`. `table` tag corresponds nicely with the data
+structure made by `Level`.
