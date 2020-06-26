@@ -14,4 +14,8 @@ class Level {
       });
     });
   }
+
+  touch(pos, size, type) {
+    let firstX = Math.floor(pos.x);
+  }
 }
