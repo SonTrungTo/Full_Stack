@@ -12,3 +12,12 @@
 .lava {
   background: rgb(255, 100, 100);
 }
+.actor {
+  position: absolute;
+}
+.coin {
+  background: rgb(255, 255, 0);
+}
+.player {
+  background: rgb(64, 64, 64);
+}
