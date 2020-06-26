@@ -2,19 +2,25 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/css/file.css" />
+    <link rel="stylesheet" href="css/file.css" />
     <title>Marijn: A platform game</title>
   </head>
   <body>
     <h1>Marijn: A platform game</h1>
+    <p id="help">Press the cursor keys(ArrowUp, ArrowLeft, ArrowRight)
+    to jump, move left and move right, respectively. Avoid being scorched and get
+    all the gold coins to win the game.</p>
 
     <script type="text/javascript" src="level/level.js"></script>
     <script type="text/javascript" src="level/state.js"></script>
     <script type="text/javascript" src="aPlatformGame.js"></script>
     <script type="text/javascript" src="actors/actors.js"></script>
+    <script type="text/javascript" src="drawing/DOMDisplay.js"></script>
+    <script type="text/javascript" src="drawing/drawingSystem.js"></script>
     <script type="text/javascript">
       let simpleLevel = new Level(simpleLevelPlan);
-      console.log(`${simpleLevel.width} by ${simpleLevel.height}`);
+      let display = new DOMDisplay(document.body, simpleLevel);
+      display.syncState(State.start(simpleLevel));
     </script>
   </body>
 </html>
