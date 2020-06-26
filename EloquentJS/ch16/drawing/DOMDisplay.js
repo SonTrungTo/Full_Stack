@@ -26,6 +26,10 @@ class DOMDisplay {
     this.scrollPlayerIntoView(state);
   }
 
+  scrollPlayerIntoView(state) {
+    
+  }
+
   clear() {
     this.dom.remove();
   }
