@@ -10,3 +10,9 @@ function drawGrid(level) {
       style: `height: ${scale}px;`
     }, ...row.map(type => elt("td", {class: type})))));
 }
+
+function drawActors(actors) {
+  return elt("div", {}, ...actors.map(actor => {
+    
+  }));
+}

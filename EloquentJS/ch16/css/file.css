@@ -1,5 +1,14 @@
 .background {
   border-spacing: 0;
   table-layout: fixed;
-  background: #70c8ff;
+  background: rgb(46, 150, 255);
+}
+.background td {
+  padding: 0;
+}
+.wall {
+  background: white;
+}
+.lava {
+  background: rgb(255, 100, 100);
 }

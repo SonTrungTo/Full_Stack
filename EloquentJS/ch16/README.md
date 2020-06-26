@@ -50,6 +50,8 @@ it appends itself and a level object.
 1. `drawGrid` is drawn using `elt`. `table` tag corresponds nicely with the data
 structure made by `Level`. (I want to experience with changing some attrs later,
 like `style: "height: ${level.height * scale}px"`).
+1. `drawActors` is drawn using `elt`. The idea is to have a set of coordinates of
+actors (their size and position) attached themselves to a `div` element and return it.
 
 # css
 It contains `file.css` to display elements graphically.
