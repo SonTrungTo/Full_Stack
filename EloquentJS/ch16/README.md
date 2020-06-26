@@ -1,4 +1,4 @@
-# Marijn: A platform game.
+# Marijn: A platform game. [Play here](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch16/Marijn.html)
 This project attempts to build a somewhat simplified Mario-like game. You control
 the main character, Marijn, moving around a fixed level design, going through a couple of levels.
 The goal is to collect all gold coins in any single level and to avoid being hit
