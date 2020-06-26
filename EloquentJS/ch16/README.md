@@ -44,6 +44,14 @@ it appends itself and a level object.
    as a state updates.
    1. `level` is used to draw a background, which is drawn by `drawGrid`. It is
    drawn once, then actors are redrawn as the state changes.
+   1. Once the background is drawn and actor elements are created, thanks to
+   `drawGrid` and `drawActors`, we need to a method to display them, given a state:
+   `syncState` method. It first removes old graphics in the background, then
+   redraws the actors in their new position; it might be awfully inefficient,
+   but tracking of all the movements of actors requires big-time book-keeping.
+   Since there are not many actors here, this method will do just fine.
+       * `scrollPlayerIntoView` method here does the display work.
+       * modification of its class helps add effects of CSS to the game status.
 
 ## drawingSystem.js
 `scale` is for enlarging the number of pixels each element of the grid takes per square.
