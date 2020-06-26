@@ -28,5 +28,10 @@
   background: rgb(180, 64, 64);
 }
 .game {
-  
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 60%;
+  max-height: 40%;
+  position: relative;
 }
