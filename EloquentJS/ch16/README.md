@@ -12,12 +12,16 @@ lives.
 This attempts to create a level object which can interpret background elements
 created by a human-readable interpretation of the level design.
 
-`Level` constructor now has `touch` method, which tests if an element (`pos, size`) touches
+`Level` constructor now has `touches` method, which tests if an element (`pos, size`) touches
 a background element in the grid. It also prevents any further readings of elements
-outside the level planned! 
+outside the level planned!
+
 ## state.js
 As the game progresses, things change: actors come and go away, level changes,
 and status of the game changes. The state class is used to update the state of the game.
+
+It also has `update` method to track activities of actors through
+collusion and overlap, its movements.
 
 # actors
 ## actors.js
