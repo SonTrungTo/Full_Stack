@@ -17,6 +17,13 @@ class State {
     let actors = this.actors.map(actor => actor.update(time, this, keys));
     let newState = new State(this.level, actors, this.status);
 
-    
+    if (newState.status != "playing") return newState;
+
+    let player = newState.player;
+    if (this.level.touches(player.pos, player.size, "lava")) {
+      return new State(this.level, actors, "lost");
+    }
+
+    // What about actors interactions? How they affect the game?
   }
 }

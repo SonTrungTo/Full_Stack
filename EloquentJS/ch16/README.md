@@ -21,7 +21,7 @@ As the game progresses, things change: actors come and go away, level changes,
 and status of the game changes. The state class is used to update the state of the game.
 
 It also has `update` method to track activities of actors through
-collusion and overlap, its movements.
+collusion and overlap, its movements => need to add `update` methods to all actors.
 
 # actors
 ## actors.js
