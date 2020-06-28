@@ -47,6 +47,15 @@ class Player {
 
     let ySpeed = this.speed.y + time * gravity;
     let movedY = pos.plus(new Vec(0, ySpeed * time));
+    if (!state.level.touches(movedY, this.size, "wall")) {
+      pos = movedY;
+    } else if (keys.ArrowUp && ySpeed > 0) {
+      ySpeed = -jumpSpeed;
+    } else {
+      ySpeed = 0;
+    }
+
+    return new Player(pos, new Vec(xSpeed, ySpeed));
   }
 }
 Player.prototype.size = new Vec(0.8, 1.5);
