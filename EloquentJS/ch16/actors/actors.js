@@ -28,6 +28,10 @@ class Player {
     return new Player(pos.plus(new Vec(0, -0.5)),
                       new Vec(0, 0));
   }
+
+  update(time, state, keys) {
+
+  }
 }
 Player.prototype.size = new Vec(0.8, 1.5);
 
@@ -55,6 +59,10 @@ class Lava {
 
   collide(state) {
     return new State(state.level, state.actors, "lost");
+  }
+
+  update(time, state) {
+    
   }
 }
 Lava.prototype.size = new Vec(1, 1);
@@ -84,6 +92,10 @@ class Coin {
       status = "won";
     }
     return new State(state.level, filtered, status);
+  }
+
+  update(time) {
+
   }
 }
 Coin.prototype.size = new Vec(0.6, 0.6);
