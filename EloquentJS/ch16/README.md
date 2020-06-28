@@ -20,8 +20,14 @@ outside the level planned!
 As the game progresses, things change: actors come and go away, level changes,
 and status of the game changes. The state class is used to update the state of the game.
 
-It also has `update` method to track activities of actors through
+It also has `update` method to track activities of actors and the game's state through
 collusion and overlap, its movements => need to add `update` methods to all actors.
+
+* `collide` is a method by actors class to return a new state: player interacting
+with lava causes the game to end, with gold coins causes the coin to disappear
+and with all of the latter wins the game.
+* `overlap` a function inside `state.js` to test whether two actors collapse
+with each other.
 
 # actors
 ## actors.js

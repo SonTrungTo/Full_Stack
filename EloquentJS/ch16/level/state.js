@@ -24,6 +24,16 @@ class State {
       return new State(this.level, actors, "lost");
     }
 
-    // What about actors interactions? How they affect the game?
+    for (let actor of actors) {
+      if (actor != player && overlap(actor, player)) {
+        newState = actor.collide(newState);
+      }
+    }
+    return newState;
   }
+}
+
+// overlap(actor1, actor2)
+function overlap(actor1, actor2) {
+  
 }
