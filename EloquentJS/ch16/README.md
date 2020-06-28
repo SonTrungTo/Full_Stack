@@ -50,7 +50,8 @@ which together determine `pos` property.
 It also contains the definition of `levelChars` object used by `Level` class
 to map an element of level plan to appropriate type/class. It now contains
 `collide(state)` method to signal the state of the game for each actor who is collided
-by the player, a.k.a lava and coin.
+by the player, a.k.a lava and coin. All actors have `update` method to track
+its properties through `time, state, keys`.
 
 # drawing
 Encapsulation is applied. We define DOMDisplay, an interface that returns

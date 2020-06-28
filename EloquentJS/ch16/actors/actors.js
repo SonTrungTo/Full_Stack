@@ -2,7 +2,9 @@
 const gravity = 30;
 const playerXSpeed = 7;
 const jumpSpeed = 17;
-
+// measurements (stats) for Coin, for it needs wobbleDist and wobbleSpeed
+const wobbleDist = 0.07;
+const wobbleSpeed = 8;
 
 class Vec {
   constructor(x, y) {
@@ -127,7 +129,9 @@ class Coin {
   }
 
   update(time) {
-
+    let wobble = this.wobble + wobbleSpeed * time;
+    let wobblePos = Math.sin(wobble) * wobbleDist;
+    return new Coin(this.basePos.plus(new Vec(0, wobblePos)), this.basePos, wobble);
   }
 }
 Coin.prototype.size = new Vec(0.6, 0.6);
