@@ -1,3 +1,9 @@
+// measurements (stats) for Player, including his/her gravity, jump speed, movement speed
+const gravity = 30;
+const playerXSpeed = 7;
+const jumpSpeed = 17;
+
+
 class Vec {
   constructor(x, y) {
     this.x = x;
@@ -30,7 +36,17 @@ class Player {
   }
 
   update(time, state, keys) {
+    let xSpeed = 0;
+    if (keys.ArrowLeft)  xSpeed -= playerXSpeed;
+    if (keys.ArrowRight) xSpeed += playerXSpeed;
+    let pos = this.pos;
+    let movedX = pos.plus(new Vec(xSpeed * time, 0));
+    if (!state.level.touches(movedX, this.size, "wall")) {
+      pos = movedX;
+    }
 
+    let ySpeed = this.speed.y + time * gravity;
+    let movedY = pos.plus(new Vec(0, ySpeed * time));
   }
 }
 Player.prototype.size = new Vec(0.8, 1.5);
@@ -62,7 +78,7 @@ class Lava {
   }
 
   update(time, state) {
-    
+
   }
 }
 Lava.prototype.size = new Vec(1, 1);
