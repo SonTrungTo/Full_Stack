@@ -96,3 +96,9 @@ being pressed as long as the key is held.
 # running
 
 ## runGame.js
+We can use something with `requestAnimationFrame`. However, it is quite primitive
+because we need to keep track the time for each request, to account for delay
+due to other uses (e.g, tabs hidden), and to change the time unit to "second"
+for easy use.
+
+* `runAnimation` does the above.
