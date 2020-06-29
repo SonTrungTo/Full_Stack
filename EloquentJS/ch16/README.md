@@ -85,3 +85,12 @@ actors (their size and position) attached themselves to a `div` element and retu
 # css
 It contains `file.css` to display elements graphically, which include background
 and moving elements.
+
+# keys
+
+## trackKeys.js
+Here were are building `trackKeys` function that tracks the keys being pressed.
+
+# running
+
+## runGame.js
