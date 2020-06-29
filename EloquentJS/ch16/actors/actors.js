@@ -90,7 +90,7 @@ class Lava {
 
   update(time, state) {
     let newPos = this.pos.plus(this.speed.times(time));
-    if (!state.level.touches(moved, this.size, "wall")) {
+    if (!state.level.touches(newPos, this.size, "wall")) {
       return new Lava(newPos, this.speed, this.reset);
     } else if (this.reset) {
       return new Lava(this.reset, this.speed, this.reset);

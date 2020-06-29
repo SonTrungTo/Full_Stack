@@ -102,3 +102,9 @@ due to other uses (e.g, tabs hidden), and to change the time unit to "second"
 for easy use.
 
 * `runAnimation` does the above.
+* `runLevel` runs the game; when the game is over in a single plan level,
+it waits 1 more second, then deletes graphic, resolves to game status and returns `false`
+in order to stop the animation.
+* `runGame`: Since the game is a sequence of levels, the game restarts a level
+when a player loses and proceeds to the next level until the game is absolutely finished!
+Then the player has won!
