@@ -23,8 +23,8 @@ class Level {
 
     for (let y = firstY; y < lastY; y++) {
       for (let x = firstX; x < lastX; x++) {
-        let isOutside = x < 0 || x > this.width ||
-                        y < 0 || y > this.height;
+        let isOutside = x < 0 || x >= this.width || // without "=", it can cause unexpected errors
+                        y < 0 || y >= this.height;
         let here = isOutside ? "wall" : this.rows[y][x];
         if (here == type) return true;
       }
