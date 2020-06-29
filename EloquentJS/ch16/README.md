@@ -89,7 +89,9 @@ and moving elements.
 # keys
 
 ## trackKeys.js
-Here were are building `trackKeys` function that tracks the keys being pressed.
+Here were are building `trackKeys` function that takes an array of names of the keys,
+and returns an object that tracks whether a key is pressed, which will stay
+being pressed as long as the key is held.
 
 # running
 
