@@ -108,3 +108,6 @@ in order to stop the animation.
 * `runGame`: Since the game is a sequence of levels, the game restarts a level
 when a player loses and proceeds to the next level until the game is absolutely finished!
 Then the player has won!
+
+# Exercise 16.1: Game Over
+The game now starts from the beginning if you lose all lives!

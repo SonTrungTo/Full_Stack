@@ -1,3 +1,7 @@
+const lives = 3;
+let para = document.createElement("p");
+para.id = "help1";
+
 // runAnimation
 function runAnimation(frameFunc) {
   let lastTime = null;
@@ -15,6 +19,7 @@ function runAnimation(frameFunc) {
 // runLevel
 function runLevel(level, Display) {
   let display = new Display(document.body, level);
+  document.body.appendChild(para);
   let state   = State.start(level);
   let ending  = 1;
   return new Promise(resolve => {
@@ -37,9 +42,18 @@ function runLevel(level, Display) {
 
 // runGame
 async function runGame(plans, Display) {
+  let remainingLives = lives;
   for (let level = 0; level < plans.length;) {
+    para.textContent = `Remaining Lives: ${remainingLives}`;
     let status = await runLevel(new Level(plans[level]), Display);
     if(status == "won") ++level;
+    if (status == "lost") {
+      remainingLives--;
+      if (remainingLives == 0) {
+        level = 0;
+        remainingLives = lives;
+      }
+    }
   }
-  console.log("You have won!");
+  para.textContent = "CONGRATS! YOU HAVE WON THE GAME!"
 }
