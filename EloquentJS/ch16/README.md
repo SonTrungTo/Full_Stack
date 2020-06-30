@@ -109,7 +109,7 @@ in order to stop the animation.
 when a player loses and proceeds to the next level until the game is absolutely finished!
 Then the player has won!
 
-# Exercise 16.1: Game Over - [x]
+# Exercise 16.1: Game Over :heavy_check_mark:
 The game now starts from the beginning if you lose all lives!
 
 # Exercise 16.2: Pausing the Game
