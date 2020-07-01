@@ -23,6 +23,16 @@ function runLevel(level, Display) {
   let state   = State.start(level);
   let ending  = 1;
   return new Promise(resolve => {
+    let isPaused = false;
+    /* "false": Running the game.
+       "true" : Pausing the game, but the game needs to keep going, runAnimation has to be running
+       MEANING ? runAnimation has to be receiving the signal. HOW???? */
+    window.addEventListener("keydown", event => {
+      if (event.key == "Escape") {
+        isPaused = true;
+      }
+    });
+
     runAnimation(time => {
       state = state.update(time, arrowKeys);
       display.syncState(state);
