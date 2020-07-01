@@ -26,14 +26,22 @@ function runLevel(level, Display) {
     let isPaused = false;
     /* "false": Running the game.
        "true" : Pausing the game, but the game needs to keep going, runAnimation has to be running
-       MEANING ? runAnimation has to be receiving the signal. HOW???? */
-    window.addEventListener("keydown", event => {
-      if (event.key == "Escape") {
-        isPaused = true;
-      }
-    });
+       MEANING ? runAnimation has to be receiving the signal. HOW????
+       Remember that runAnimation has to be recursively called! */
+    window.addEventListener("keydown", escKeyHandler);
 
-    runAnimation(time => {
+    function escKeyHandler(event) {
+      if (event.key == "Escape") {
+        isPaused = !isPaused;
+        event.preventDefault();
+      }
+    }
+
+    function update(time) {
+      if (isPaused) {
+        runAnimation(update);
+        return false;
+      }
       state = state.update(time, arrowKeys);
       display.syncState(state);
       if (state.status == "playing") {
@@ -46,7 +54,9 @@ function runLevel(level, Display) {
         resolve(state.status);
         return false;
       }
-    });
+    }
+
+    runAnimation(update);
   });
 }
 
