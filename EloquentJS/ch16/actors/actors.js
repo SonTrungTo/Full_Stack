@@ -5,6 +5,9 @@ const jumpSpeed = 17;
 // measurements (stats) for Coin, for it needs wobbleDist and wobbleSpeed
 const wobbleDist = 0.07;
 const wobbleSpeed = 8;
+// measurements (stats) for Monster: it will be slower, stronger than its human player counterpart
+const monsterSpeed = 3;
+const monsterJumpSpeed = 20;
 
 class Vec {
   constructor(x, y) {
@@ -61,6 +64,50 @@ class Player {
   }
 }
 Player.prototype.size = new Vec(0.8, 1.5);
+
+// Monster class
+class Monster {
+  constructor(pos, speed) {
+    this.pos   = pos;
+    this.speed = speed;
+  }
+
+  get type() {return "monster";}
+
+  static create(pos) {
+    return new Monster(pos.plus(new Vec(0, -1)),
+                       new Vec(0, 0));
+  }
+
+  collide(state) {
+    return new State(state.level, state.actors, "lost");
+  }
+
+  update(time, state) {
+    let player = state.player;
+    let xSpeed, ySpeed;
+
+    xSpeed = player.pos.x > this.pos.x ? monsterSpeed : -monsterSpeed;
+    let pos = this.pos;
+    let movedX = pos.plus(new Vec(time * xSpeed, 0));
+    if (!state.level.touches(movedX, this.size, "wall")) {
+      pos = movedX;
+    }
+
+    ySpeed = this.speed.y + time * gravity;
+    let movedY = pos.plus(new Vec(0, time * ySpeed));
+    if (!state.level.touches(movedY, this.size, "wall")) {
+      pos = movedY;
+    } else if (ySpeed > 0 && state.level.touches(movedX, this.size, "wall")) {
+      ySpeed = -monsterJumpSpeed;
+    } else {
+      ySpeed = 0;
+    }
+
+    return new Monster(pos, new Vec(xSpeed, ySpeed));
+  }
+}
+Monster.prototype.size = new Vec(1.5, 2);
 
 // Lava class
 class Lava {
@@ -139,5 +186,6 @@ Coin.prototype.size = new Vec(0.6, 0.6);
 const levelChars = {
   ".": "empty", "#": "wall", "+": "lava",
   "=": Lava, "|": Lava, "v": Lava,
-  "@": Player, "o": Coin
+  "@": Player, "o": Coin,
+  "M": Monster
 };
