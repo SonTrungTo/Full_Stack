@@ -113,3 +113,4 @@ Then the player has won!
 The game now starts from the beginning if you lose all lives!
 
 # Exercise 16.2: Pausing the Game
+We need to pause the game somehow by pressing "Escape". This is a difficult exercise.
