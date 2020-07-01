@@ -82,7 +82,7 @@ class Monster {
   collide(state) {
     let player = state.player;
     let bottomPlayer = player.pos.y + player.size.y; // ~~ +1.5
-    let headMonster = this.pos.y + 0.4;              // ~~ x > player.pos.y since its supposed to be below (at least 2)
+    let headMonster = this.pos.y + 0.55;             // ~~ x > player.pos.y since its supposed to be below (at least 2)
     if (bottomPlayer < headMonster) {
       let filtered = state.actors.filter(actor => this != actor);
       return new State(state.level, filtered, state.status);
