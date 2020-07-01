@@ -116,5 +116,5 @@ The game now starts from the beginning if you lose all lives!
 The game is now capable of being paused by pressing ESC key. Addtionally,
 `trackKeys` are rewritten to prevent being leaked out!
 
-# Exercise 16.3: Monsters
+# Exercise 16.3: Monsters :heavy_check_mark:
 The game now has monsters wandering in the levels, stalking the player!!!

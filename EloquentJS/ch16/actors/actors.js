@@ -80,6 +80,13 @@ class Monster {
   }
 
   collide(state) {
+    let player = state.player;
+    let bottomPlayer = player.pos.y + player.size.y; // ~~ +1.5
+    let headMonster = this.pos.y + 0.675;           // ~~ x > player.pos.y since its supposed to be below (at least 2)
+    if (bottomPlayer < headMonster) {
+      let filtered = state.actors.filter(actor => this != actor);
+      return new State(state.level, filtered, state.status);
+    }
     return new State(state.level, state.actors, "lost");
   }
 
@@ -98,7 +105,7 @@ class Monster {
     let movedY = pos.plus(new Vec(0, time * ySpeed));
     if (!state.level.touches(movedY, this.size, "wall")) {
       pos = movedY;
-    } else if (ySpeed > 0 && state.level.touches(movedX, this.size, "wall")) {
+    } else if (ySpeed > 0 && state.level.touches(movedX, this.size, "wall") || Math.random() < 0.15) {
       ySpeed = -monsterJumpSpeed;
     } else {
       ySpeed = 0;
