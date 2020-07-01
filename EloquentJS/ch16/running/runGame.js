@@ -42,6 +42,7 @@ function runLevel(level, Display) {
         runAnimation(update);
         return false;
       }
+      arrowKeys.addHandler();
       state = state.update(time, arrowKeys);
       display.syncState(state);
       if (state.status == "playing") {
@@ -51,6 +52,8 @@ function runLevel(level, Display) {
         return true;
       } else {
         display.clear();
+        arrowKeys.removeHandler();
+        window.removeEventListener("keydown", escKeyHandler);
         resolve(state.status);
         return false;
       }

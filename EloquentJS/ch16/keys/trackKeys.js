@@ -9,7 +9,15 @@ function trackKeys(keys) {
     }
   }
 
-  window.addEventListener("keydown", track);
-  window.addEventListener("keyup", track);
+  down.addHandler = () => {
+    window.addEventListener("keydown", track);
+    window.addEventListener("keyup", track);
+  };
+
+  down.removeHandler = () => {
+    window.removeEventListener("keydown", track);
+    window.removeEventListener("keyup", track);
+  };
+
   return down;
 }
