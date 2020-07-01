@@ -5,8 +5,8 @@ const jumpSpeed = 17;
 // measurements (stats) for Coin, for it needs wobbleDist and wobbleSpeed
 const wobbleDist = 0.07;
 const wobbleSpeed = 8;
-// measurements (stats) for Monster: it will be slower, stronger than its human player counterpart
-const monsterSpeed = 3;
+// measurements (stats) for Monster: it will be as fast as, stronger than its human player counterpart
+const monsterSpeed = 7;
 const monsterJumpSpeed = 20;
 
 class Vec {
@@ -82,7 +82,7 @@ class Monster {
   collide(state) {
     let player = state.player;
     let bottomPlayer = player.pos.y + player.size.y; // ~~ +1.5
-    let headMonster = this.pos.y + 0.675;           // ~~ x > player.pos.y since its supposed to be below (at least 2)
+    let headMonster = this.pos.y + 0.4;              // ~~ x > player.pos.y since its supposed to be below (at least 2)
     if (bottomPlayer < headMonster) {
       let filtered = state.actors.filter(actor => this != actor);
       return new State(state.level, filtered, state.status);
