@@ -19,6 +19,7 @@ img.addEventListener("load", () => {
 
 img2.addEventListener("load", () => {
   let cycle = 0;
+  //flipHorizontally(cx, 40 + spriteW2 / 2); // it's stack
   setInterval(() => {
     cx.clearRect(40, 0, spriteW2, spriteH2);
     cx.drawImage(img2,
