@@ -1,4 +1,9 @@
 const scale = 20;
+let otherSprites = document.createElement("img");
+otherSprites.src = "img/sprites_others.png";
+let playerSprites = document.createElement("img");
+playerSprites.src = "img/marijn.png";
+const playerXOverlap = 4;
 
 class CanvasDisplay {
   constructor(parent, level) {
@@ -55,6 +60,35 @@ class CanvasDisplay {
       this.cx.fillStyle = rgb(66, 183, 255);
     }
     this.cx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  drawBackground(level) {
+    let {top, left, width, height} = this.viewport;
+    let xStart = Math.floor(left);
+    let xEnd   = Math.ceil(left + width);
+    let yStart = Math.floor(top);
+    let yEnd   = Math.ceil(top + height);
+
+    for (let y = yStart; y < yEnd; y++) {
+      for (let x = xStart; x < xEnd; x++) {
+        let tile = level.rows[y][x];
+        if (tile == "empty") continue;
+        let screenX = (x - left) * scale;
+        let screenY = (y - top) * scale;
+        let tileX = tile == "lava" ? scale : 0;
+        this.cx.drawImage(otherSprites,
+                          tileX,         0, scale, scale,
+                          screenX, screenY, scale, scale);
+      }
+    }
+  }
+
+  drawPlayer(player, x, y, width, height) {
+    width += playerXOverlap * 2;
+    x -= playerXOverlap;
+    if (player.speed.x != 0) {
+      
+    }
   }
 
   clear() {
