@@ -3,7 +3,16 @@ let otherSprites = document.createElement("img");
 otherSprites.src = "img/sprites_others.png";
 let playerSprites = document.createElement("img");
 playerSprites.src = "img/marijn.png";
-const playerXOverlap = 4;
+let monsterSprites = document.createElement("img");
+monsterSprites.src = "img/monsters.png";
+const playerXOverlap  = 4;
+const monsterXOverlap = 3;
+
+function flipHorizontally(context, around) {
+  context.translate(around, 0);
+  context.scale(-1, 1);
+  context.translate(-around, 0);
+}
 
 class CanvasDisplay {
   constructor(parent, level) {
@@ -14,6 +23,7 @@ class CanvasDisplay {
     this.cx = this.canvas.getContext("2d");
 
     this.flipPlayer = false;
+    this.flipMonster = false;
 
     this.viewport = {
       top:    0,
@@ -85,9 +95,63 @@ class CanvasDisplay {
 
   drawPlayer(player, x, y, width, height) {
     width += playerXOverlap * 2;
-    x -= playerXOverlap;
+    x -= playerXOverlap; // this accounts for the flipping axis.
     if (player.speed.x != 0) {
-      
+      this.flipPlayer = player.speed.x < 0;
+    }
+
+    let tile = 8;
+    if (player.x.speed != 0) {
+      tile = Math.floor(Date.now() / 60) % 8;
+    } else if (player.y.speed != 0) {
+      tile = 9;
+    }
+
+    this.cx.save();
+    if (this.flipPlayer) {
+      flipHorizontally(this.cx, x + width / 2);
+    }
+    let tileX = tile * width;
+    this.cx.drawImage(playerSprites,
+                      tileX, 0, width, height,
+                      x,     y, width, height);
+    this.cx.restore();
+  }
+
+  drawMonster(monster, x, y, width, height) {
+    width += monsterXOverlap * 2;
+    x -= monsterXOverlap;
+
+    let tile = 1;
+    if (monster.speed.x != 0) {
+      this.flipMonster = monster.speed.x < 0;
+      tile  = Math.floor(Date.now() / 60) % 3;
+    }
+
+    this.cx.save();
+    if (this.flipMonster) {
+      flipHorizontally(this.cx, x + width / 2);
+    }
+    let tileX = tile * width;
+    this.cx.drawImage(monsterSprites,
+                      tileX, 0, width, height,
+                      x,     y, width, height);
+    this.cx.restore();
+  }
+
+  drawActors(actors) {
+    for (let actor of actors) {
+      let width = actor.size.x * scale;
+      let height = actor.size.y * scale;
+      let x = (actor.pos.x - this.viewport.left) * scale;
+      let y = (actor.pos.y - this.viewport.top) * scale;
+      if (actor.type == "player") {
+        this.drawPlayer(actor, x, y, width, height);
+      } else if (actor.type == "monster") {
+        this.drawMonster(actor, x, y, width, height);
+      } else {
+        
+      }
     }
   }
 
