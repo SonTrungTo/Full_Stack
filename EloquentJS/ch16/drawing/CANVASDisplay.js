@@ -39,10 +39,22 @@ class CanvasDisplay {
     }
 
     if (center.y < view.top + margin) {
-      view.top;
-    } else if () {
-
+      view.top = Math.max(center.y - margin, 0);
+    } else if (center.y > view.top + view.height - margin) {
+      view.top = Math.min(margin + center.y - view.height,
+                          state.level.height - view.height);
     }
+  }
+
+  clearDisplay(status) {
+    if (status == "won") {
+      this.cx.fillStyle = rgb(153, 218, 255);
+    } else if (status == "lost") {
+      this.cx.fillStyle = rgb(255, 102, 128);
+    } else {
+      this.cx.fillStyle = rgb(66, 183, 255);
+    }
+    this.cx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   clear() {
