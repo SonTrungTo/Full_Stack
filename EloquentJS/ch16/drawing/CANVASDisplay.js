@@ -29,7 +29,21 @@ class CanvasDisplay {
     let view   = this.viewport;
     let margin = view.width / 3;
     let player = state.player();
-    let center;
+    let center = player.pos.plus(player.size.times(0.5));
+
+    if (center.x < view.left + margin) {
+      view.left = Math.max(center.x - margin, 0);
+    } else if (center.x > view.left + view.width - margin) {
+      view.left = Math.min(center.x + margin - view.width,
+                           state.level.width - view.width);
+    }
+
+    if (center.y < view.top + margin) {
+      view.top;
+    } else if () {
+
+    }
+  }
 
   clear() {
     this.canvas.remove();
