@@ -150,7 +150,10 @@ class CanvasDisplay {
       } else if (actor.type == "monster") {
         this.drawMonster(actor, x, y, width, height);
       } else {
-        
+        let tileX = (actor.type == "coin" ? 2 : 1) * scale;
+        thix.cx.drawImage(otherSprites,
+                          tileX, 0, width, height,
+                          x,     y, width, height);
       }
     }
   }
