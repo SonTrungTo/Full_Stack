@@ -1,12 +1,14 @@
 const scale = 20;
 let otherSprites = document.createElement("img");
-otherSprites.src = "img/sprites_others.png";
+otherSprites.src = "drawing/img/sprites_others.png";
 let playerSprites = document.createElement("img");
-playerSprites.src = "img/marijn.png";
+playerSprites.src = "drawing/img/marijn.png";
 let monsterSprites = document.createElement("img");
-monsterSprites.src = "img/monsters.png";
-const playerXOverlap  = 4;
-const monsterXOverlap = 3;
+monsterSprites.src = "drawing/img/monsters.png";
+let game           = document.createElement("div");
+game.className     = "game";
+const playerXOverlap  = 16;
+const monsterXOverlap = 8;
 
 function flipHorizontally(context, around) {
   context.translate(around, 0);
@@ -19,7 +21,8 @@ class CanvasDisplay {
     this.canvas = document.createElement("canvas");
     this.canvas.width  = Math.min(600, level.width  * scale);
     this.canvas.height = Math.min(450, level.height * scale);
-    parent.appendChild(this.canvas);
+    game.appendChild(this.canvas);
+    parent.appendChild(game);
     this.cx = this.canvas.getContext("2d");
 
     this.flipPlayer = false;
@@ -43,7 +46,7 @@ class CanvasDisplay {
   updateViewPort(state) {
     let view   = this.viewport;
     let margin = view.width / 3;
-    let player = state.player();
+    let player = state.player;
     let center = player.pos.plus(player.size.times(0.5));
 
     if (center.x < view.left + margin) {
@@ -63,11 +66,11 @@ class CanvasDisplay {
 
   clearDisplay(status) {
     if (status == "won") {
-      this.cx.fillStyle = rgb(153, 218, 255);
+      this.cx.fillStyle = "rgb(153, 218, 255)";
     } else if (status == "lost") {
-      this.cx.fillStyle = rgb(255, 102, 128);
+      this.cx.fillStyle = "rgb(255, 102, 128)";
     } else {
-      this.cx.fillStyle = rgb(66, 183, 255);
+      this.cx.fillStyle = "rgb(46, 150, 255)";
     }
     this.cx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
@@ -85,9 +88,9 @@ class CanvasDisplay {
         if (tile == "empty") continue;
         let screenX = (x - left) * scale;
         let screenY = (y - top) * scale;
-        let tileX = tile == "lava" ? scale : 0;
+        let tileX = tile == "lava" ? (scale * 2) : 0;             // 40 : 0
         this.cx.drawImage(otherSprites,
-                          tileX,         0, scale, scale,
+                          tileX,         0, scale * 2, scale * 2, // 40 x 40
                           screenX, screenY, scale, scale);
       }
     }
@@ -101,10 +104,10 @@ class CanvasDisplay {
     }
 
     let tile = 8;
-    if (player.x.speed != 0) {
-      tile = Math.floor(Date.now() / 60) % 8;
-    } else if (player.y.speed != 0) {
+    if (player.speed.y != 0) {
       tile = 9;
+    } else if (player.speed.x != 0) {
+      tile = Math.floor(Date.now() / 60) % 8;
     }
 
     this.cx.save();
@@ -113,7 +116,7 @@ class CanvasDisplay {
     }
     let tileX = tile * width;
     this.cx.drawImage(playerSprites,
-                      tileX, 0, width, height,
+                      tileX, 0, 48, 60,                     // 48:60 for each sprite
                       x,     y, width, height);
     this.cx.restore();
   }
@@ -134,7 +137,7 @@ class CanvasDisplay {
     }
     let tileX = tile * width;
     this.cx.drawImage(monsterSprites,
-                      tileX, 0, width, height,
+                      tileX, 0, 46, 47,                  // 46:47 for each sprite
                       x,     y, width, height);
     this.cx.restore();
   }
@@ -150,9 +153,9 @@ class CanvasDisplay {
       } else if (actor.type == "monster") {
         this.drawMonster(actor, x, y, width, height);
       } else {
-        let tileX = (actor.type == "coin" ? 2 : 1) * scale;
-        thix.cx.drawImage(otherSprites,
-                          tileX, 0, width, height,
+        let tileX = (actor.type == "coin" ? 4 : 2) * scale;
+        this.cx.drawImage(otherSprites,
+                          tileX, 0, 24, 24,
                           x,     y, width, height);
       }
     }
