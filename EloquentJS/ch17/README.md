@@ -1,4 +1,4 @@
-# Shapes
+# shapes.js (Shapes)
 Drawing:
 1. A trapezoid
 1. A red diamond

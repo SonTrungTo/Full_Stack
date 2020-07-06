@@ -1,8 +1,10 @@
+let shapes = document.getElementById("shapes");
+
 function drawTrapezoid(posX, posY, ...sizes) {
   let canvas = document.createElement("canvas");
   canvas.width  = 150;
   canvas.height = 100;
-  document.body.appendChild(canvas);
+  shapes.appendChild(canvas);
   let cx = canvas.getContext("2d");
   cx.beginPath();
 
@@ -22,7 +24,7 @@ function drawRedDiamond(posX, posY, ...lengths) {
   let canvas = document.createElement("canvas");
   canvas.width  = 100;
   canvas.height = 150;
-  document.body.appendChild(canvas);
+  shapes.appendChild(canvas);
   let cx = canvas.getContext("2d");
 
   let length = lengths[0] == null ? 50 : lengths[0];
@@ -37,6 +39,14 @@ function drawRedDiamond(posX, posY, ...lengths) {
   cx.fillStyle = "red";
   cx.fillRect(posX, posY, length, length);
   cx.restore();
+}
+
+function drawZigzaggingLine(posX, posY, ...lengths) {
+  let canvas = document.createElement("canvas");
+  canvas.width  = 100;
+  canvas.height = 150;
+  shapes.appendChild(canvas);
+  let cx = canvas.getContext("2d");
 }
 
 drawTrapezoid(50, 10, 60, 50);
