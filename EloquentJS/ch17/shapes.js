@@ -51,20 +51,21 @@ function drawZigzaggingLine(posX, posY, ...lengths) {
   let length = lengths[0] == null ? 50 : lengths[0];
   let lines  = lengths[1] == null ? 10 : lengths[1];
   let isLeft = 0;
-
-  for (let line = 0; i < array.length; i++) {
-    array[i]
-  }
+  let increment = length / lines;
 
   cx.beginPath();
-
   cx.moveTo(posX, posY);
-  cx.lineTo(posX + length , posY + length / 6);
-  cx.lineTo(posX, posY + (length / 6) * 2);
-
+  for (let line = 0; line < lines; line++, isLeft++) {
+    if (isLeft % 2 == 0) {
+      cx.lineTo(posX + length, posY + increment);
+    } else {
+      increment += 10;
+      cx.lineTo(posX, posY + increment);
+    }
+  }
   cx.stroke();
 }
 
 drawTrapezoid(50, 10, 60, 50);
 drawRedDiamond(30, 60);
-drawZigzaggingLine(30, 60, 50, 20);
+drawZigzaggingLine(30, 60, 50, 16);
