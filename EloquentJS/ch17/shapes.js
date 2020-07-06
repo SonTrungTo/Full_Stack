@@ -1,7 +1,7 @@
 function drawTrapezoid(posX, posY, ...sizes) {
   let canvas = document.createElement("canvas");
-  canvas.width  = 300;
-  canvas.height = 300;
+  canvas.width  = 150;
+  canvas.height = 100;
   document.body.appendChild(canvas);
   let cx = canvas.getContext("2d");
   cx.beginPath();
@@ -18,8 +18,26 @@ function drawTrapezoid(posX, posY, ...sizes) {
   cx.stroke();
 }
 
-function drawRedDiamond() {
+function drawRedDiamond(posX, posY, ...lengths) {
+  let canvas = document.createElement("canvas");
+  canvas.width  = 100;
+  canvas.height = 150;
+  document.body.appendChild(canvas);
+  let cx = canvas.getContext("2d");
 
+  let length = lengths[0] == null ? 50 : lengths[0];
+  function rotateCenter(context, aroundX, aroundY) {
+    context.translate(aroundX, aroundY);
+    context.rotate(Math.PI / 4);
+    context.translate(-aroundX, -aroundY);
+  }
+
+  cx.save();
+  rotateCenter(cx, posX + length / 2, posY + length / 2);
+  cx.fillStyle = "red";
+  cx.fillRect(posX, posY, length, length);
+  cx.restore();
 }
 
-drawTrapezoid(50, 10, 50, 50);
+drawTrapezoid(50, 10, 60, 50);
+drawRedDiamond(30, 60);
