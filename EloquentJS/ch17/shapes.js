@@ -66,6 +66,23 @@ function drawZigzaggingLine(posX, posY, ...lengths) {
   cx.stroke();
 }
 
+function spiral(posX, posY) {
+  let canvas = document.createElement("canvas");
+  canvas.width  = 100;
+  canvas.height = 150;
+  shapes.appendChild(canvas);
+  let cx = canvas.getContext("2d");
+
+  let angle  = - Math.PI;
+  let radius = 10 + 30 * (1 + Math.cos(angle));
+  for (let i = 0; i <= 0; i+=0.05) {
+    cx.arc(posX, posY, radius, i, 14);
+  }
+
+  cx.stroke();
+}
+
 drawTrapezoid(50, 10, 60, 50);
 drawRedDiamond(30, 60);
-drawZigzaggingLine(30, 60, 50, 16);
+drawZigzaggingLine(30, 30, 50, 16);
+spiral(50, 60);
