@@ -47,7 +47,24 @@ function drawZigzaggingLine(posX, posY, ...lengths) {
   canvas.height = 150;
   shapes.appendChild(canvas);
   let cx = canvas.getContext("2d");
+
+  let length = lengths[0] == null ? 50 : lengths[0];
+  let lines  = lengths[1] == null ? 10 : lengths[1];
+  let isLeft = 0;
+
+  for (let line = 0; i < array.length; i++) {
+    array[i]
+  }
+
+  cx.beginPath();
+
+  cx.moveTo(posX, posY);
+  cx.lineTo(posX + length , posY + length / 6);
+  cx.lineTo(posX, posY + (length / 6) * 2);
+
+  cx.stroke();
 }
 
 drawTrapezoid(50, 10, 60, 50);
 drawRedDiamond(30, 60);
+drawZigzaggingLine(30, 60, 50, 20);
