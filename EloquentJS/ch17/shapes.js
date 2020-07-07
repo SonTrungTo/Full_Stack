@@ -88,7 +88,33 @@ function spiral(posX, posY) {
   cx.stroke();
 }
 
+function drawNPointedStar(posX, posY, n) {
+  let canvas = document.createElement("canvas");
+  canvas.width  = 200;
+  canvas.height = 150;
+  shapes.appendChild(canvas);
+  let cx = canvas.getContext("2d");
+  let startAngle = 0;
+  let endAngle   = 2 * Math.PI / n;
+  let radius     = 50;
+
+  let centerX = posX + radius, centerY = posY + radius;
+  cx.beginPath();
+
+  cx.moveTo(radius + radius * Math.cos(startAngle),
+            radius + radius * Math.sin(startAngle));
+  for (let i = 0; i < n; i++) {
+    cx.quadraticCurveTo(centerX, centerY, radius + radius * Math.cos(startAngle + endAngle),
+                        radius + radius * Math.sin(startAngle + endAngle));
+    startAngle += endAngle;
+  }
+
+  cx.fillStyle = "yellow";
+  cx.fill();
+}
+
 drawTrapezoid(50, 10, 60, 50);
 drawRedDiamond(30, 60);
 drawZigzaggingLine(30, 30, 50, 16);
 spiral(80, 60);
+drawNPointedStar(0, 0, 8);
