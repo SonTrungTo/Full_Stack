@@ -7,5 +7,9 @@ const results = [
 ];
 
 function createPieChart(results) {
-  let canvas;
+  let canvas = document.createElement("canvas");
+  canvas.width  = 200;
+  canvas.height = 150;
+  pie.appendChild(canvas);
+  let cx = canvas.getContext("2d"); 
 }
