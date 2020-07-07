@@ -8,22 +8,38 @@ const results = [
 
 function createPieChart(results) {
   let canvas = document.createElement("canvas");
-  canvas.width  = 300;
+  canvas.width  = 350;
   canvas.height = 300;
   pie.appendChild(canvas);
   let cx = canvas.getContext("2d");
 
   let total = results.reduce((sum, {count}) => sum + count, 0);
   let startAngle = - Math.PI / 2;
+  let radius = 100;
+  let centerX = 150,  centerY = 150;
   for (let result of results) {
     cx.beginPath();
     let endAngle = 2 * Math.PI / total * result.count;
-    cx.arc(150, 150, 100, startAngle, startAngle + endAngle);
+    cx.arc(centerX, centerY, radius, startAngle, startAngle + endAngle);
     startAngle += endAngle;
-    cx.lineTo(150, 150);
+    cx.lineTo(centerX, centerY);
 
     cx.fillStyle = result.color;
     cx.fill();
+  }
+
+  for (let result of results) {
+    cx.beginPath();
+    let endAngle = 2 * Math.PI / total * result.count;
+    let posXName = centerX + (radius + 30) * Math.cos(startAngle + endAngle / 2);
+    let posYName = centerY + (radius + 30) * Math.sin(startAngle + endAngle / 2);
+    cx.moveTo(centerX, centerY);
+    cx.font = "10px Georgia";
+    cx.fillStyle = "blue";
+    cx.textAlign = "center";
+    cx.textBaseLine = "middle";
+    cx.fillText(result.name, posXName, posYName);
+    startAngle += endAngle;
   }
 }
 
