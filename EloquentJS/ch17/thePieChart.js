@@ -16,7 +16,7 @@ function createPieChart(results) {
   let total = results.reduce((sum, {count}) => sum + count, 0);
   let startAngle = - Math.PI / 2;
   let radius = 100;
-  let centerX = 150,  centerY = 150;
+  let centerX = 175,  centerY = 150;
   for (let result of results) {
     cx.beginPath();
     let endAngle = 2 * Math.PI / total * result.count;
@@ -31,12 +31,12 @@ function createPieChart(results) {
   for (let result of results) {
     cx.beginPath();
     let endAngle = 2 * Math.PI / total * result.count;
-    let posXName = centerX + (radius + 30) * Math.cos(startAngle + endAngle / 2);
-    let posYName = centerY + (radius + 30) * Math.sin(startAngle + endAngle / 2);
+    let posXName = centerX + (radius + 20) * Math.cos(startAngle + endAngle / 2);
+    let posYName = centerY + (radius + 20) * Math.sin(startAngle + endAngle / 2);
     cx.moveTo(centerX, centerY);
     cx.font = "10px Georgia";
     cx.fillStyle = "blue";
-    cx.textAlign = "center";
+    cx.textAlign = Math.cos(startAngle + endAngle / 2) > 0 ? "left" : "right";
     cx.textBaseline = "middle";
     cx.fillText(result.name, posXName, posYName);
     startAngle += endAngle;
