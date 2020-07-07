@@ -37,7 +37,7 @@ function createPieChart(results) {
     cx.font = "10px Georgia";
     cx.fillStyle = "blue";
     cx.textAlign = "center";
-    cx.textBaseLine = "middle";
+    cx.textBaseline = "middle";
     cx.fillText(result.name, posXName, posYName);
     startAngle += endAngle;
   }
