@@ -10,3 +10,4 @@ Drawing:
 Putting label on each pie of the chart.
 
 # aBouncingBall.js (The Bouncing Ball)
+The ball moves at a constant speed and bounces off the walls when it hits them.
