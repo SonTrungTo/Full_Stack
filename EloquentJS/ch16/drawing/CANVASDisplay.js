@@ -3,8 +3,40 @@ let otherSprites = document.createElement("img");
 otherSprites.src = "drawing/img/sprites_others.png";
 let playerSprites = document.createElement("img");
 playerSprites.src = "drawing/img/marijn.png";
+
+let invertedPlayerSprites = document.createElement("canvas");
+invertedPlayerSprites.width  = 480;
+invertedPlayerSprites.height = 60;
+let cx_P = invertedPlayerSprites.getContext("2d");
+playerSprites.addEventListener("load", () => {
+  for (let i = 0; i < 10; i++) {
+    cx_P.save();
+    flipHorizontally(cx_P, i * 48 + 48 / 2);
+    cx_P.drawImage(playerSprites,
+                   i * 48, 0, 48, 60,
+                   i * 48, 0, 48, 60);
+    cx_P.restore();
+  }
+});
+
 let monsterSprites = document.createElement("img");
 monsterSprites.src = "drawing/img/monsters.png";
+
+let invertedMonsterSprites = document.createElement("canvas");
+invertedMonsterSprites.width = 138;
+invertedMonsterSprites.height = 47;
+let cx_M = invertedMonsterSprites.getContext("2d");
+monsterSprites.addEventListener("load", () => {
+  for (let i = 0; i < 3; i++) {
+    cx_M.save();
+    flipHorizontally(cx_M, i * 46 + 46 / 2);
+    cx_M.drawImage(monsterSprites,
+                   i * 46, 0, 46, 47,
+                   i * 46, 0, 46, 47);
+    cx_M.restore();
+  }
+});
+
 let game           = document.createElement("div");
 game.className     = "game";
 const playerXOverlap  = 16;
@@ -110,15 +142,17 @@ class CanvasDisplay {
       tile = Math.floor(Date.now() / 60) % 8;
     }
 
-    this.cx.save();
-    if (this.flipPlayer) {
-      flipHorizontally(this.cx, x + width / 2);
-    }
+
     let tileX = tile * width;
-    this.cx.drawImage(playerSprites,
-                      tileX, 0, 48, 60,                     // 48:60 for each sprite
-                      x,     y, width, height);
-    this.cx.restore();
+    if (this.flipPlayer) {
+      this.cx.drawImage(invertedPlayerSprites,
+                        tileX, 0, 48, 60,
+                        x,     y, width, height);
+    } else {
+      this.cx.drawImage(playerSprites,
+                        tileX, 0, 48, 60,                     // 48:60 for each sprite
+                        x,     y, width, height);
+    }
   }
 
   drawMonster(monster, x, y, width, height) {
@@ -131,15 +165,16 @@ class CanvasDisplay {
       tile  = Math.floor(Date.now() / 60) % 3;
     }
 
-    this.cx.save();
-    if (this.flipMonster) {
-      flipHorizontally(this.cx, x + width / 2);
-    }
     let tileX = tile * width;
-    this.cx.drawImage(monsterSprites,
-                      tileX, 0, 46, 47,                  // 46:47 for each sprite
-                      x,     y, width, height);
-    this.cx.restore();
+    if (this.flipMonster) {
+      this.cx.drawImage(monsterSprites,
+                        tileX, 0, 46, 47,                  // 46:47 for each sprite
+                        x,     y, width, height);
+    } else {
+      this.cx.drawImage(invertedMonsterSprites,
+                        tileX, 0, 46, 47,
+                        x,     y, width, height);
+    }
   }
 
   drawActors(actors) {

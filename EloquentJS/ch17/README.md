@@ -15,3 +15,11 @@ The ball moves at a constant speed and bounces off the walls when it hits them.
 This is also an extension of what is required in the exercise: each time the ball
 hits a side of the wall, its speed is incremented! This could be a potential
 for a future game!
+
+# precomputedMirroring (Precomputed Mirroring, added to CANVASDisplay.js)
+From the hint: We draw inverted sprites on a canvas without adding to the document.
+Then use that canvas as a source to draw the sprites.
+
+The lesson here is drawing transformed images takes significant time for bitmap
+to be built. Also, loading additional images may take time; that is why loading
+from canvas is the fastest way.
