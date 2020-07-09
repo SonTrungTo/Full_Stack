@@ -10,3 +10,9 @@ Last-Modified: Thu, 14 May 2019 14:05:30 GMT
 
 <!doctype HTML>
 bla bla bla...
+
+POST /example/message.html HTTP/1.1 <br />
+Content-Length: 24  <br />
+Content-Type: application/x-www-form-urlencoded
+
+name=Son&message=anime%3F
