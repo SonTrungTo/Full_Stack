@@ -1,11 +1,11 @@
 # Exercises incoming...
-GET /18.html HTTP/1.1
-Host: eloquentjavascript.net
+GET /18.html HTTP/1.1 <br />
+Host: eloquentjavascript.net <br />
 User-Agent: <browser's name>
 
-HTTP/1.1 200 OK
-Content-Length: 65349
-Content-Type: text/html
+HTTP/1.1 200 OK <br />
+Content-Length: 65349 <br />
+Content-Type: text/html <br />
 Last-Modified: Thu, 14 May 2019 14:05:30 GMT
 
 <!doctype HTML>
