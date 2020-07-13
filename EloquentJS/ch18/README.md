@@ -1,4 +1,12 @@
-# Exercises incoming...
+# Content Negotiation
+Retrieving data from https://eloquentjavascript.net/author in 4 media types:
+
+1. text/plain
+1. text/html
+1. application/json
+1. application/rainbows+unicorns (Code: 406)
+
+
 GET /18.html HTTP/1.1 <br />
 Host: eloquentjavascript.net <br />
 User-Agent: <browser's name>
