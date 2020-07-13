@@ -9,6 +9,9 @@ Retrieving data from https://eloquentjavascript.net/author in 4 media types:
 # A JavaScript Workbench
 Directly running JS in the box.
 
+# Conway's Game of Life
+etc...,
+
 ## Some notes about the book.
 GET /18.html HTTP/1.1 <br />
 Host: eloquentjavascript.net <br />
