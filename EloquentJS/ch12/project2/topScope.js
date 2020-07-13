@@ -8,7 +8,7 @@ for (let op of ["+", "-", "*", "/", "%", "==", "<", ">"]) {
   topScope[op] = Function(`a, b`, `return a ${op} b;`);
 }
 
-// Since you don't need to evaluate anything!
+// Since you don't need to complexly interact with args.
 topScope.print = function(...args) {
   console.log(...args);
   return false;

@@ -3,18 +3,44 @@
   <head>
     <meta charset="utf-8">
     <title>Demo on Egg</title>
+    <style type="text/css">
+      .column {
+        display: flex;
+      }
+
+      .row {
+        flex: 50%;
+      }
+    </style>
   </head>
   <body>
     <h1>Demo on Egg</h1>
-    <p><span>Some basic syntax:</span>
-      <div>
-        <div class="">
-          print(args): Print the args out on the output console.
+    <p>Some basic syntax:</p>
+      <div class="column">
+        <div class="row" style="background: #aaa;">
+          <h2>Basic functionals</h2>
+          <p><code>print(args)</code>: Print the args out on the output console. E.g,
+          <code>print("I am legend!")</code> should yield <code>I am legend!</code> on the console.</p>
+          <p><code>operator(arg1, arg2)</code>: operator = [+, -, *, /, %, ==, <, >]. E.g,
+          <code>+(1, 1)</code> should yield <code>2</code>.</p>
+          <p><code>array(args)</code>: enable the array functionality for program.
+          E.g, <code>array(1,2,3)</code> is equivalent to <code>[1, 2, 3]</code>.</p>
+          <p><code>length(array)</code> returns the length of an array, the equivalence
+          of <code>array.length</code> in JS.</p>
+          <p><code>element(array, n)</code> returns the n<sup>th</sup> element of
+          the <code>array</code>.</p>
         </div>
-        <div class="">
-          if(arg1, arg2 , arg3): If(arg1) arg2; else arg 3;
+        <div class="row" style="background: #bbb;">
+          <h2>Basic conditional statements and function calls</h2>
+          <p><code>if(arg1, arg2, arg3)</code> is equivalent to
+          <code>if(arg1) arg2; else arg3;</code></p>
+          <p><code>while(arg1, arg2)</code> is equivalent to
+          <code>while(arg1) arg2;</code></p>
+          <p><code>do(args)</code> is equivalent to
+          <code>{arg1; arg2; ...}</code></p>
+          <p><code>define(arg1, arg2)</code> is equivalent to
+          <code>let arg1 = arg2;</code>, binding arg2 to arg1.</p>
         </div>
       </div>
-    </p>
   </body>
 </html>
