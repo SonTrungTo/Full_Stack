@@ -1,1 +1,2 @@
-let codes = document.querySelector("textarea");
+let codesBody = document.querySelector("textarea");
+let runCodes  = document.querySelector("runCodes");
