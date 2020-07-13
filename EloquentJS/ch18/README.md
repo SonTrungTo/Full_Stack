@@ -6,6 +6,8 @@ Retrieving data from https://eloquentjavascript.net/author in 4 media types:
 1. application/json
 1. application/rainbows+unicorns (Code: 406)
 
+# A JavaScript Workbench
+Directly running JS in the box.
 
 GET /18.html HTTP/1.1 <br />
 Host: eloquentjavascript.net <br />
