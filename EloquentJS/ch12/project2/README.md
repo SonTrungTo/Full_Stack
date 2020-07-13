@@ -1,4 +1,5 @@
 ## Project: Egg, a programming language built on JavaScript.
+## [Demo](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch12/project2/demo.html)
 The purpose is to have a taste on how a programming language is
 built. Certain aspects of JavaScript, such as closures, have
 made an excellent demonstration of how full features of JavaScript
