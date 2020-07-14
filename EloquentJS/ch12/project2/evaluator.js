@@ -1,4 +1,4 @@
-const {specialForms} = require('./specialForms');
+// const {specialForms} = require('./specialForms');
 
 function evaluate(expr, scope) {
   if (expr.type == "value") {
@@ -25,4 +25,4 @@ function evaluate(expr, scope) {
   }
 }
 
-exports.evaluate = evaluate;
+// exports.evaluate = evaluate;

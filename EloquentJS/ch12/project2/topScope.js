@@ -27,4 +27,4 @@ topScope.element = function (array, n) {
   return array[n];
 };
 
-exports.topScope = topScope;
+// exports.topScope = topScope;

@@ -83,4 +83,4 @@ specialForms.set = function (args, scope) {
   throw new ReferenceError(`${varName} is not defined!`);
 };
 
-exports.specialForms = specialForms;
+// exports.specialForms = specialForms;

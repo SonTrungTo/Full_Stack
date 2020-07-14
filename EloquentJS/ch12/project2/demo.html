@@ -11,6 +11,12 @@
       .row {
         flex: 50%;
       }
+
+      textarea {
+        margin-top: 30px;
+        width: 90%;
+        height: 200px;
+      }
     </style>
   </head>
   <body>
@@ -40,7 +46,21 @@
           <code>{arg1; arg2; ...}</code></p>
           <p><code>define(arg1, arg2)</code> is equivalent to
           <code>let arg1 = arg2;</code>, binding arg2 to arg1.</p>
+          <p><code>fun(arg_1,...,arg_n-1, arg_n)</code> initializes
+          a function, whose body is the last argument.</p>
+          <p><code>set(arg1, arg2)</code> sets the <code>arg1</code> the value
+          of <code>arg2</code>. The difference between this and <code>define(arg1, arg2)</code>
+          is the former directly updates the value from the global scope.</p>
         </div>
       </div>
+    <textarea></textarea> <button type="button">Run code</button>
+    <div class="helpText"></div>
+
+  <script type="text/javascript" src="evaluator.js"></script>
+  <script type="text/javascript" src="parser.js"></script>
+  <script type="text/javascript" src="topScope.js"></script>
+  <script type="text/javascript" src="specialForms.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="workbench.js"></script>
   </body>
 </html>

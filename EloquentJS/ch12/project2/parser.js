@@ -39,7 +39,7 @@ function parseApply(expr, program) {
   return parseApply(expr, program.slice(1));
 }
 
-exports.parse = function (program) {
+let parse = function (program) {
   let {expr, rest} = parseExpression(program);
   if (skipSpace(rest).length > 0) {
     throw new SyntaxError(`Unexpected text after program!`);
