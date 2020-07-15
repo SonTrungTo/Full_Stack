@@ -1,6 +1,8 @@
 let  grid = document.querySelector("#grid");
 let  startButton   = document.querySelector("#start");
 let  advanceButton = document.querySelector("#advance");
+let  autoButton    = document.querySelector("#auto");
+let  running       = null;
 
 function createGrid(rows, cols) {
   grid.setAttribute("rows", rows);
@@ -78,15 +80,8 @@ startButton.addEventListener("click", () => {
   }
 });
 
-advanceButton.addEventListener("click", () => {
+function nextMove() {
   let checkboxes = grid.childNodes;
-  let checkedBox = [];
-
-  // Initialize the already checked box
-  for (let i = 0; i < checkboxes.length; i++) {
-    let checkbox = checkboxes[i];
-    if (checkbox.type == "checkbox" && checkbox.checked) checkedBox.push(checkbox);
-  }
 
   for (let i = 0; i < checkboxes.length; i++) {
     let countChecked = 0;
@@ -95,16 +90,28 @@ advanceButton.addEventListener("click", () => {
     for (let adjCell of adjCells) {
       if (adjCell.checked) ++countChecked;
     }
+    // From here, we need to preserve our state. If not, we will arrive at a different
+    // solution, a.k.a, interacting with one square at a time.
     if (checkbox.checked) {
-      if (countChecked < 2 || countChecked > 3) {
-        checkbox.checked = false;
-      } else if (countChecked == 2 || countChecked == 3) {
-        checkbox.checked = true;
+        if (countChecked < 2 || countChecked > 3) {
+          checkbox.checked = false;
+        } else if (countChecked == 2 || countChecked == 3) {
+          checkbox.checked = true;
+        }
+      } else {
+        if (countChecked == 3) {
+          checkbox.checked = true;
+        }
       }
-    } else {
-      if (countChecked == 3) {
-        checkbox.checked = true;
-      }
-    }
+  }
+}
+
+advanceButton.addEventListener("click", nextMove);
+autoButton.addEventListener("click", () => {
+  if (running) {
+    clearInterval(running);
+    running = null;
+  } else {
+    running = setInterval(nextMove, 400);
   }
 });
