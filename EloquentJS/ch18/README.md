@@ -12,7 +12,9 @@ Retrieving data from https://eloquentjavascript.net/author in 4 media types:
 Directly running JS in the box.
 
 # Conway's Game of Life
-I got the first draft: However, it is for one square at a time, not for a whole grid.
+I got the first draft: However, it is for one square at a time, not for a whole grid. <br />
+version 2: This is another attempt to write the solution for the whole grid. This
+is based on the author's solution.
 
 ## Some notes about the book.
 GET /18.html HTTP/1.1 <br />
