@@ -18,6 +18,38 @@ function createGrid(rows, cols) {
   }
 }
 
+function adjacentCells(cells, cell) {
+  let adjCells = [];
+  let rows = Number(grid.getAttribute("rows"));
+  let cols = Number(grid.getAttribute("cols"));
+  let centerRow  = Number(cell.getAttribute("row"));
+  let centerCol  = Number(cell.getAttribute("col"));
+
+  for (let i = 0; i < cells.length; i++) {
+    let adjCell = cells[i];
+    let adjCellRow = Number(adjCell.getAttribute("row"));
+    let adjCellCol = Number(adjCell.getAttribute("col"));
+    if (adjCell.getAttribute("row") == null || adjCell.getAttribute("col") == null) {
+      continue;
+    }
+    for (let rowAdd = -1; rowAdd < 2; rowAdd++) {
+      for (let colAdd = -1; colAdd < 2; colAdd++) {
+        if (rowAdd != 0 || colAdd != 0) {
+          let sumRow = centerRow + rowAdd;
+          let sumCol = centerCol + colAdd;
+          if (!(sumRow < 0 || sumRow == rows || sumCol < 0 || sumCol == cols)) {
+            if (adjCellRow == sumRow && adjCellCol == sumCol) {
+              adjCells.push(adjCell);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return adjCells;
+}
+
 createGrid(20, 30);
 
 startButton.addEventListener("click", () => {
@@ -41,6 +73,37 @@ startButton.addEventListener("click", () => {
                 checkbox.checked = true;
               }
         }
+      }
+    }
+  }
+});
+
+advanceButton.addEventListener("click", () => {
+  let checkboxes = grid.childNodes;
+  let checkedBox = [];
+
+  // Initialize the already checked box
+  for (let i = 0; i < checkboxes.length; i++) {
+    let checkbox = checkboxes[i];
+    if (checkbox.type == "checkbox" && checkbox.checked) checkedBox.push(checkbox);
+  }
+
+  for (let i = 0; i < checkboxes.length; i++) {
+    let countChecked = 0;
+    let checkbox = checkboxes[i];
+    let adjCells = adjacentCells(checkboxes, checkbox);
+    for (let adjCell of adjCells) {
+      if (adjCell.checked) ++countChecked;
+    }
+    if (checkbox.checked) {
+      if (countChecked < 2 || countChecked > 3) {
+        checkbox.checked = false;
+      } else if (countChecked == 2 || countChecked == 3) {
+        checkbox.checked = true;
+      }
+    } else {
+      if (countChecked == 3) {
+        checkbox.checked = true;
       }
     }
   }

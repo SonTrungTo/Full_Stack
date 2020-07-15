@@ -10,7 +10,7 @@ Retrieving data from https://eloquentjavascript.net/author in 4 media types:
 Directly running JS in the box.
 
 # Conway's Game of Life
-etc...,
+I got the first draft: However, it is for one square at a time, not for a whole grid.
 
 ## Some notes about the book.
 GET /18.html HTTP/1.1 <br />
