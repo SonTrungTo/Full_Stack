@@ -48,11 +48,47 @@ startButton.addEventListener("click", () => {
   checkboxesFromGrid(randomGrid());
 });
 
-// count the number of all neighbors around (x, y), except for (x, y) itself.
+// count the number of all live neighbors around (x, y), except for (x, y) itself.
 function countNeighbors(grid, x, y) {
-  for (var i = 0; i < array.length; i++) {
-    for (var i = 0; i < array.length; i++) {
-      array[i]
+  let count = 0;
+  for (let x1 = Math.max(0, x - 1); x1 <= Math.min(rows - 1, x + 1); x1++) {
+    for (let y1 = Math.max(0, y - 1); y1 <= Math.min(cols - 1, y + 1); y1++) {
+      if ((x1 != x || y1 != y) && grid[y1 + x1 * cols]) {
+        ++count;
+      }
     }
   }
+  return count;
 }
+
+function nextGrid(grid) {
+  let newGrid = new Array(cols * rows);
+  for (let x = 0; x < rows; x++) {
+    for (let y = 0; y < cols; y++) {
+      let offSet    = y + x * cols;
+      let neighbors = countNeighbors(grid, x, y);
+      if (neighbors < 2 || neighbors > 3) {
+        newGrid[offSet] = false;
+      } else if (neighbors == 2) {
+        newGrid[offSet] = grid[offSet];
+      } else {
+        newGrid[offSet] = true;
+      }
+    }
+  }
+  return newGrid;
+}
+
+function turn() {
+  checkboxesFromGrid(nextGrid(gridFromCheckboxes()));
+}
+
+advanceButton.addEventListener("click", turn);
+autoButton.addEventListener("click", () => {
+  if (running) {
+    clearInterval(running);
+    running = null;
+  } else {
+    running = setInterval(turn, 400);
+  }
+});
