@@ -1,3 +1,5 @@
+## [Solution Template](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch18/template.html)
+
 # Content Negotiation
 Retrieving data from https://eloquentjavascript.net/author in 4 media types:
 
