@@ -15,6 +15,7 @@
 1. [Egg: A programming language in JavaScript](https://github.com/SonTrungTo/Full_Stack/tree/master/EloquentJS/ch12/project2)
 1. [Marijn: A platform game](https://github.com/SonTrungTo/Full_Stack/tree/master/EloquentJS/ch16)
 1. [Notes: An app to remind](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch18/codeExamples/notes.html) (mini-project)
+1. [A Pixel Art Editor](https://github.com/SonTrungTo/Full_Stack/tree/master/EloquentJS/ch19)
 
 ## License
 MIT
