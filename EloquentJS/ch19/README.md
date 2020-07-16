@@ -14,3 +14,8 @@ by `{x, y, color}` and returns a picture with updated pixels.
 
 Keep in mind that picture returns immutable object. Also, `updateState`
 is used to update a state, with `action` is dispatched as object by components.
+
+## dom.js
+`elt` is a function helper that returns a DOM element, which may contain
+properties, which cannot be assigned a normal string attribute but can be with
+a non-string one: e.g, to register a click event handler.
