@@ -2,7 +2,7 @@
 This project attempts to build a pixel-drawing editor, where you manipulate
 a pixel in a zoomed-in image, in which each pixels represent a color square.
 
-## state.js
+### state.js
 A state will be an object which includes `picture, tool, color` properties.
 The picture itself is an object that stores `width, height, pixels` content
 of the picture, and its methods are:
@@ -15,7 +15,14 @@ by `{x, y, color}` and returns a picture with updated pixels.
 Keep in mind that picture returns immutable object. Also, `updateState`
 is used to update a state, with `action` is dispatched as object by components.
 
-## dom.js
+### dom.js
 `elt` is a function helper that returns a DOM element, which may contain
 properties, which cannot be assigned a normal string attribute but can be with
 a non-string one: e.g, to register a click event handler.
+
+## components
+The first component we will build is `PictureCanvas`. It will display the current
+picture and communicate the pointer event with the rest of the application.
+
+### canvas.js
+This contains `PictureCanvas`.
