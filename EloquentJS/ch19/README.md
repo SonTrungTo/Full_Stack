@@ -25,4 +25,10 @@ The first component we will build is `PictureCanvas`. It will display the curren
 picture and communicate the pointer event with the rest of the application.
 
 ### canvas.js
-This contains `PictureCanvas`.
+This contains `PictureCanvas`. It has callbacks inside its
+constructor to notify and communication mouse position to
+the rest of the app.
+
+As for the callbacks, when you interact with the canvas,
+the canvas needs to know the location of the pointer in
+picture pixels.
