@@ -32,3 +32,11 @@ the rest of the app.
 As for the callbacks, when you interact with the canvas,
 the canvas needs to know the location of the pointer in
 picture pixels.
+
+### editor.js
+`PictureEditor` gives a shell around `PictureCanvas`: It displays a set of
+tools and controls we pass to the constructor.
+
+The first control is the tool selection menu. It first create <select> with
+options and an `update` event handler that changes the app state when the tool
+is changed.
