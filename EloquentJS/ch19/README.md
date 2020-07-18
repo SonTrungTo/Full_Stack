@@ -47,3 +47,8 @@ The second control is the color select menu. It works similarly.
 ### drawing.js
 We add functionalities to the mouse or touch events, including `draw`, `rectangle`,
 `fill` and `pick`(the tools).
+
+The main thing is to communicate each of the controls to the state of the application.
+
+### saveAndLoad.js
+They are another tools, designed to save and load a picture from the application.
