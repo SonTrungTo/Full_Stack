@@ -38,7 +38,7 @@ picture pixels.
 tools and controls we pass to the constructor.
 
 ### controls.js
-The first control is the tool selection menu. It first create <select> with
+The first control is the tool selection menu. It first create `<select>` with
 options and an `onchange` event handler that changes the app state when the tool
 is changed.
 
@@ -46,4 +46,4 @@ The second control is the color select menu. It works similarly.
 
 ### drawing.js
 We add functionalities to the mouse or touch events, including `draw`, `rectangle`,
-`fill` and `color picker`.
+`fill` and `color picker`(the tools).
