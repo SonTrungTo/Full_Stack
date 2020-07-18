@@ -43,3 +43,7 @@ options and an `onchange` event handler that changes the app state when the tool
 is changed.
 
 The second control is the color select menu. It works similarly.
+
+### drawing.js
+We add functionalities to the mouse or touch events, including `draw`, `rectangle`,
+`fill` and `color picker`.
