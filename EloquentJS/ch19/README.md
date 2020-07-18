@@ -37,6 +37,7 @@ picture pixels.
 `PictureEditor` gives a shell around `PictureCanvas`: It displays a set of
 tools and controls we pass to the constructor.
 
+### controls.js
 The first control is the tool selection menu. It first create <select> with
 options and an `update` event handler that changes the app state when the tool
 is changed.
