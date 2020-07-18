@@ -29,5 +29,22 @@ function rectangle(start, state, dispatch) {
 }
 
 function fill({x, y}, state, dispatch) {
-  let targetColor;
+  let targetColor = state.picture.pixel(x, y);
+  let drawn = [{x, y, color: state.color}];
+  for (let done = 0; done < drawn.length; done++) {
+    for (let {dx, dy} of around) {
+      let x = drawn[done] + dx, y = drawn[done] + dy;
+      if (x >= 0 && x < state.picture.width &&
+          y >= 0 && y < state.picture.height &&
+          state.picture.pixel(x, y) == targetColor &&
+          !drawn.some(p => p.x == x && p.y == y)) {
+            drawn.push({x, y, color: state.color});
+      }
+    }
+  }
+  dispatch({picture: state.picture.draw(drawn)});
+}
+
+function pick(pos, state, dispatch) {
+  dispatch({color: state.picture.pixel(pos.x, pos.y)});
 }
