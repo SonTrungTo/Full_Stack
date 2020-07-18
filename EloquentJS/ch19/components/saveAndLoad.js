@@ -18,3 +18,18 @@ class SaveButton {
   }
   syncState(state) {this.picture = state.picture;}
 }
+📁
+class LoadButton {
+  constructor(_, {dispatch}) {
+
+  }
+  syncState() {}
+}
+
+function startLoad(dispatch) {
+
+}
+
+function finishLoad(file, dispatch) {
+  
+}
