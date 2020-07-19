@@ -20,6 +20,10 @@ is used to update a state, with `action` is dispatched as object by components.
 properties, which cannot be assigned a normal string attribute but can be with
 a non-string one: e.g, to register a click event handler.
 
+### run.js
+Initilization of the state and controls. Running the app
+by destructuring object with `=` after the binding names.
+
 ## components
 The first component we will build is `PictureCanvas`. It will display the current
 picture and communicate the pointer event with the rest of the application.

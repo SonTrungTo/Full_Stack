@@ -3,11 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Pixel Art Editor</title>
+    <style type="text/css">
+      .app {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <h1>Pixel Art Editor</h1>
+    <div class="app"></div>
 
     <script type="text/javascript" src="dom.js"></script>
     <script type="text/javascript" src="state.js"></script>
+    <script type="text/javascript" src="components/canvas.js"></script>
+    <script type="text/javascript" src="components/editor.js"></script>
+    <script type="text/javascript" src="components/saveAndLoad.js"></script>
+    <script type="text/javascript" src="components/controls.js"></script>
+    <script type="text/javascript" src="components/drawing.js"></script>
+    <script type="text/javascript" src="components/undo.js"></script>
+    <script type="text/javascript" src="run.js"></script>
+    <script type="text/javascript">
+      document.querySelector(".app")
+      .appendChild(startPixelEditor({}));
+    </script>
   </body>
 </html>

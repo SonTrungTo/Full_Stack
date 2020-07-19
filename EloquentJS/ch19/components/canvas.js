@@ -21,7 +21,7 @@ class PictureCanvas {
     let onMove = onDown(pos);
     if (!onMove) return;
     let move = moveEvent => {
-      if (moveEvent.buttons != 0) {
+      if (moveEvent.buttons == 0) {
         this.dom.removeEventListener("mousemove", move);
       } else {
         let newPos = pointerPosition(moveEvent, this.dom);

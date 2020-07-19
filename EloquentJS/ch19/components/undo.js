@@ -1,6 +1,6 @@
 function historyUpdateState(state, action) {
   if (action.undo == true) {
-    if (action.done.length == 0) return state;
+    if (state.done.length == 0) return state;
     return Object.assign({}, state, {
       picture: state.done[0],
       done: state.done.slice(1),

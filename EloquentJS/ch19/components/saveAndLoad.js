@@ -5,7 +5,7 @@ class SaveButton {
       onclick: () => this.save()
     }, "💾 Save");
   }
-  function save() {
+  save() {
     let canvas = elt("canvas");
     drawPicture(this.picture, canvas, 10);
     let link = elt("a", {
@@ -22,7 +22,7 @@ class SaveButton {
 class LoadButton {
   constructor(_, {dispatch}) {
     this.dom = elt("button", {
-      onclick: startLoad(dispatch)
+      onclick: () => startLoad(dispatch)
     }, "📁 Load");
   }
   syncState() {}
@@ -31,7 +31,7 @@ class LoadButton {
 function startLoad(dispatch) {
   let input = elt("input", {
     type: "file",
-    onchange: () => finishLoad(input.files[0], dispatch);
+    onchange: () => finishLoad(input.files[0], dispatch)
   });
   document.body.appendChild(input);
   input.click();
@@ -51,11 +51,11 @@ function finishLoad(file, dispatch) {
 }
 
 function pictureFromImage(image) {
-  let width  = Math.min(100, image.width);
-  let height = Math.min(100, image.height);
+  let width  = Math.min(80, image.width);
+  let height = Math.min(50, image.height);
   let canvas = elt("canvas", {width, height});
   let cx = canvas.getContext("2d");
-  cx.drawImage(image, 0, 0);
+  cx.drawImage(image, 0, 0, width, height);
   let pixels = [];
   let {data} = cx.getImageData(0, 0, width, height);
 

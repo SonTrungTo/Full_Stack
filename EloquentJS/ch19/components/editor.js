@@ -17,7 +17,7 @@ class PictureEditor {
 
   syncState(state) {
     this.state = state;
-    this.canvas.syncState(state);
+    this.canvas.syncState(state.picture);
     for (let ctrl of this.controls) ctrl.syncState(state);
   }
 }
