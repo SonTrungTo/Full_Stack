@@ -58,3 +58,11 @@ However, the process are complicated due to the browser technology. Namely,
 * `LoadButton` simulates a load by making a pseudo input file, drawing on a canvas,
 getting pixel info from that canvas and returning picture object via `dispatch`
 in order to communicate to the current state for the current picture.
+
+### undo.js
+We add `done` property to state to store an array of pictures to restore. We
+add `doneAt` property to state to store the amount of time passed before it
+is undone.
+
+Here `historyUpdateState` serves as the main communication between app states(dispatch).
+There is also `UndoButton` class.
