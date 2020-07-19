@@ -39,7 +39,7 @@ class PictureCanvas {
     let onMove = onDown(pos);
     if (!onMove) return;
     let move = moveEvent => {
-      let newPos = pointerPosition(startEvent.touches[0], this.dom);
+      let newPos = pointerPosition(moveEvent.touches[0], this.dom);
       if (newPos.x == pos.x && newPos.y == pos.y) return;
       pos = newPos;
       onMove(newPos);
