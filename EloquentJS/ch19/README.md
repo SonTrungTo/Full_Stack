@@ -52,3 +52,9 @@ The main thing is to communicate each of the controls to the state of the applic
 
 ### saveAndLoad.js
 They are another tools, designed to save and load a picture from the application.
+However, the process are complicated due to the browser technology. Namely,
+
+* `SaveButton` simulates a save by creating a link to canvas and simulating the link.
+* `LoadButton` simulates a load by making a pseudo input file, drawing on a canvas,
+getting pixel info from that canvas and returning picture object via `dispatch`
+in order to communicate to the current state for the current picture.
