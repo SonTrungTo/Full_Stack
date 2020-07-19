@@ -1,4 +1,4 @@
-# Project: A Pixel Art Editor
+# [Project: A Pixel Art Editor](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch19/editor.html)
 This project attempts to build a pixel-drawing editor, where you manipulate
 a pixel in a zoomed-in image, in which each pixels represent a color square.
 
