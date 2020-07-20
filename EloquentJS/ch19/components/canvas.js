@@ -53,10 +53,10 @@ class PictureCanvas {
   }
 }
 
-function drawPicture(picture, canvas, scale, previous) { // previous picture adding...
-  if (previous != null &&
-      (previous.width != picture.width ||
-      previous.height != picture.height)) {
+function drawPicture(picture, canvas, scale, previous) { // canvas refreshes when its sizes change
+  if (previous == null ||
+      previous.width  != picture.width ||
+      previous.height != picture.height) {
     canvas.width  = picture.width  * scale;
     canvas.height = picture.height * scale;
     previous = null;
@@ -65,9 +65,11 @@ function drawPicture(picture, canvas, scale, previous) { // previous picture add
 
   for (let y = 0; y < picture.height; y++) {
     for (let x = 0; x < picture.width; x++) {
-      let oldColor = previous.pixel(x, y);
-      cx.fillStyle = picture.pixel(x, y);
-      cx.fillRect(x * scale, y * scale, scale, scale);
+      let newColor = picture.pixel(x, y);
+      if (previous == null || previous.pixel(x, y) != newColor) {
+        cx.fillStyle = newColor;
+        cx.fillRect(x * scale, y * scale, scale, scale);
+      }
     }
   }
 }
