@@ -48,3 +48,7 @@ function fill({x, y}, state, dispatch) {
 function pick(pos, state, dispatch) {
   dispatch({color: state.picture.pixel(pos.x, pos.y)});
 }
+
+function circle(start, state, dispatch) { // Drawing a filled circle here...
+
+}
