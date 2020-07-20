@@ -70,3 +70,5 @@ is undone.
 
 Here `historyUpdateState` serves as the main communication between app states(dispatch).
 There is also `UndoButton` class.
+
+# Exercise 19.1: Keyboard Bindings :heavy_check_mark:
