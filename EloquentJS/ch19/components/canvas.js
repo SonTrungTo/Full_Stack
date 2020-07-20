@@ -54,12 +54,18 @@ class PictureCanvas {
 }
 
 function drawPicture(picture, canvas, scale, previous) { // previous picture adding...
-  canvas.width  = picture.width  * scale;
-  canvas.height = picture.height * scale;
+  if (previous != null &&
+      (previous.width != picture.width ||
+      previous.height != picture.height)) {
+    canvas.width  = picture.width  * scale;
+    canvas.height = picture.height * scale;
+    previous = null;
+  }
   let cx = canvas.getContext("2d");
 
   for (let y = 0; y < picture.height; y++) {
     for (let x = 0; x < picture.width; x++) {
+      let oldColor = previous.pixel(x, y);
       cx.fillStyle = picture.pixel(x, y);
       cx.fillRect(x * scale, y * scale, scale, scale);
     }
