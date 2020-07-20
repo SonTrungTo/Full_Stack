@@ -72,3 +72,5 @@ Here `historyUpdateState` serves as the main communication between app states(di
 There is also `UndoButton` class.
 
 # Exercise 19.1: Keyboard Bindings :heavy_check_mark:
+# Exercise 19.2: Efficient Drawing
+A good demonstration why immutability is important.

@@ -11,8 +11,8 @@ class PictureCanvas {
 
   syncState(picture) {
     if (this.picture == picture) return;
+    drawPicture(picture, this.dom, scale, this.picture);
     this.picture = picture;
-    drawPicture(this.picture, this.dom, scale);
   }
 
   mouse(downEvent, onDown) {
@@ -53,7 +53,7 @@ class PictureCanvas {
   }
 }
 
-function drawPicture(picture, canvas, scale) {
+function drawPicture(picture, canvas, scale, previous) { // previous picture adding...
   canvas.width  = picture.width  * scale;
   canvas.height = picture.height * scale;
   let cx = canvas.getContext("2d");
