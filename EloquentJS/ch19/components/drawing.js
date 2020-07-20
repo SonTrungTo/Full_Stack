@@ -50,5 +50,13 @@ function pick(pos, state, dispatch) {
 }
 
 function circle(start, state, dispatch) { // Drawing a filled circle here...
+  function drawCircle(pos) {
+    let xStart = Math.min(start.x, pos.x);
+    let yStart = Math.min(start.y, pos.y);
+    let xEnd   = Math.max(start.x, pos.x);
+    let yEnd   = Math.max(start.y, pos.y);
+    let drawn  = [];
 
+    
+  }
 }
