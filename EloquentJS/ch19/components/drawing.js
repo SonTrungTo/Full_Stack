@@ -1,6 +1,10 @@
 const around = [{dx: 1, dy: 0}, {dx: -1, dy: 0},
                 {dx: 0, dy: 1}, {dx: 0, dy: -1}];
 
+function drawLine(newPos, state) {
+  
+}
+
 function draw(pos, state, dispatch) {
   function drawPixel({x, y}, state) {
     let drawn = {x, y, color: state.color};

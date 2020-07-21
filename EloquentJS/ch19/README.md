@@ -77,3 +77,17 @@ A good demonstration why immutability is important.
 # Exercise 19.3: Circles :heavy_check_mark:
 Drawing a circle (tool) added!
 # Exercise 19.4: Proper Lines
+I really can't solve this problem *on my own*. However, a serious attempts on it is
+taken by taking notes on the nature of problems, providing potential for a possible
+solution.
+
+* There are four problems, slightly different, associated with this exercise.
+Trigonometrically speaking,
+  * in the first quadrant, before going through 45 degrees line, the line proceeds
+  as if it is on the horizontal axis since it proceeds horizontally more than vertically.
+  Once the line crosses through 45 degrees line, the lines proceeds vertically, with
+  the base axis being the vertical axis.
+  * in the second quadrant
+  * in the third quadrant
+  * in the fourth quadrant
+* The general approach is
