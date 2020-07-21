@@ -85,9 +85,12 @@ solution.
 Trigonometrically speaking,
   * in the first quadrant, before going through 45 degrees line, the line proceeds
   as if it is on the horizontal axis since it proceeds horizontally more than vertically.
-  Once the line crosses through 45 degrees line, the lines proceeds vertically, with
+  Once the line crosses through 45 degrees line, the line proceeds vertically, with
   the base axis being the vertical axis.
-  * in the second quadrant
+  * in the second quadrant, after going through 135 degrees line, the line proceeds
+  again horizontally, but the direction changes from right to left.
   * in the third quadrant
   * in the fourth quadrant
-* The general approach is
+* The general approach is comparing against the diagonal line, then doing the loops
+on the based axis, swapping the startPoint and endPoint if necessary and computing
+(x,y,color) along the based axis.

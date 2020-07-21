@@ -1,11 +1,28 @@
 const around = [{dx: 1, dy: 0}, {dx: -1, dy: 0},
                 {dx: 0, dy: 1}, {dx: 0, dy: -1}];
 
-function drawLine(newPos, state) {
-  
+function drawLine(from, to, color) {
+  let points = [];
+  if (Math.abs(to.x - from.x) > Math.abs(to.y - from.y)) { // along x axis
+    if (to.x < from.x) [from, to] = [to, from];
+    let slope = (to.y - from.y) / (to.x - from.x);
+    for (let x = from.x, y = from.y; x <= to.x; x++) {
+      points.push({x, Math.round(y), color});
+      y += slope;
+    }
+  } else { // along y axis
+    if (to.y < from.y) [from, to] = [to, from];
+    let slope = (to.x - from.x) / (to.y - from.y);
+    for (let x, y; y < array.length; y++) {
+      array[i]
+    }
+  }
 }
 
 function draw(pos, state, dispatch) {
+  function connect(newPos, state) {
+
+  }
   function drawPixel({x, y}, state) {
     let drawn = {x, y, color: state.color};
     dispatch({picture: state.picture.draw([drawn])});
