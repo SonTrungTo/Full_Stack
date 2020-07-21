@@ -57,6 +57,20 @@ function circle(start, state, dispatch) { // Drawing a filled circle here...
     let yEnd   = Math.max(start.y, pos.y);
     let drawn  = [];
 
-    
+    let radius  = Math.sqrt(Math.pow(xEnd - xStart, 2) + Math.pow(yEnd - yStart, 2));
+    let radiusC = Math.ceil(radius);
+    for (let dy = -radiusC; dy <= radiusC; dy++) { // We are now coloring all squares inside circle
+      for (let dx = -radiusC; dx <= radiusC; dx++) {
+        let dist = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+        if (dist > radius) continue;
+        let x = xStart + dx, y = yStart + dy;
+        if (x < 0 || y < 0 ||
+            x >= state.picture.width || y >= state.picture.height) continue;
+        drawn.push({x, y, color: state.color});
+      }
+    }
+    dispatch({picture: state.picture.draw(drawn)});
   }
+  drawCircle(start);
+  return drawCircle;
 }

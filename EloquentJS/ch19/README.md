@@ -74,4 +74,6 @@ There is also `UndoButton` class.
 # Exercise 19.1: Keyboard Bindings :heavy_check_mark:
 # Exercise 19.2: Efficient Drawing :heavy_check_mark:
 A good demonstration why immutability is important.
-# Exercise 19.3: Circles
+# Exercise 19.3: Circles :heavy_check_mark:
+Drawing a circle (tool) added!
+# Exercise 19.4: Proper Lines
