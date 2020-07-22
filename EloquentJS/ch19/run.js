@@ -6,7 +6,7 @@ const startState = {
   doneAt: 0
 };
 
-const baseTools = {draw, rectangle, fill, pick, circle};
+const baseTools = {draw, rectangle, fill, pick, circle, line};
 
 const baseControls = [
   ToolSelect, ColorSelect, SaveButton, LoadButton, UndoButton

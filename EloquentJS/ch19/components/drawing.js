@@ -95,3 +95,10 @@ function circle(start, state, dispatch) { // Drawing a filled circle here...
   drawCircle(start);
   return drawCircle;
 }
+
+function line(start, state, dispatch) {
+  return to => {
+    let line = drawLine(start, to, state.color);
+    dispatch({picture: state.picture.draw(line)});
+  };
+}

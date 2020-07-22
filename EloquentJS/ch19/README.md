@@ -76,7 +76,7 @@ There is also `UndoButton` class.
 A good demonstration why immutability is important.
 # Exercise 19.3: Circles :heavy_check_mark:
 Drawing a circle (tool) added!
-# Exercise 19.4: Proper Lines
+# Exercise 19.4: Proper Lines :heavy_check_mark:
 I really can't solve this problem *on my own*. However, a serious attempts on it is
 taken by taking notes on the nature of problems, providing potential for a possible
 solution.
@@ -89,8 +89,8 @@ Trigonometrically speaking,
   the base axis being the vertical axis.
   * in the second quadrant, after going through 135 degrees line, the line proceeds
   again horizontally, but the direction changes from right to left.
-  * in the third quadrant
-  * in the fourth quadrant
+  * in the third quadrant, similar as the first
+  * in the fourth quadrant, similarly as the second
 * The general approach is comparing against the diagonal line, then doing the loops
 on the based axis, swapping the startPoint and endPoint if necessary and computing
 (x,y,color) along the based axis.
