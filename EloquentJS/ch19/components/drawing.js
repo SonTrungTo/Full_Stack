@@ -6,29 +6,29 @@ function drawLine(from, to, color) {
   if (Math.abs(to.x - from.x) > Math.abs(to.y - from.y)) { // along x axis
     if (to.x < from.x) [from, to] = [to, from];
     let slope = (to.y - from.y) / (to.x - from.x);
-    for (let x = from.x, y = from.y; x <= to.x; x++) {
-      points.push({x, Math.round(y), color});
+    for (let x = from.x, y = from.y; x <= to.x ; x++) {
+      points.push({x, y: Math.round(y), color});
       y += slope;
     }
   } else { // along y axis
     if (to.y < from.y) [from, to] = [to, from];
     let slope = (to.x - from.x) / (to.y - from.y);
-    for (let x, y; y < array.length; y++) {
-      array[i]
+    for (let x = from.x, y = from.y; y <= to.y ; y++) {
+      points.push({x: Math.round(x), y, color});
+      x += slope;
     }
   }
+  return points;
 }
 
 function draw(pos, state, dispatch) {
   function connect(newPos, state) {
-
+    let drawn = drawLine(pos, newPos, state.color);
+    pos = newPos;
+    dispatch({picture: state.picture.draw(drawn)});
   }
-  function drawPixel({x, y}, state) {
-    let drawn = {x, y, color: state.color};
-    dispatch({picture: state.picture.draw([drawn])});
-  }
-  drawPixel(pos, state);
-  return drawPixel;
+  connect(pos, state);
+  return connect;
 }
 
 function rectangle(start, state, dispatch) {
