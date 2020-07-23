@@ -5,3 +5,7 @@ academic advisor, along with Trevor Darrell, Pieter Abbeel and Sergey Levine.
 
 But hell, Stanford is also an excellent place to be a Ph.D, with Andrew Ng
 along with a bunch of other profs.
+
+. A server reads requests and then writes responses.
+. A client writes a request then reads a response.
+. Reading from a stream is done using event handlers rather than methods.
