@@ -1,0 +1,10 @@
+{
+  "author": "Son To",
+  "name": "A file server",
+  "description": "HTTP server that allows remote access to a file system",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "mime": "^2.4.6"
+  }
+}

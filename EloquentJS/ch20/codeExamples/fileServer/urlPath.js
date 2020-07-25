@@ -7,7 +7,7 @@ function urlPath(url) {
   let {pathname} = parse(url);
   let path = resolve(decodeURIComponent(pathname).slice(1));
   if (path != baseDirectory &&
-      !path.startWith(baseDirectory + sep)) {
+      !path.startsWith(baseDirectory + sep)) {
     throw {status: 403, body: "Forbidden"};
   }
   return path;
