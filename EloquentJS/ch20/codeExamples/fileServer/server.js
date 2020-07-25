@@ -1,6 +1,6 @@
 const {createServer} = require("https");
 
-const methods = Object.create(null);
+const {methods} = require("./methods");
 
 createServer((request, response) => {
   let handler = methods[request.method] || notAllowed;

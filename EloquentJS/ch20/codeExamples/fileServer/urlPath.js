@@ -12,3 +12,5 @@ function urlPath(url) {
   }
   return path;
 }
+
+exports.urlPath = urlPath;
