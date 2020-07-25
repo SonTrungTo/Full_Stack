@@ -4,6 +4,7 @@ const {createReadStream}  = require("fs");
 const {createWriteStream} = require("fs");
 const {readdir, stat} = require("fs").promises;
 const {rmdir, unlink} = require("fs").promises;
+const {mkdir}         = require("fs").promises;
 
 const mime = require("mime");
 
@@ -57,6 +58,12 @@ async function pipeStream(from, to) {
     to.on("finish", resolve);
     from.pipe(to);
   });
+}
+
+methods.MKCOL = async function(request) {
+  let path = urlPath(request.url);
+  await mkdir(path);
+  return {status: 204};
 }
 
 exports.methods = methods;
