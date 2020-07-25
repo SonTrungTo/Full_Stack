@@ -62,8 +62,20 @@ async function pipeStream(from, to) {
 
 methods.MKCOL = async function(request) {
   let path = urlPath(request.url);
-  await mkdir(path);
-  return {status: 204};
+  let stats;
+
+  try {
+    stats = await stat(path);
+  } catch (error) {
+    if (error.code != "ENOENT") throw error;
+    await mkdir(path);
+    return {status: 204};
+  }
+  if (stats.isDirectory()) {
+    return {status: 204};
+  } else {
+    return {body: "Is not a valid directory", status: 400};
+  }
 }
 
 exports.methods = methods;
