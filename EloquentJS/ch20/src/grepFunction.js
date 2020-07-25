@@ -1,14 +1,16 @@
-exports.grep = grep;
+exports.search = search;
 
-const {readFile} = require("fs");
+const {readFileSync, statSync, readdirSync} = require("fs");
 
-function grep(pattern, files) {
-  let match;
+function search(pattern, file) {
+  let stats = statSync(file);
 
-  for (let file of files) {
-    readFile(String(file), "utf8", (err, text) => {
-      if (err) throw err;
-      if (match = pattern.exec(text)) return file;
-    });
+  if (stats.isDirectory()) {
+    for (let dir of readdirSync(file)) {
+      search(pattern, file + "/" + dir);
+    }
+  } else {
+    let text = readFileSync(file, "utf8");
+    if (pattern.test(text)) console.log(file);
   }
 }
