@@ -1,1 +1,22 @@
-# Exercises incoming... Final project...
+# Project: A skill-sharing website.
+
+## talks dir
+This dir is for containing interface of HTTP request, which includes each sub
+dir in which it contains a JSON file like: (method: "PUT")
+
+[{"title": "Unituning", <br />
+  "presenter": "Jamal", <br />
+  "summary": "Modifying your cycle for extra style", <br />
+  "comment": []}] <br/>
+<br />
+PUT /talks/Unituning
+
+URL needs to be encode since it will contain spaces: <br />
+console.log("/talks/"+ encodeURIComponent("Swimmming in a river"));
+
+Client(If-None-Match: String(4)) vs Server(ETag: String(5)) ? server will
+response if different. To differentiate from normal conditional request
+and long polling, we use Prefer: wait=90
+
+## router.js
+This dispatches the requests to another function handling those.
