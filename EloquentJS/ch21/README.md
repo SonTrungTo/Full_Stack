@@ -28,3 +28,6 @@ including a server which handles requests and responses for two cases:
 * `/public/`: if the url pattern does not match, this is the default path for serving files.
 
 Incidentally, it wraps the server in an object that also holds its state (talks).
+
+`this.talks` contains `talks` object whose properties are the titles of the talks.
+We are now adding HTTP methods (thanks to handler) for the clients to use them.
