@@ -24,5 +24,7 @@ This dispatches the requests to another function handling those.
 ## skillSharingServer.js
 including a server which handles requests and responses for two cases:
 
-* `/talks/`
-* `/public/`
+* `/talks/`: which is handled via router. Client uses HTTP for this.
+* `/public/`: if the url pattern does not match, this is the default path for serving files.
+
+Incidentally, it wraps the server in an object that also holds its state (talks).
