@@ -36,3 +36,9 @@ We are now adding HTTP methods (thanks to handler) for the clients to use them.
 * DELETE
 * PUT
 * POST
+
+We also add support for long polling. `talkResponse()` is a helper method
+for the server that returns an array of talks along with `ETag` headers to the client.
+The handler will also check if the request headers for `If-no-match` and `Prefer`
+(case insensitive) to distinguish between normal conditional request and
+long polling one.

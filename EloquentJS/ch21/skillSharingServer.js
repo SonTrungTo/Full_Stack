@@ -36,6 +36,17 @@ class SkillSharingServer {
   stop() {
     this.server.close();
   }
+  talkResponse() {
+    let talks = [];
+    for (let title of Object.keys(this.talks)) {
+      talks.push(this.talks[title]);
+    }
+    return {
+      body: JSON.stringify(talks),
+      headers: {"Content-Type": "application/json",
+                "ETag": `"${this.version}"`}
+    };
+  }
 }
 
 // building handlers
@@ -48,7 +59,7 @@ router.add("GET", talkPath, async (server, title) => {
       headers: {"Content-Type": "application/json"}
     };
   } else {
-    return {body: `No '${title}' in ./talks/`, status: 404};
+    return {body: `No '${title}' in ./talks/ found`, status: 404};
   }
 });
 
@@ -107,4 +118,10 @@ router.add("POST", /^\/talks\/([^\/]+)\/comments$/,
   } else {
     return {body: `No talk '${title}' found`, status: 404};
   }
+});
+
+// support for long polling
+router.add("GET", /^\/talks$/, async (server, request) => { // spread operators cancel empty array
+  let tag;
+  let wait;
 });
