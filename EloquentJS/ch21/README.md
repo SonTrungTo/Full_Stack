@@ -7,7 +7,7 @@ dir in which it contains a JSON file like: (method: "PUT")
 [{"title": "Unituning", <br />
   "presenter": "Jamal", <br />
   "summary": "Modifying your cycle for extra style", <br />
-  "comment": []}] <br/>
+  "comment": [ ]}] <br />
 <br />
 PUT /talks/Unituning
 
