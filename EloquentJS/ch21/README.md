@@ -20,3 +20,9 @@ and long polling, we use Prefer: wait=90
 
 ## router.js
 This dispatches the requests to another function handling those.
+
+## skillSharingServer.js
+including a server which handles requests and responses for two cases:
+
+* `/talks/`
+* `/public/`
