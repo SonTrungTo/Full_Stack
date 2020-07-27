@@ -48,7 +48,7 @@ router.add("GET", talkPath, async (server, title) => {
       headers: {"Content-Type": "application/json"}
     };
   } else {
-    return {body: `No ${title} in ./talks/`, status: 404};
+    return {body: `No '${title}' in ./talks/`, status: 404};
   }
 });
 
@@ -89,4 +89,22 @@ router.add("PUT", talkPath, async (server, title, request) => {
   return {status: 204};
 });
 
-router.add("POST");
+router.add("POST", /^\/talks\/([^\/]+)\/comments$/,
+          async (server, title, request) => {
+  let requestBody = await readStream(request);
+  let comment;
+  try {comment = JSON.parse(requestBody);}
+  catch(_) {return {body: "Invalid JSON data", status: 400};}
+
+  if (!comment ||
+      typeof comment.author  != "string" ||
+      typeof comment.message != "string") {
+    return {body: `Bad comment data`, status: 400};
+  } else if (title in server.talks) {
+    server.talks[title].comments.push(comment);
+    server.updated();
+    return {status: 204};
+  } else {
+    return {body: `No talk '${title}' found`, status: 404};
+  }
+});

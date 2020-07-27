@@ -31,3 +31,8 @@ Incidentally, it wraps the server in an object that also holds its state (talks)
 
 `this.talks` contains `talks` object whose properties are the titles of the talks.
 We are now adding HTTP methods (thanks to handler) for the clients to use them.
+
+* GET
+* DELETE
+* PUT
+* POST
