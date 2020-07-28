@@ -2,6 +2,7 @@
 This projects builds a small chat app website that encourages information exchanges
 between people on various topics.
 
+# Server side
 ## talks dir
 This dir is for containing interface of HTTP request, which includes each sub
 dir in which it contains a JSON file like: (method: "PUT")
@@ -44,3 +45,14 @@ for the server that returns an array of talks along with `ETag` headers to the c
 The handler will also check if the request headers for `If-no-match` and `Prefer`
 (case insensitive) to distinguish between normal conditional request and
 long polling one.
+
+# Client side (./public)
+## index.html
+Automatically found by `ecstatic` package.
+
+## skillsharing_client.js
+scripts for the page: {talks, user} object along with
+state management in `handleAction`
+
+## skillsharing.css
+And of course, its css.
