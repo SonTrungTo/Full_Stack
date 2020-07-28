@@ -53,6 +53,7 @@ function elt(type, props, ...children) {
     if (typeof child != "string") dom.appendChild(child);
     else dom.appendChild(document.createTextNode(child));
   }
+  return dom;
 }
 
 function renderUserField(name, dispatch) {
@@ -92,11 +93,101 @@ function renderTalk(talk, dispatch) {
           form.reset();
         }
     },
-        elt("textarea", {name: "comment"}), " "
+        elt("textarea", {name: "comment"}), " ",
         elt("button", {type: "submit"}, "Send"))
   );
 }
 
 function renderComment(comment) {
-  return elt();
+  return elt("p", {className: "comment"},
+            elt("strong", null, comment.author),
+            ": ", comment.message);
 }
+
+function renderTalkForm(dispatch) {
+  let title   = elt("input", {type: "text"});
+  let summary = elt("input", {type: "text"});
+  return elt("form", {
+    onsubmit(event) {
+      event.preventDefault();
+      dispatch({
+        type: "newTalk",
+        title: title.value,
+        summary: summary.value
+      });
+      event.target.reset();
+    }
+  }, elt("h3", null, "Submit a Talk"),
+     elt("label", null, "Title: ", title),
+     elt("label", null, "Summary: ", summary),
+     elt("button", {type: "submit"}, "Create"));
+}
+
+async function pollTalks(update) {
+  let tag = undefined;
+  for (;;) {
+    let response;
+
+    try {
+      response = await fetchOK("/talks", {
+        headers: tag && {
+          "If-None-Match": tag,
+          "Prefer": "wait=90"
+        }
+      });
+    } catch (error) {
+      console.log("Request failed: " + error);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      continue;
+    }
+    if (response.status == "304") continue;
+    tag = response.headers.get("Etag"); // try "get" later.
+    update(await response.json());
+  }
+}
+
+// The following component ties the app together
+class SkillSharingApp {
+  constructor(state, dispatch) {
+    this.dispatch = dispatch;
+    this.talkDOM = elt("div", {className: "talks"});
+    this.dom = elt("div", null,
+                   renderUserField(state.user, dispatch),
+                   this.talkDOM,
+                   renderTalkForm(dispatch));
+    this.syncState(state);
+  }
+
+  syncState(state) {
+    if (state.talks != this.talks) { // redrawing, needs to be dealt with in exercise.
+      this.talkDOM.textContent = "";
+      for (let talk of state.talks) {
+        this.talkDOM.appendChild(
+          renderTalk(talk, this.dispatch)
+        );
+      }
+    }
+    this.talks = state.talks;
+  }
+}
+
+function runApp() {
+  let user = localStorage.getItem("userName") || "";
+  let state, app;
+  function dispatch(action) {
+    state = handleAction(state, action);
+    app.syncState(state);
+  }
+
+  pollTalks(talks => {
+    if (!app) {
+      state = {user, talks};
+      app = new SkillSharingApp(state, dispatch);
+      document.body.appendChild(app.dom);
+    } else {
+      dispatch({type: "setTalks", talks});
+    }
+  }).catch(reportError);
+}
+
+runApp();
