@@ -13,7 +13,7 @@ class SkillSharingServer {
 
     let fileServer = ecstatic({root: "./public"});
     this.server = createServer((request, response) => {
-      let resolved = rounter.resolve(this, request);
+      let resolved = router.resolve(this, request);
 
       if (resolved) {
         resolved
@@ -46,6 +46,22 @@ class SkillSharingServer {
       headers: {"Content-Type": "application/json",
                 "ETag": `"${this.version}"`}
     };
+  }
+  waitForChanges(time) {
+    return new Promise(resolve => {
+      this.waiting.push(resolve);
+      setTimeout( () => {
+        if (!this.waiting.includes(resolve)) return;
+        this.waiting = this.waiting.filter(r => r != resolve);
+        resolve({status: 304});
+      }, time * 1000);
+    });
+  }
+  updated() {
+    this.version++;
+    let response = this.talkResponse();
+    this.waiting.forEach(resolve => resolve(response));
+    this.waiting = [];
   }
 }
 
@@ -122,6 +138,15 @@ router.add("POST", /^\/talks\/([^\/]+)\/comments$/,
 
 // support for long polling
 router.add("GET", /^\/talks$/, async (server, request) => { // spread operators cancel empty array
-  let tag;
-  let wait;
+  let tag = /"(.*)"/.exec(request.headers["if-none-match"]);
+  let wait = /\bwait=(\d+)/.exec(request.headers["prefer"]);
+  if (!tag || tag[1] != server.version) {
+    return server.talkResponse();
+  } else if (!wait) {
+    return {status: 304};
+  } else {
+    return server.waitForChanges(Number(wait[1]));
+  }
 });
+
+new SkillSharingServer(Object.create(null)).start(8000);
