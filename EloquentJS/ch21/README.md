@@ -51,8 +51,9 @@ long polling one.
 Automatically found by `ecstatic` package.
 
 ## skillsharing_client.js
-scripts for the page: {talks, user} object along with
-state management in `handleAction`
+script for the page: {talks, user} object along with
+state management in `handleAction`. It also contains
+components renderer.
 
 ## skillsharing.css
 And of course, its css.
