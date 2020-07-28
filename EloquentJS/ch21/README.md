@@ -1,4 +1,6 @@
 # Project: A skill-sharing website.
+This projects builds a small chat app website that encourages information exchanges
+between people on various topics.
 
 ## talks dir
 This dir is for containing interface of HTTP request, which includes each sub
