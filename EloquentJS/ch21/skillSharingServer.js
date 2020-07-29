@@ -1,6 +1,7 @@
 const {createServer} = require("http");
 const Router = require("./router");
 const ecstatic = require("ecstatic");
+const {readFileSync, writeFileSync} = require("fs");
 
 const router = new Router();
 const defaultHeaders = {"Content-Type": "text/plain"};
@@ -62,6 +63,10 @@ class SkillSharingServer {
     let response = this.talkResponse();
     this.waiting.forEach(resolve => resolve(response));
     this.waiting = [];
+
+    writeFileSync("./talks.json", JSON.stringify(this.talks), err => {
+      if (err) throw err;
+    });
   }
 }
 
@@ -149,4 +154,14 @@ router.add("GET", /^\/talks$/, async (server, request) => { // spread operators 
   }
 });
 
-new SkillSharingServer(Object.create(null)).start(8000);
+function loadTalks() {
+  let json;
+  try {
+    json = JSON.parse(readFileSync("./talks.json", "utf8"));
+  } catch (e) {
+    json = {};
+  }
+  return Object.assign(Object.create(null), json);
+}
+
+new SkillSharingServer(loadTalks()).start(8000);

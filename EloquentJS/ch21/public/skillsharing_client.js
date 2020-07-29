@@ -105,8 +105,8 @@ function renderComment(comment) {
 }
 
 function renderTalkForm(dispatch) {
-  let title   = elt("input", {type: "text"});
-  let summary = elt("input", {type: "text"});
+  let title   = elt("input", {type: "text", name: "title"});
+  let summary = elt("input", {type: "text", name: "summary"});
   return elt("form", {
     onsubmit(event) {
       event.preventDefault();
@@ -118,8 +118,10 @@ function renderTalkForm(dispatch) {
       event.target.reset();
     }
   }, elt("h3", null, "Submit a Talk"),
-     elt("label", null, "Title: ", title),
-     elt("label", null, "Summary: ", summary),
+     elt("label", {for: title.name}, "Title:"),
+     title, elt("br"),
+     elt("label", {for: summary.name}, "Summary:"),
+     summary, elt("br"),
      elt("button", {type: "submit"}, "Create"));
 }
 
@@ -141,7 +143,7 @@ async function pollTalks(update) {
       continue;
     }
     if (response.status == "304") continue;
-    tag = response.headers.get("Etag"); // try "get" later.
+    tag = response.headers.get("Etag"); // without "get", same result.
     update(await response.json());
   }
 }
