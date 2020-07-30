@@ -1,10 +1,9 @@
 ## Main references
 1. [HTML & CSS - Jon Duckett](https://www.amazon.com/HTML-CSS-Design-Build-Websites/dp/1118008189/ref=sr_1_2?crid=3AS6FM88U87QN&dchild=1&keywords=jon+duckett+html+and+css&qid=1586829568&sprefix=html+css+jon+d%2Caps%2C245&sr=8-2)
 2. [Bootstrap 4 + Flexbox + CSS Grid + Media Queries](https://www.w3schools.com/)
-3. Eloquent Javascript
-4. Express.js
-5. Node.js
-6. [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
+3. [Eloquent Javascript](https://www.amazon.com/Eloquent-JavaScript-3rd-Introduction-Programming/dp/1593279507/ref=sr_1_1?crid=3DNJTXVBNEP64&dchild=1&keywords=eloquent+javascript&qid=1596076759&sprefix=eloquent%2Caps%2C300&sr=8-1)
+4. [Express.js](https://www.amazon.com/Express-Action-Writing-building-applications/dp/1617292427/ref=sr_1_1?dchild=1&keywords=expressjs&qid=1596076808&sr=8-1)
+5. [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
 
 (to be continued)
 
