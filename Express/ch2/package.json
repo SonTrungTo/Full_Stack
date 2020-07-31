@@ -1,0 +1,9 @@
+{
+  "author": "Son To",
+  "name": "ch2 of Express",
+  "description": "review of callbacks and promises",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
