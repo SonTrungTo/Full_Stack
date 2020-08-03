@@ -1,18 +1,13 @@
 const express = require("express");
 
+const apiVersion1 = require("./api1");
+const apiVersion2 = require("./api2");
+
 const app = express();
 
-app.get("/random/:min/:max", (req, res) => {
-  let min = parseInt(req.params.min), max = parseInt(req.params.max);
+app.use("/v1", apiVersion1);
+app.use("/v2", apiVersion2);
 
-  if (isNaN(min) || isNaN(max)) {
-    res.status(400).json({error: "Bad request."});
-    return ;
-  }
-
-  let result = Math.round(Math.random() * (max - min) + min);
-
-  res.json({result});
+app.listen(3000, () => {
+  console.log("App started on port 3000.");
 });
-
-app.listen(3000);
