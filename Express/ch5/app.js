@@ -4,7 +4,7 @@ const zipdb = require("zippity-do-dah");
 const ForecastIo = require("forecastio");
 
 const app = express();
-const weather = new ForecastIo("c63a8baf76fdc40e38124f6e28ef6752");
+const weather = new ForecastIo("");
 
 app.use(express.static(resolve(__dirname, "public")));
 
