@@ -16,6 +16,8 @@
 1. [Notes: An app to remind](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch18/codeExamples/notes.html) (mini-project)
 1. [A Pixel Art Editor](https://github.com/SonTrungTo/Full_Stack/tree/master/EloquentJS/ch19)
 1. [A Skill-Sharing Website](https://vast-peak-65357.herokuapp.com/)
+1. [The Guest Book](https://damp-everglades-27995.herokuapp.com/)
+1. [The Weather App](https://weather-app-son-to.herokuapp.com/)
 
 ## Other projects (waiting to be improved)
 1. [Son's Website (with oudated CSS 960)](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/HTML_CSS/ch15/example/example.html)
