@@ -1,0 +1,8 @@
+{
+  "name": "pg-documentation",
+  "version": "1.0.0",
+  "description": "Notes about pg package in Node.js",
+  "dependencies": {
+    "pg": "^8.3.0"
+  }
+}
