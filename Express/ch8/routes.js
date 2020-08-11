@@ -21,4 +21,30 @@ router.get("/", (req, res, next) => { // Using queries to list users from the ne
   });
 });
 
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
+router.post("/signup", (req, res, next) => {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  User.findOne({username}, (err, user) => {
+    if (err) {return next(err);}
+    if (user) {
+      req.flash("error", "User already exists!");
+      return res.redirect("/signup");
+    }
+    let newUser = new User({
+      username,
+      password
+    });
+    newUser.save(next); // Create a new user instance, save it to the database and move to the next request handler
+  });
+}, passport.authenticate("login", { // Authenticate the user with passport
+  successRedirect: "/",
+  failureRedirect: "/signup",
+  failureFlash:    true
+}));
+
 module.exports = router;
