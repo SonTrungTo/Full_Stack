@@ -1,5 +1,5 @@
-let {genSalt, hash} = require("bcrypt-nodejs");
-let {Schema} = require("mongoose");
+let {genSalt, hash, compare} = require("bcrypt-nodejs");
+let {Schema, model} = require("mongoose");
 let userSchema = Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
@@ -9,10 +9,6 @@ let userSchema = Schema({
 });
 
 const SALT_FACTOR = 10;
-
-userSchema.methods.name = () => {
-  return this.displayName || this.username;
-};
 
 let noop = () => {}; // for use with the bcrypt module.
 
@@ -30,3 +26,17 @@ userSchema.pre("save", (done) => { // hashing password before it is saved!
     });
   });
 });
+
+userSchema.methods.checkPassword = (guess, done) => {
+  compare(guess, this.password, (err, isMatch) => {
+    done(err, isMatch);
+  });
+};
+
+userSchema.methods.name = () => {
+  return this.displayName || this.username;
+};
+
+// We now connect the schema to the database model.
+let User = model("User", userSchema);
+module.exports = User;
