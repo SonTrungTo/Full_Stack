@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 
 const User = require("./models/user");
 
@@ -16,7 +17,7 @@ router.get("/", (req, res, next) => { // Using queries to list users from the ne
   .sort({createdAt: "descending"})
   .exec((err, users) => {
     if (err) {return  next(err);}
-    res.render("index", {users: users});
+    res.render("index", {users});
   });
 });
 
