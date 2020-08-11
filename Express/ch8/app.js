@@ -15,7 +15,7 @@ const routes = require("./routes");
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/test");
+mongoose.connect("mongodb://localhost:27017/learn_about_me_db");
 
 app.set("port", process.env.PORT || 3000);
 
