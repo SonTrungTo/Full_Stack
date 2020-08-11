@@ -12,7 +12,7 @@ const SALT_FACTOR = 10;
 
 let noop = () => {}; // for use with the bcrypt module.
 
-userSchema.pre("save", (done) => { // hashing password before it is saved!
+userSchema.pre("save", function(done) { // hashing password before it is saved!, 'this' is new User
   let user = this;
   if (!user.isModified("password")) {
     done();
