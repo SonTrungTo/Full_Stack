@@ -47,4 +47,6 @@ router.post("/signup", (req, res, next) => {
   failureFlash:    true
 }));
 
+router.get("/users/:username");
+
 module.exports = router;
