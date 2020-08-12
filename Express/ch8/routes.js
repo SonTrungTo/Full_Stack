@@ -47,6 +47,12 @@ router.post("/signup", (req, res, next) => {
   failureFlash:    true
 }));
 
-router.get("/users/:username");
+router.get("/users/:username", (req, res, next) => {
+  User.findOne({username: req.params.username}, (err, user) => {
+    if (err) {return next(err);}
+    if (!user) {return next(404);}
+    res.render("profile", {user});
+  });
+});
 
 module.exports = router;
