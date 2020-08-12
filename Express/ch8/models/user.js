@@ -27,13 +27,13 @@ userSchema.pre("save", function(done) { // hashing password before it is saved!,
   });
 });
 
-userSchema.methods.checkPassword = (guess, done) => {
+userSchema.methods.checkPassword = function (guess, done) {
   compare(guess, this.password, (err, isMatch) => {
     done(err, isMatch);
   });
 };
 
-userSchema.methods.name = () => {
+userSchema.methods.name = function () {
   return this.displayName || this.username;
 };
 
