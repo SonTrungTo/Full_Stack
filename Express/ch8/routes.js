@@ -70,4 +70,23 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+// ensure that users are authenticated
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { // thanks to passport
+    next();
+  } else {
+    req.flash("info", "You need to log in to view this page!");
+    res.redirect("/login");
+  }
+}
+
+router.get("/edit", ensureAuthenticated, (req, res) => {
+  res.render("edit");
+});
+
+router.post("/edit", ensureAuthenticated, (req, res) => {
+  req.user.displayName;
+  req.user.bio;
+});
+
 module.exports = router;
