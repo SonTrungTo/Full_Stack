@@ -65,6 +65,9 @@ router.post("/login", passport.authenticate("login", {
   failureFlash: true
 }));
 
-router.get();
+router.get("/logout", (req, res) => {
+  req.logout(); // thanks to passport, it also populates req.user, req.flash("error"), req.flash("info")
+  res.redirect("/");
+});
 
 module.exports = router;
