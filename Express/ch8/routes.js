@@ -59,4 +59,12 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+router.post("/login", passport.authenticate("login", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+  failureFlash: true
+}));
+
+router.get();
+
 module.exports = router;
