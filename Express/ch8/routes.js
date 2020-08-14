@@ -84,9 +84,17 @@ router.get("/edit", ensureAuthenticated, (req, res) => {
   res.render("edit");
 });
 
-router.post("/edit", ensureAuthenticated, (req, res) => {
-  req.user.displayName;
-  req.user.bio;
+router.post("/edit", ensureAuthenticated, (req, res, next) => {
+  req.user.displayName = req.body.displayname;
+  req.user.bio = req.body.bio;
+  req.user.save(err => {
+    if (err) {
+      next(err);
+      return;
+    }
+    req.flash("info", "Profile updated!");
+    res.redirect("/edit");
+  });
 });
 
 module.exports = router;
