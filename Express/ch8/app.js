@@ -8,6 +8,13 @@ const session = require("express-session"); // stores user sessions across diffe
 const flash = require("connect-flash"); // displays error messages
 const passport = require("passport");  // {initialize, session} to initialize passport module and handle session
 const setUpPassport = require("./setuppassport");
+// additional extra stuffs
+const favicon = require("static-favicon"); // deprecated!
+const logger  = require("morgan");
+// password resets and password validation
+const nodemailer = require("nodemailer"); // sending email
+const crypto     = require("crypto");     // generate random tokens for reset, part of nodejs
+const async      = require("async");      // async.waterfall to avoid the use of nested callbacks
 
 let salt1 = bcrypt.genSaltSync();
 let salt2 = bcrypt.genSaltSync();
@@ -25,6 +32,9 @@ app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(favicon());
+app.use(logger("dev"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(session({
