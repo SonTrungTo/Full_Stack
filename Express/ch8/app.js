@@ -30,7 +30,7 @@ app.set("view engine", "ejs");
 
 app.use(favicon());
 app.use(logger("dev"));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.json()); // Hopefullly fixed for express-validator
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(session({

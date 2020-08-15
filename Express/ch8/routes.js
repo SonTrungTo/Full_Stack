@@ -3,7 +3,7 @@ const passport = require("passport");
 // password resets and password validation
 const nodemailer = require("nodemailer"); // sending email
 const crypto     = require("crypto");     // generate random tokens for reset, part of nodejs
-const {body, validationResult} = require("express-validator"); // to recheck password and other checks
+const {check, validationResult} = require("express-validator"); // to recheck password and other checks
 const async = require("async");      // async.waterfall to avoid the use of nested callbacks
 require("dotenv").config();
 
@@ -31,15 +31,38 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", [
+  check('username')
+        .not()
+        .isEmpty()
+        .withMessage('Name is required!'),
+  check('password', 'Password is required')
+        .isLength({min: 5})
+        .custom((val, {req, loc, path}) => {
+          if (val !== req.body.confirm) {
+            throw new Error("Passwords don't match");
+          } else {
+            return value;
+          }
+        }),
+  check('email', 'Email is required!').isEmail()
+], (req, res, next) => {
   let username = req.body.username;
   let password = req.body.password;
   let email    = req.body.email;
 
-  User.findOne({username}, (err, user) => {
+  let errors = validationResult(req).array();
+
+  User.findOne({$and: [{username}, {email}]}, (err, user) => {
     if (err) {return next(err);}
     if (user) {
-      req.flash("error", "User already exists!");
+      req.flash("error", "User or email already exists!");
+      return res.redirect("/signup");
+    }
+    if (errors) {
+      for (let error of errors) {
+        req.flash("error", String(error.msg));
+      }
       return res.redirect("/signup");
     }
     let newUser = new User({
@@ -188,10 +211,43 @@ router.post("/reset/:token", (req, res, next) => {
         user.password = req.body.password;
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
+
+        user.save(err => {
+          if (err) {return next(err);}
+          passport.authenticate("login", {
+            successRedirect: "/",
+            failureRedirect: "/login",
+            failureFlash: true
+          });
+          done(err, user);
+        });
+      });
+    },
+    (user, done) => {
+      const smtpTransport = nodemailer.createTransport({
+        service: "SendGrid",
+        auth: {
+          user: process.env.REACT_APP_SENDGRID_USERNAME,
+          pass: process.env.REACT_APP_SENDGRID_PASSWORD
+        }
+      });
+      const mailOptions = {
+        to:       user.email,
+        from:     process.env.REACT_APP_SENDGRID_USERNAME,
+        subject:  'LearnFromMe password has been changed,',
+        text:  'Hi, \n\n' +
+        'This is a confirmation that your password for the account' + user.email +
+        'has been changed. \n\n' +
+        'Best, \n' + 'LearnFromMe team.'
+      };
+      smtpTransport.sendMail(mailOptions, err => {
+        req.flash('info', 'Success! Your password has been changed!');
+        done(err);
       });
     }
   ], err => {
-
+    if (err) throw new Error("OOPS! Something is wrong!");
+    res.redirect("/");
   });
 });
 
