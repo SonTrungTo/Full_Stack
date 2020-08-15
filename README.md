@@ -18,6 +18,7 @@
 1. [A Skill-Sharing Website](https://vast-peak-65357.herokuapp.com/)
 1. [The Guest Book](https://damp-everglades-27995.herokuapp.com/)
 1. [The Weather App](https://weather-app-son-to.herokuapp.com/)
+1. [Learn About Me](https://learn-about-me-son-to.herokuapp.com/)
 
 ## Other projects (waiting to be improved)
 1. [Son's Website (with oudated CSS 960)](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/HTML_CSS/ch15/example/example.html)
