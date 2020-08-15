@@ -11,10 +11,6 @@ const setUpPassport = require("./setuppassport");
 // additional extra stuffs
 const favicon = require("static-favicon"); // deprecated!
 const logger  = require("morgan");
-// password resets and password validation
-const nodemailer = require("nodemailer"); // sending email
-const crypto     = require("crypto");     // generate random tokens for reset, part of nodejs
-const async      = require("async");      // async.waterfall to avoid the use of nested callbacks
 
 let salt1 = bcrypt.genSaltSync();
 let salt2 = bcrypt.genSaltSync();

@@ -1,5 +1,11 @@
 const express = require("express");
 const passport = require("passport");
+// password resets and password validation
+const nodemailer = require("nodemailer"); // sending email
+const crypto     = require("crypto");     // generate random tokens for reset, part of nodejs
+const {body, validationResult} = require("express-validator"); // to recheck password and other checks
+const async = require("async");      // async.waterfall to avoid the use of nested callbacks
+require("dotenv").config();
 
 const User = require("./models/user");
 
@@ -28,6 +34,7 @@ router.get("/signup", (req, res) => {
 router.post("/signup", (req, res, next) => {
   let username = req.body.username;
   let password = req.body.password;
+  let email    = req.body.email;
 
   User.findOne({username}, (err, user) => {
     if (err) {return next(err);}
@@ -37,7 +44,8 @@ router.post("/signup", (req, res, next) => {
     }
     let newUser = new User({
       username,
-      password
+      password,
+      email
     });
     newUser.save(next); // Create a new user instance, save it to the database and move to the next request handler
   });
@@ -94,6 +102,96 @@ router.post("/edit", ensureAuthenticated, (req, res, next) => {
     }
     req.flash("info", "Profile updated!");
     res.redirect("/edit");
+  });
+});
+
+router.get("/forgot", (req, res) => {
+  res.render("forgot");
+});
+
+router.post("/forgot", (req, res, next) => {
+  async.waterfall([
+    (done) => {
+      crypto.randomBytes(20, (err, buf) => {
+        let token = buf.toString("hex");
+        done(err, token);
+      });
+    },
+    (token, done) => {
+      User.findOne({email: req.body.email}, (err, user) => {
+        if (!user) {
+          req.flash("error", "No account with that email exists!");
+          return res.redirect("/forgot");
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(err => {
+          done(err, token, user);
+        });
+      });
+    },
+    (token, user, done) => {
+      const smtpTransport = nodemailer.createTransport({
+        service: "SendGrid",
+        auth: {
+          user: process.env.REACT_APP_SENDGRID_USERNAME,
+          pass: process.env.REACT_APP_SENDGRID_PASSWORD
+        }
+      });
+      const mailOptions = {
+        to: user.email,
+        from: process.env.REACT_APP_SENDGRID_USERNAME,
+        subject: 'LearnFromMe Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested ' +
+        'the reset of the password for your account on Learn From Me webpage. \n\n' +
+        'Please click on the following link, or paste this into your browser to complete ' +
+        'the process: \n\n' +
+        'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+        'If you did not request this, please ignore this email and your password ' +
+        'will remain unchanged.\n'
+      };
+      smtpTransport.sendMail(mailOptions, err => {
+        req.flash("info", `An email has been sent to ${user.email} with further instructions.\n
+Check your spam folder since this is a test!`);
+        done(err);
+      });
+    }
+  ], (err) => {
+    if (err) {return next(err);}
+    res.redirect("/forgot");
+  });
+});
+
+router.get("/reset/:token", (req, res, next) => {
+  User.findOne( {resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+    if(err) {return next(err);}
+    if(!user) {
+      req.flash("error", "Password token is invalid/expired!");
+      return res.redirect("/forgot");
+    }
+    res.render("reset");
+  });
+});
+
+router.post("/reset/:token", (req, res, next) => {
+  async.waterfall([
+    done => {
+      User.findOne( {resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+        if (err) {return next(err);}
+        if (!user) {
+          req.flash("error", "Password token has expired or is invalid!");
+          return res.redirect("forgot");
+        }
+
+        user.password = req.body.password;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+      });
+    }
+  ], err => {
+
   });
 });
 

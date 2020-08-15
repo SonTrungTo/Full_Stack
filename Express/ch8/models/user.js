@@ -2,10 +2,13 @@ let {genSalt, hash, compare} = require("bcrypt-nodejs");
 let {Schema, model} = require("mongoose");
 let userSchema = Schema({
   username: {type: String, required: true, unique: true},
+  email:    {type: String, required: true, unique: true},
   password: {type: String, required: true},
   createdAt: {type: Date, default: Date.now},
   displayName: String,
-  bio: String
+  bio: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 const SALT_FACTOR = 10;
