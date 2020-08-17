@@ -40,4 +40,12 @@ describe("capitalize", () => {
     expect(str.valueOf()).to.equal("what is Javascript?");
   });
 
+  it("throws an error if passed a number", () => {
+    expect(() => {capitalize(123)}).to.throw(Error);
+  });
+
+  it("changes the value", () => {
+    expect(capitalize("foo")).not.to.equal("foo");
+  });
+
 });
