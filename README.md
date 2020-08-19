@@ -4,6 +4,7 @@
 3. [Eloquent Javascript](https://www.amazon.com/Eloquent-JavaScript-3rd-Introduction-Programming/dp/1593279507/ref=sr_1_1?crid=3DNJTXVBNEP64&dchild=1&keywords=eloquent+javascript&qid=1596076759&sprefix=eloquent%2Caps%2C300&sr=8-1)
 4. [Express.js](https://www.amazon.com/Express-Action-Writing-building-applications/dp/1617292427/ref=sr_1_1?dchild=1&keywords=expressjs&qid=1596076808&sr=8-1)
 5. [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
+6. [Pro React 16](https://www.amazon.com/Pro-React-16-Adam-Freeman/dp/1484244508/ref=sr_1_1?dchild=1&keywords=pro+react&qid=1597812219&sr=8-1)
 
 (to be continued)
 
