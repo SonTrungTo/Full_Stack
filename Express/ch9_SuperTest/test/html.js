@@ -26,7 +26,7 @@ describe("html response", () => {
         let $ = cheerio.load(htmlResponse);
         let userAgent = $(".user-agent").html().trim();
         if (userAgent !== "my cool browser") {
-          
+          throw new Error("User Agent not found!");
         }
       })
       .end(done);
