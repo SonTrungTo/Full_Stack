@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
-import "./App.css";
-import reactLogo from "./logo.svg";
+import {Display} from "./Display";
 
-let   name = "Adam";
-const city = "London";
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      city: "London"
+    };
+  }
 
-export default class extends Component {
+  changeCity = () => {
+    debugger
+    this.setState({city: this.state.city === "London" ? "New York" : "London"});
+  };
 
-  message = () => `Hello ${name} from ${city}`;
-
-  render = () =>
-      <div className="text-center">
-        <h4 className="bg-primary text-white text-center p-3">
-          {this.message()}
-        </h4>
-        <img src={reactLogo} alt="reactLogo" />
-      </div>
+  render() {
+    return(
+      <Display value={this.state.city} callback={this.changeCity} />
+    );
+  }
 }
