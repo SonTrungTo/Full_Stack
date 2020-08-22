@@ -12,7 +12,7 @@ export function Summary(props) {
             <td>
                 <SimpleButton className="btn btn-warning m-1"
                 callback={ props.reverseCallback }
-                text={`Reverse (${props.name})`}/>
+                text={`Reverse (${props.name})`} />
                 <SimpleButton className="btn btn-info m-1" 
                 callback={ () => props.promoteCallback(props.name) }
                 text={`Promote (${props.name})`} />
