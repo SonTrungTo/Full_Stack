@@ -35,13 +35,23 @@ export class SimpleButton extends Component {
         this.props.callback();
     };
 
-    /*
+    /* Sequential updates
     handleClick = () => {
         this.setState({counter: this.state.counter + 1},
             () => this.setState({hasButtonBeenClicked: this.state.counter > 0})
         );
         this.props.callback();
     };
+    */
+
+    /* Multiple updates in setState
+    handleClick = () => {
+        for (let i = 0; i < 5; i++) {
+            this.setState((state, props) => {return {counter: state.counter + 1}});
+        }
+        this.setState({hasButtonBeenClicked: true});
+        this.props.callback();
+    }; 
     */
 }
 
