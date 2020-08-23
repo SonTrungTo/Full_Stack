@@ -14,7 +14,7 @@ export class SimpleButton extends Component {
     render() {
         return(
             <button className={this.props.className} 
-            onClick={this.props.callback} 
+            onClick={this.handleClick} 
             disabled={ this.props.disabled === "true" || this.props.disabled === true} >
                 {this.props.text} {this.state.counter}
                 {this.state.hasButtonBeenClicked &&
@@ -25,9 +25,26 @@ export class SimpleButton extends Component {
             </button>
         );
     }
+
+    /* We need to handle state data modification. Write it below.... */
+    handleClick = () => {
+        this.setState({
+            counter: this.state.counter + 1,
+            hasButtonBeenClicked: true
+        });
+        this.props.callback();
+    };
+
+    /*
+    handleClick = () => {
+        this.setState({counter: this.state.counter + 1},
+            () => this.setState({hasButtonBeenClicked: this.state.counter > 0})
+        );
+        this.props.callback();
+    };
+    */
 }
 
-/* We need to handle state data modification */
 
 /* SimpleButton.defaultProps = {
     disabled: false
