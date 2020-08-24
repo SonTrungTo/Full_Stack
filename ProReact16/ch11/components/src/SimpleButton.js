@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 export class SimpleButton extends Component {
 
@@ -54,16 +54,15 @@ export class SimpleButton extends Component {
         this.props.callback();
     }; 
     */
+
+   static defaultProps = {
+        disabled: false
+    };
+
+    static propTypes = {
+        text:      PropTypes.string,
+        theme:     PropTypes.string,
+        callback:  PropTypes.func,
+        disabled:  PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    };
 }
-
-
-/* SimpleButton.defaultProps = {
-    disabled: false
-};
-
-SimpleButton.propTypes = {
-    text:      PropTypes.string,
-    theme:     PropTypes.string,
-    callback:  PropTypes.func,
-    disabled:  PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-}; */

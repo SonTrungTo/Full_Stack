@@ -4,7 +4,7 @@ import {SimpleButton} from "./SimpleButton";
 import {HooksButton} from "./HooksButton";
 
 export class Summary extends Component {
-    constructor(props) {
+/*     constructor(props) {
         super(props);
         this.state = {
             counter: 0
@@ -14,7 +14,7 @@ export class Summary extends Component {
     incrementCounter = (increment) => {
         this.setState((state) => {return {counter: state.counter + increment}});
     };
-
+ */
     render() {
         const props = this.props;
         return (
@@ -26,13 +26,11 @@ export class Summary extends Component {
                     <SimpleButton className="btn btn-warning m-1"
                     callback={ props.reverseCallback }
                     text={`Reverse (${props.name})`}
-                    counter={this.state.counter}
-                    incrementCallback={this.incrementCounter} />
+                    {...props} />
                     <HooksButton className="btn btn-info m-1" 
                     callback={ () => props.promoteCallback(props.name) }
                     text={`Promote (${props.name})`}
-                    counter={this.state.counter}
-                    incrementCallback={this.incrementCounter} />
+                    {...props} />
                 </td>
             </>
             );
