@@ -1,6 +1,7 @@
 import React from "react";
 //import {CallbackButton} from "./CallbackButton";
 import {SimpleButton} from "./SimpleButton";
+import {HooksButton} from "./HooksButton";
 
 export function Summary(props) {
 
@@ -13,7 +14,7 @@ export function Summary(props) {
                 <SimpleButton className="btn btn-warning m-1"
                 callback={ props.reverseCallback }
                 text={`Reverse (${props.name})`} />
-                <SimpleButton className="btn btn-info m-1" 
+                <HooksButton className="btn btn-info m-1" 
                 callback={ () => props.promoteCallback(props.name) }
                 text={`Promote (${props.name})`} />
             </td>
