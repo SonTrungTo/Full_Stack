@@ -4,13 +4,16 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: "Ready"
+      message: "Ready",
+      counter: 0
     };
     /* this.handleEvent = this.handleEvent.bind(this); */
   }
 
-  handleEvent = () => {
-    this.setState({message: "Clicked"});
+  handleEvent = (event) => {
+    event.persist();
+    this.setState({counter: this.state.counter + 1},
+      () => this.setState({message: `${event.type}: ${this.state.counter}`}));
   };
 
   /* handleEvent() {
