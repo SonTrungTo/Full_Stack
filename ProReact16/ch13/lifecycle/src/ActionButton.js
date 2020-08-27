@@ -4,7 +4,7 @@ export class ActionButton extends Component {
     render() {
         console.log(`Render ActionButton (${this.props.text}) Component `);
         return(
-            <button className="btn btn-primary m-2"
+            <button className={`btn btn-${this.props.theme} m-2`}
                     onClick={this.props.callback}>
                         {this.props.text}
             </button>

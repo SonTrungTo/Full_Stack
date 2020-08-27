@@ -17,7 +17,7 @@ export class List extends Component {
         console.log("Render List Component");
         return(
             <div>
-                <ActionButton callback={this.reverseList}
+                <ActionButton callback={this.reverseList} theme="primary"
                 text="Reverse Names" />
                 {this.state.names.map((name, index) => {
                     return (

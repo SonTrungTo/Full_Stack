@@ -13,7 +13,7 @@ export class ExternalCounter extends Component {
     render() {
         return(
             <div>
-                <ActionButton callback={this.incrementCounter}
+                <ActionButton callback={this.incrementCounter} theme="primary"
                 text="External Counter" />
                 <div className="h5 text-center p-2">
                     External: { externalCounter }
