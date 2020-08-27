@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ActionButton } from "./ActionButton";
 
-export class ActionButton extends Component {
+export class Message extends Component {
     render() {
         console.log(`Render Message Component `);
         return (
