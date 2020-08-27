@@ -36,4 +36,12 @@ export class Message extends Component {
     componentDidMount() {
         console.log("componentDidMount Message Component");
     }
+
+    componentDidUpdate() {
+        console.log("componentDidUpdate Message Component");
+    }
+
+    componentWillUnmount() {
+        console.log("componentWillUnmount Message Component");
+    }
 }
