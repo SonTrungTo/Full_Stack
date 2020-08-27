@@ -21,7 +21,7 @@ export class List extends Component {
                 text="Reverse Names" />
                 {this.state.names.map((name, index) => {
                     return (
-                        <h5 key={name}> {name} </h5>
+                        <h5 key={name} id={name.toLowerCase()}> {name} </h5>
                     );
                 })}
             </div>
