@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Message } from "./Message";
 import { ActionButton } from "./ActionButton";
+import { ThemeSelector } from "./ThemeSelector";
 
 export default class App extends Component {
   constructor(props) {
@@ -17,9 +18,11 @@ export default class App extends Component {
   render() {
     return (
       <div className="m-2 text-center">
-        <Message theme="primary" message={`Counter: ${this.state.counter}`} />
-        <ActionButton theme="secondary" callback={this.incrementCounter} 
-        text="Increment" />
+        <ThemeSelector>
+          <Message theme="primary" message={`Counter: ${this.state.counter}`} />
+          <ActionButton theme="secondary" callback={this.incrementCounter} 
+          text="Increment" />
+        </ThemeSelector>
       </div>
     );
   }
