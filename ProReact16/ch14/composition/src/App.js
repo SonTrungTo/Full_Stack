@@ -4,7 +4,7 @@ import React, { Component } from "react";
 // import { ThemeSelector } from "./ThemeSelector";
 import { GeneralList } from "./GeneralList";
 import { SortedList } from "./SortedList";
-import { ProFeature } from "./ProFeature";
+// import { ProFeature } from "./ProFeature";
 // import { ProController } from "./ProController";
 // import { LogToConsole } from "./LogToConsole";
 
@@ -47,12 +47,8 @@ export default class App extends Component {
             <GeneralList theme="primary" list={this.state.names} />
           </div>
           <div className="col-6">
-            <ProFeature pro={this.state.proMode}
-            render={ text => 
-            <>
-             <h4 className="text-center">{text}</h4>
-             <SortedList list={this.state.names} />
-            </> } />
+            <SortedList proMode={this.state.proMode} 
+            list={this.state.names} />
           </div>
         </div>
       </div>
