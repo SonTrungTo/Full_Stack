@@ -4,11 +4,11 @@ import React, { Component } from "react";
 // import { ThemeSelector } from "./ThemeSelector";
 import { GeneralList } from "./GeneralList";
 import { SortedList } from "./SortedList";
-// import { ProFeature } from "./ProFeature";
-import { ProController } from "./ProController";
-import { LogToConsole } from "./LogToConsole";
+import { ProFeature } from "./ProFeature";
+// import { ProController } from "./ProController";
+// import { LogToConsole } from "./LogToConsole";
 
-const ProList = ProController(LogToConsole(SortedList, "Sorted", true, true, true));
+// const ProList = ProController(LogToConsole(SortedList, "Sorted", true, true, true));
 
 export default class App extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class App extends Component {
       //counter: 0,
       names: ["Zoe", "Bob", "Alice", "Dora", "Joe"],
       cities: ["London", "New York", "Paris", "Milan", "Boston"],
-      //proMode: false
+      proMode: false
     };
   }
 
@@ -25,21 +25,30 @@ export default class App extends Component {
   //   this.setState({counter: this.state.counter + 1});
   // };
 
+  toggleProMode = () => {
+    this.setState({proMode: !this.state.proMode});
+  };
+
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-3">
+          <div className="col-12 text-center p-2">
+            <div className="form-check">
+              <input type="checkbox" className="form-check-input" 
+              onChange={this.toggleProMode}
+              value={this.state.proMode} />
+              <label className="form-check-label">Pro Mode</label>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6">
             <GeneralList theme="primary" list={this.state.names} />
           </div>
-          <div className="col-3">
-            <ProList list={this.state.names} />
-          </div>
-          <div className="col-3">
-            <GeneralList theme="secondary" list={this.state.cities} />
-          </div>
-          <div className="col-3">
-            <ProList list={this.state.cities} />
+          <div className="col-6">
+            <ProFeature pro={this.state.proMode}
+            render={() => <SortedList list={this.state.names} /> } />
           </div>
         </div>
       </div>
