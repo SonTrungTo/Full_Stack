@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { GeneralList } from "./GeneralList";
 import { ActionButton } from "./ActionButton";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 export class SortedList extends Component {
     constructor(props) {
@@ -22,12 +23,14 @@ export class SortedList extends Component {
     render() {
         return (
             <div>
-                <GeneralList list={this.getList()} theme="info" />
-                <div className="text-center m-2">
-                    <ActionButton theme="primary" text="Sort" 
-                    proMode={this.props.proMode}
-                    callback={this.toggleSort} />
-                </div>
+                <ErrorBoundary>
+                    <GeneralList list={this.getList()} theme="info" />
+                    <div className="text-center m-2">
+                        <ActionButton theme="primary" text="Sort" 
+                        proMode={this.props.proMode}
+                        callback={this.toggleSort} />
+                    </div>
+                </ErrorBoundary>
             </div>
         );
     }
