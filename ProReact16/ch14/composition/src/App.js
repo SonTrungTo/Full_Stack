@@ -4,6 +4,7 @@ import React, { Component } from "react";
 // import { ThemeSelector } from "./ThemeSelector";
 import { GeneralList } from "./GeneralList";
 import { SortedList } from "./SortedList";
+import { ProModeContext } from "./ProModeContext"; /* Context Provider */
 // import { ProFeature } from "./ProFeature";
 // import { ProController } from "./ProController";
 // import { LogToConsole } from "./LogToConsole";
@@ -17,7 +18,10 @@ export default class App extends Component {
       //counter: 0,
       names: ["Zoe", "Bob", "Alice", "Dora", "Joe"],
       cities: ["London", "New York", "Paris", "Milan", "Boston"],
-      proMode: false
+      //proMode: false,
+      proContextData: {
+        proMode: false
+      }
     };
   }
 
@@ -26,7 +30,7 @@ export default class App extends Component {
   // };
 
   toggleProMode = () => {
-    this.setState({proMode: !this.state.proMode});
+    this.setState(state => state.proContextData.proMode = !state.proContextData.proMode);
   };
 
   render() {
@@ -37,7 +41,7 @@ export default class App extends Component {
             <div className="form-check">
               <input type="checkbox" className="form-check-input" 
               onChange={this.toggleProMode}
-              value={this.state.proMode} />
+              value={this.state.proContextData.proMode} />
               <label className="form-check-label">Pro Mode</label>
             </div>
           </div>
@@ -47,8 +51,9 @@ export default class App extends Component {
             <GeneralList theme="primary" list={this.state.names} />
           </div>
           <div className="col-6">
-            <SortedList proMode={this.state.proMode} 
-            list={this.state.names} />
+            <ProModeContext.Provider value={this.state.proContextData}>
+              <SortedList list={this.state.names} />
+            </ProModeContext.Provider>
           </div>
         </div>
       </div>
