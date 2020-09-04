@@ -17,7 +17,7 @@ export class Display extends Component {
                 <div className="container-fluid bg-secondary p-2">
                     {keys.map(key => 
                         <div key={key} className="h5 row text-white">
-                            <div className="col">{key}: </div>
+                            <div className="col">{key}:</div>
                             <div className="col">
                                 {this.formatValue(this.props.data[key])}
                             </div>
