@@ -6,12 +6,16 @@ export class Editor extends Component {
         this.state = {
             name: "Bob",
             flavor: "Vanilla",
-            topping: ["Strawberries"]
+            topping: ["Strawberries"],
+            book: ["Microeconomic Theory"],
+            nerd: false
         };
         this.flavors = ["Chocolate", "Double Chocolate",
     "Tripple Chocolate", "Vanilla"];
         this.toppings = ["Sprinkles", "Fudge Sauce",
     "Strawberries", "Maple Syrup"];
+        this.books = ["Microeconomic Theory", "Statistical Inference",
+    "Econometrics", "The Bayesian Choice", "Advanced Macroeconomics"];
     }
 
     updateFormValue = (event) => {
@@ -24,6 +28,11 @@ export class Editor extends Component {
         .filter(o => o.selected).map(o => o.value);
 
         this.setState({ [event.target.name]: options },
+            () => this.props.submit(this.state) );
+    };
+
+    updateFormValueCheck = (event) => {
+        this.setState({ [event.target.name]: event.target.checked },
             () => this.props.submit(this.state) );
     };
 
@@ -60,6 +69,26 @@ export class Editor extends Component {
                             </option>
                         )}
                     </select>
+                </div>
+                <div className="form-group">
+                    <label>Favorite Book</label>
+                    {this.books.map(book => 
+                        <div className="form-check" key={book}>
+                            <input type="radio" className="form-check-input"
+                            name="book" value={book}
+                            checked={this.state.book === book}
+                            onChange={this.updateFormValue} />
+                            <label className="form-check-label">{book}</label>
+                        </div>
+                    )}
+                </div>
+                <div className="form-group">
+                    <div className="form-check">
+                        <input type="checkbox" className="form-check-input"
+                        name="nerd" checked={this.state.nerd}
+                        onChange={this.updateFormValueCheck} />
+                        <label className="form-check-label">I am a nerd!</label>
+                    </div>
                 </div>
             </div>
         );
