@@ -9,7 +9,8 @@ export class Editor extends Component {
             topping: ["Strawberries"],
             book: ["Microeconomic Theory"],
             advisor: ["Andrew Ng"],
-            nerd: false
+            nerd: false,
+            order: ""
         };
         this.flavors = ["Chocolate", "Double Chocolate",
     "Tripple Chocolate", "Vanilla"];
@@ -115,6 +116,12 @@ export class Editor extends Component {
                             <label className="form-check-label">{adv}</label>
                         </div>
                     )}
+                </div>
+                <div className="form-group">
+                    <label>Order</label>
+                    <textarea className="form-control" name="order"
+                    value={this.state.order}
+                    onChange={this.updateFormValue} />
                 </div>
             </div>
         );
