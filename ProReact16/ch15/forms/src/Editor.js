@@ -8,6 +8,7 @@ export class Editor extends Component {
             flavor: "Vanilla",
             topping: ["Strawberries"],
             book: ["Microeconomic Theory"],
+            advisor: ["Andrew Ng"],
             nerd: false
         };
         this.flavors = ["Chocolate", "Double Chocolate",
@@ -16,6 +17,8 @@ export class Editor extends Component {
     "Strawberries", "Maple Syrup"];
         this.books = ["Microeconomic Theory", "Statistical Inference",
     "Econometrics", "The Bayesian Choice", "Advanced Macroeconomics"];
+        this.advisors = ["Andrew Ng", "Michael Jordan", "Jure Leskovec",
+    "Pieter Abbeel", "Sergey Levine"];
     }
 
     updateFormValue = (event) => {
@@ -34,6 +37,17 @@ export class Editor extends Component {
     updateFormValueCheck = (event) => {
         this.setState({ [event.target.name]: event.target.checked },
             () => this.props.submit(this.state) );
+    };
+
+    updateFormValueCheckPopulate = (event) => {
+        event.persist();
+        this.setState(state => {
+            if (event.target.checked) {
+                return {advisor: state.advisor.concat(event.target.name)};
+            } else {
+                return {advisor: state.advisor.filter(adv => adv !== event.target.name)}
+            }
+        }, () => this.props.submit(this.state) );
     };
 
     render() {
@@ -89,6 +103,18 @@ export class Editor extends Component {
                         onChange={this.updateFormValueCheck} />
                         <label className="form-check-label">I am a nerd!</label>
                     </div>
+                </div>
+                <div className="form-group">
+                    <label>Your advisor(s)</label>
+                    {this.advisors.map(adv =>
+                        <div className="form-check" key={adv}>
+                            <input type="checkbox" className="form-check-input"
+                            name={adv}
+                            checked={this.state.advisor.indexOf(adv) > -1}
+                            onChange={this.updateFormValueCheckPopulate} />
+                            <label className="form-check-label">{adv}</label>
+                        </div>
+                    )}
                 </div>
             </div>
         );
