@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+import { FormValidator } from "./FormValidator";
+import { ValidationMessage } from "./ValidationMessage";
 
 export class Editor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "Bob",
+            name: "",
             flavor: "Vanilla",
             topping: ["Strawberries"],
             book: ["Microeconomic Theory"],
             advisor: ["Andrew Ng"],
             nerd: false,
+            email: "",
             order: ""
         };
         this.flavors = ["Chocolate", "Double Chocolate",
@@ -20,24 +23,26 @@ export class Editor extends Component {
     "Econometrics", "The Bayesian Choice", "Advanced Macroeconomics"];
         this.advisors = ["Andrew Ng", "Michael Jordan", "Jure Leskovec",
     "Pieter Abbeel", "Sergey Levine"];
+        this.rules = {
+            name:  {required: true, minLength: 3, alpha: true},
+            email: {required: true, email: true},
+            order: {required: true}
+        };
     }
 
     updateFormValue = (event) => {
-        this.setState({ [event.target.name]: event.target.value },
-            () => this.props.submit(this.state) );
+        this.setState({ [event.target.name]: event.target.value });
     };
 
     updateFormValueOptions = (event) => {
         let options = [...event.target.options]
         .filter(o => o.selected).map(o => o.value);
 
-        this.setState({ [event.target.name]: options },
-            () => this.props.submit(this.state) );
+        this.setState({ [event.target.name]: options });
     };
 
     updateFormValueCheck = (event) => {
-        this.setState({ [event.target.name]: event.target.checked },
-            () => this.props.submit(this.state) );
+        this.setState({ [event.target.name]: event.target.checked });
     };
 
     updateFormValueCheckPopulate = (event) => {
@@ -48,7 +53,7 @@ export class Editor extends Component {
             } else {
                 return {advisor: state.advisor.filter(adv => adv !== event.target.name)}
             }
-        }, () => this.props.submit(this.state) );
+        });
     };
 
     render() {

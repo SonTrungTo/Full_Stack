@@ -61,6 +61,6 @@ export class FormValidator extends Component {
                     Submit
                 </button>
             </div>
-        </React.Fragment>
+        </React.Fragment>;
     }
 }
