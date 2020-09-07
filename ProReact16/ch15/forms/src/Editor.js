@@ -26,7 +26,8 @@ export class Editor extends Component {
         this.rules = {
             name:  {required: true, minLength: 3, alpha: true},
             email: {required: true, email: true},
-            order: {required: true}
+            order: {required: true},
+            nerd:  {true: true}
         };
     }
 
@@ -119,6 +120,7 @@ export class Editor extends Component {
                             name="nerd" checked={this.state.nerd}
                             onChange={this.updateFormValueCheck} />
                             <label className="form-check-label">I am a nerd!</label>
+                            <ValidationMessage field="nerd" />
                         </div>
                     </div>
                     <div className="form-group">
