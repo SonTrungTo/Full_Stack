@@ -29,6 +29,10 @@ export function ValidateData(data, rules) {
                         !validator.isEmail(val)) {
                             fieldErrors.push("Enter a valid email address");
                     }
+                    if (rules[field].equals &&
+                        !validator.equals(val, data[rules[field].equals])) {
+                            fieldErrors.push("Values don't match");
+                    }
                 }
             }
             if (fieldErrors.length > 0) {

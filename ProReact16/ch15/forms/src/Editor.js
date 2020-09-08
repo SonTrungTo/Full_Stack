@@ -13,6 +13,7 @@ export class Editor extends Component {
             advisor: ["Andrew Ng"],
             nerd: false,
             email: "",
+            emailConfirm: "",
             order: ""
         };
         this.flavors = ["Chocolate", "Double Chocolate",
@@ -25,7 +26,8 @@ export class Editor extends Component {
     "Pieter Abbeel", "Sergey Levine"];
         this.rules = {
             name:  {required: true, minLength: 3, alpha: true},
-            email: {required: true, email: true},
+            email: {required: true, email: true, equals: "emailConfirm"},
+            emailConfirm: {required: true, email: true, equals: "email"},
             order: {required: true},
             nerd:  {true: true}
         };
@@ -77,6 +79,14 @@ export class Editor extends Component {
                         value={this.state.email}
                         onChange={this.updateFormValue} />
                         <ValidationMessage field="email" />
+                    </div>
+                    <div className="form-group">
+                        <label>Confirm Email</label>
+                        <input className="form-control"
+                        name="emailConfirm"
+                        value={this.state.emailConfirm}
+                        onChange={this.updateFormValue} />
+                        <ValidationMessage field="emailConfirm" />
                     </div>
                     <div className="form-group">
                         <label>Ice Cream Flavors</label>
