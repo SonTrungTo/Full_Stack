@@ -35,6 +35,18 @@ export class Editor extends Component {
             </div>
             <div className="form-group p-2">
                 <label>Category</label>
+                <input className="form-control" name="category"
+                value={this.state.category} onChange={this.handleChange} />
+            </div>
+            <div className="form-group p-2">
+                <label>Price</label>
+                <input className="form-control" name="price"
+                value={this.state.price} onChange={this.handleChange} />
+            </div>
+            <div className="text-center">
+                <button className="btn btn-primary" onClick={this.handleAdd}>
+                    Add
+                </button>
             </div>
         </React.Fragment>
     }
