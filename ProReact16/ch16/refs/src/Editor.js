@@ -9,6 +9,7 @@ export class Editor extends Component {
             category: "",
             price: ""
         };
+        this.nameRef = React.createRef();
     }
 
     handleChange = (event) => {
@@ -22,7 +23,7 @@ export class Editor extends Component {
             name: "",
             category: "",
             price: ""
-        });
+        }, () => this.nameRef.current.focus() );
     };
 
     render() {
@@ -31,7 +32,7 @@ export class Editor extends Component {
                 <label>Name</label>
                 <input className="form-control" name="name"
                 value={this.state.name} onChange={this.handleChange}
-                autoFocus={true} />
+                autoFocus={true} ref={this.nameRef} />
             </div>
             <div className="form-group p-2">
                 <label>Category</label>
