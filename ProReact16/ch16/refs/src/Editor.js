@@ -98,6 +98,21 @@ export class Editor extends Component {
         </div> : content;
     }
 
+    getSnapshotBeforeUpdate(props, state) {
+        return Object.values(this.formElements).map(item => {
+            return {name: item.name, value: item.element.value};
+        });
+    }
+
+    componentDidUpdate(oldProps, oldState, snapshot) {
+        snapshot.forEach(item => {
+            let element = this.formElements[item.name].element;
+            if (element.value !== item.value) {
+                element.value = item.value;
+            }
+        });
+    }
+
     render() {
         return this.wrapContent(
         <React.Fragment>
