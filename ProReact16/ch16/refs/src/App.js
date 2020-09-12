@@ -4,6 +4,7 @@ import { ProductTable } from "./ProductTable";
 import { ColorInvalidElements } from "./jQueryColorizer";
 // import { FormField } from "./FormField";
 import { ForwardFormField } from "./FormField";
+import { PortalWrapper } from "./PortalWrapper";
 
 export default class App extends Component {
 
@@ -14,6 +15,7 @@ export default class App extends Component {
     };
     this.editorRef = React.createRef();
     this.fieldRef  = React.createRef();
+    this.portalFieldRef = React.createRef();
   }
 
   addProduct = (product) => {
@@ -26,8 +28,12 @@ export default class App extends Component {
     ColorInvalidElements(this.editorRef.current);
   };
 
-  handleClick = () => {
+  focusLocal = () => {
     this.fieldRef.current.focus();
+  };
+
+  focusPortal = () => {
+    this.portalFieldRef.current.focus();
   };
 
   render() {
@@ -42,11 +48,18 @@ export default class App extends Component {
           <Editor callback={this.addProduct} />
         </div>
         <div className="m-2">
+          <PortalWrapper>
+            <ForwardFormField label="Name" ref={this.portalFieldRef} />
+          </PortalWrapper>
           <ForwardFormField label="Name" ref={this.fieldRef} />
           <div className="text-center m-2">
-            <button className="btn btn-primary" 
-            onClick={this.handleClick}>
-              Focus
+            <button className="btn btn-primary m-1" 
+            onClick={this.focusLocal}>
+              Focus Local
+            </button>
+            <button className="btn btn-primary m-1"
+            onClick={this.focusPortal}>
+              Focus Portal
             </button>
           </div>
         </div>
