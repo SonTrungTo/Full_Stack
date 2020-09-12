@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Editor } from "./Editor";
 import { ProductTable } from "./ProductTable";
 import { ColorInvalidElements } from "./jQueryColorizer";
-import { FormField } from "./FormField";
+// import { FormField } from "./FormField";
+import { ForwardFormField } from "./FormField";
 
 export default class App extends Component {
 
@@ -41,7 +42,7 @@ export default class App extends Component {
           <Editor callback={this.addProduct} />
         </div>
         <div className="m-2">
-          <FormField label="Name" fieldRef={this.fieldRef} />
+          <ForwardFormField label="Name" ref={this.fieldRef} />
           <div className="text-center m-2">
             <button className="btn btn-primary" 
             onClick={this.handleClick}>
