@@ -15,3 +15,16 @@ it("testing title prop in App", () => {
     expect(titleValue).toBe(titleText);
     expect(stateData).toBe(titleText);
 });
+
+it('update states data', () => {
+    const wrapper = shallow(<App />);
+    const values = [10, 20, 30];
+
+    values.forEach((value, index) => {
+        wrapper.instance().updateFieldValue(index + 1, value);
+    });
+    wrapper.instance().updateTotal();
+
+    expect(wrapper.state("total"))
+    .toBe(values.reduce((total, val) => total += val, 0));
+});
