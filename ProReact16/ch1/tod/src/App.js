@@ -10,7 +10,7 @@ export default class App extends Component {
         {action: "Read Microeconomic Theory", done: false},
         {action: "Read Calculus, Apostol", done: false},
         {action: "Read Algebra, Artin", done: false},
-        {action: "Read Fundamnetals of Probability, Ross", done: false},
+        {action: "Read Fundamentals of Probability, Ross", done: false},
         {action: "Read Statistical Inference, Casella", done: false}
       ],
       nextItemText: ""
@@ -30,6 +30,23 @@ export default class App extends Component {
     }
   };
 
+  toggleToDo = (todo) => {
+    this.setState({
+      todoItems: this.state.todoItems.map(item => item.action === todo.action ?
+        {...item, done: !item.done} : item)
+    });
+  };
+
+  toDoTableRows = () => this.state.todoItems.map(item =>
+      <tr key={item.action}>
+        <td>{item.action}</td>
+        <td>
+          <input type="checkbox" checked={item.done}
+          onChange={() => this.toggleToDo(item)} />
+        </td>
+      </tr>  
+    );
+
   render = () =>
       <div>
         <h4 className="bg-primary text-center p-2 text-white">
@@ -46,6 +63,17 @@ export default class App extends Component {
               Add
             </button>
           </div>
+          <table className="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Done</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.toDoTableRows()}
+            </tbody>
+          </table>
         </div>
       </div>
 }
