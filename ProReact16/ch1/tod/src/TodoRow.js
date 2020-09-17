@@ -5,7 +5,7 @@ export class TodoRow extends Component {
         <tr>
             <td>{this.props.item.action}</td>
             <td>
-                <input type="checkbox" value={this.props.item.done}
+                <input type="checkbox" checked={this.props.item.done}
                 onChange={() => this.props.callback(this.props.item)} />
             </td>
         </tr>
