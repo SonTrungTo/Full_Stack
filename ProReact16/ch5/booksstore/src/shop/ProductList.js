@@ -12,7 +12,7 @@ export class ProductList extends Component {
                     <h4 className="card-title">
                         {product.name}
                         <span className="badge badge-pill badge-primary float-right">
-                            ${product.price.toFixed(2)}
+                            <span>&#8364;</span>{product.price.toFixed(2)}
                         </span>
                     </h4>
                     <h5 className="card-subtitle">{product.author}</h5>
