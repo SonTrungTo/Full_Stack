@@ -6,10 +6,8 @@ export const ShopReducer = (storeData, action) => {
                 ...storeData,
                 [action.payload.dataType]: action.payload.data
             };
-            break;
     
         default:
             return storeData || {};
-            break;
     }
 };
