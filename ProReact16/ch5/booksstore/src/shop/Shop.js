@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { CategoryNavigation } from "./CategoryNavigation";
 import { ProductList } from "./ProductList";
+import { CartSummary } from "./CartSummary";
 
 export class Shop extends Component {
     render() {
@@ -8,6 +9,7 @@ export class Shop extends Component {
             <div className="row">
                 <div className="col bg-dark text-white">
                     <div className="navbar-brand">BOOKS STORE</div>
+                    <CartSummary {...this.props} />
                 </div>
             </div>
             <div className="row">
@@ -16,7 +18,8 @@ export class Shop extends Component {
                     baseUrl="/shop/products" />
                 </div>
                 <div className="col-9 p-2">
-                    <ProductList products={this.props.products} />
+                    <ProductList products={this.props.products}
+                    addToCart={this.props.addToCart} />
                 </div>
             </div>
         </div>

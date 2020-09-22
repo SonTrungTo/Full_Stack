@@ -15,9 +15,13 @@ export class ProductList extends Component {
                             <span>&#8364;</span>{product.price.toFixed(2)}
                         </span>
                     </h4>
-                    <h5 className="card-subtitle">{product.author}</h5>
+                    <h6 className="card-subtitle">{product.author}</h6>
                     <div className="card-text bg-white p-1">
                         {product.description}
+                        <button className="btn btn-success btn-sm float-right"
+                        onClick={ () => this.props.addToCart(product) }>
+                            Add To Cart
+                        </button>
                     </div>
                 </div>
             </div>
