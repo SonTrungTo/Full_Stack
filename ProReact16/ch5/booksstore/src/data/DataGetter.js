@@ -20,8 +20,8 @@ export class DataGetter extends Component {
             _limit: this.props.pageSize || 5
         };
 
-        if (condition) {
-            
+        if (Object.keys(rtData).find(key => dsData[key] !== rtData[key])) {
+            this.props.loadData(DataTypes.PRODUCTS, rtData);
         }
     }
 }
