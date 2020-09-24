@@ -14,8 +14,8 @@ export class DataGetter extends Component {
         const dsData = this.props.products_params || {};
         const rtData = {
             _page: this.props.match.params.page || 1,
-            category_like: (this.props.match.params.category || "") === "all" 
-                ? "" : this.props.match.params.category,
+            category_like: this.props.match.params.category === "all" 
+                ? "" : (this.props.match.params.category || "" ),
             _sort: this.props.sortKey || "name",
             _limit: this.props.pageSize || 5
         };
