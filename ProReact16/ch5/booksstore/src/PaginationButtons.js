@@ -39,7 +39,7 @@ export class PaginationButtons extends Component {
             {
                 this.getPageNumbers().map(num =>
                     <button className={`btn mx-1 ${num === current
-                    ? btn-primary : btn-secondary}`}
+                    ? "btn-primary" : "btn-secondary"}`}
                     onClick={() => navigate(num)} 
                     key={num}>
                         {num}
