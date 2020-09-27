@@ -16,7 +16,7 @@ export class CartDetailsRows extends Component {
                 {this.props.cart.map(item => 
                     <tr key={item}>
                         <td>
-                            <input type="number" value={item.quantity}
+                            <input type="number" value={item.quantity} min="1"
                             onChange={(ev) => this.handleChange(item.product, ev)} />
                         </td>
                         <td>{item.product.name}</td>

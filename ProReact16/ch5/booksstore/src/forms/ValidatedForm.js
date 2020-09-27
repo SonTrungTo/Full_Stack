@@ -30,7 +30,7 @@ export class ValidatedForm extends Component {
     };
 
     registerRef = (element) => {
-        if (element !== undefined || element !== null) {
+        if (element !== null) {
             this.formElements[element.name] = element;
         }
     };
