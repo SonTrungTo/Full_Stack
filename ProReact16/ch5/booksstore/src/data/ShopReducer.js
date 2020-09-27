@@ -1,4 +1,4 @@
-import { ActionTypes } from "./Types";
+import { ActionTypes, DataTypes } from "./Types";
 export const ShopReducer = (storeData, action) => {
     switch (action.type) {
         case ActionTypes.DATA_LOAD:
@@ -20,6 +20,15 @@ export const ShopReducer = (storeData, action) => {
                 ...storeData,
                 sortKey: action.payload
             };
+
+        case ActionTypes.DATA_STORE:
+            if (action.payload.dataType === DataTypes.ORDERS) {
+                return {
+                    ...storeData,
+                    order: action.payload.data
+                };
+            }
+            break;
 
         default:
             return storeData || {};
