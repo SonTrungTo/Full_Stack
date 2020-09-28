@@ -6,6 +6,7 @@ for (let i = 1; i <= 503; i++) {
     const category = faker.helpers.randomize(categories);
     data.push({
         id: i,
+        image: faker.image.image(300, 300),
         name:   faker.commerce.productName(),
         author: faker.company.companyName(),
         category: category,

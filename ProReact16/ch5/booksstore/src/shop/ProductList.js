@@ -8,6 +8,10 @@ export class ProductList extends Component {
         }
         return this.props.products.map(product =>
             <div className="card p-1 m-1 bg-light" key={product.id}>
+                <div className="card-header">
+                    <img src={product.image}
+                    alt={product.id} />
+                </div>
                 <div className="card-body">
                     <h4 className="card-title">
                         {product.name}
