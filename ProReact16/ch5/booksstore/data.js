@@ -1,10 +1,11 @@
 const faker = require('faker');
-const data = [];
+const products = [];
+const orders = [];
 const categories = ["Economics", "Mathematics", "Computer Science", "Psychology"];
 faker.seed(100);
 for (let i = 1; i <= 503; i++) {
     const category = faker.helpers.randomize(categories);
-    data.push({
+    products.push({
         id: i,
         image: faker.image.image(300, 300),
         name:   faker.commerce.productName(),
@@ -14,11 +15,18 @@ for (let i = 1; i <= 503; i++) {
         price: Number(faker.commerce.price())
     });
 }
+for (let i = 1; i <= 103; i++) {
+    const fname = faker.name.firstName();
+    const lname = faker.name.lastName();
+    const order = {
+        
+    };
+}
 
 module.exports = function () {
     return {
-        categories: categories,
-        products: data,
-        orders: []
+        categories,
+        products,
+        orders: orders
     };
 }
