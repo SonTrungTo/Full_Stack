@@ -10,7 +10,7 @@ export class Checkout extends Component {
             {label: "Email", attrs: {type: "email"}},
             {label: "Address"},
             {label: "City"},
-            {label: "Zip/Postal Code", name: "zip"},
+            {label: "Zip/Postal Code", name: "zip", attrs: {pattern: "[0-9]{5}"}},
             {label: "Country"}
         ];
     }

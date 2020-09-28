@@ -15,7 +15,7 @@ export class ValidatedForm extends Component {
         this.setState(state => {
             const newState = {...state, validationErrors: {}};
             Object.values(this.formElements).forEach(elem => {
-                if (elem.checkValidity()) {
+                if (!elem.checkValidity()) {
                     newState.validationErrors[elem.name] = GetMessages(elem);
                 }
             });
