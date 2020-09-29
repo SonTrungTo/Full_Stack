@@ -1,0 +1,23 @@
+type product {
+    id: ID!,
+    image: String,
+    name: String!,
+    author: String!,
+    description: String!,
+    category: String!,
+    price: Float!
+}
+
+type productPage {
+    totalSize: Int!,
+    products(sort: String, page: Int, pageSize: Int): [product]
+}
+
+type orderPage {
+    totalSize: Int,
+    orders(sort: String, page: Int, pageSize: Int): [order]
+}
+
+type order {
+       
+}
