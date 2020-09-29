@@ -29,12 +29,21 @@ for (let i = 1; i <= 103; i++) {
         shipped: faker.random.boolean(),
         products: []
     };
+    const productCount = faker.random.number({min: 1, max: 5});
+    const product_ids = [];
+    while (product_ids.length < productCount) {
+        const candidateId = faker.random.number({min: 1, max: products.length});
+        if (product_ids.indexOf(candidateId) === -1) {
+            product_ids.push(candidateId);
+        }
+    }
+    for (let j = 0; j < productCount; j++) {
+        order.products.push({
+            quantity: faker.random.number({min: 1, max: 10}),
+            product_id: product_ids[j]
+        });
+    }
+    orders.push(order);
 }
 
-module.exports = function () {
-    return {
-        categories,
-        products,
-        orders: orders
-    };
-}
+module.exports = () => ({categories, products, orders});
