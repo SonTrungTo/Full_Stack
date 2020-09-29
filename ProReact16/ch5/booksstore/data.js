@@ -19,7 +19,15 @@ for (let i = 1; i <= 103; i++) {
     const fname = faker.name.firstName();
     const lname = faker.name.lastName();
     const order = {
-        
+        id: i,
+        name: `${fname} ${lname}`,
+        email: faker.internet.email(fname, lname),
+        address: faker.address.streetAddress(),
+        city: faker.address.city(),
+        zip: faker.address.zipCode(),
+        country: faker.address.country(),
+        shipped: faker.random.boolean(),
+        products: []
     };
 }
 
