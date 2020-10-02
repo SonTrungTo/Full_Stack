@@ -18,7 +18,8 @@ export class OrdersRow extends Component {
                 <span>&euro;</span>{ this.calcTotal(this.props.order.products) }
             </td>
             <td className="text-center">
-                <button className="btn btn-sm btn-block bg-muted">
+                <button className="btn btn-sm btn-block bg-muted"
+                onClick={ this.props.toggleShipped }>
                     { this.getShipping(this.props.order) }
                     <span>
                         {
