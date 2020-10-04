@@ -16,3 +16,22 @@ export const ordersSummaryQuery = gql`
         }
     }
 `;
+
+export const productsList = gql`
+    query($page: Int, $pageSize: Int, $sort: String) {
+        products {
+            totalSize,
+            products(sort: $sort, page: $page, pageSize: $pageSize) {
+                id, name, category, price
+            }
+        }
+    }
+`;
+
+export const product = gql`
+    query($id: ID!) {
+        product(id: $id) {
+            id, name, description, category, price, image, author
+        }
+    }
+`;
