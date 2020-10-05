@@ -7,6 +7,7 @@ const {buildSchema} = require('graphql');
 const {graphqlHTTP} = require('express-graphql');
 const queryResolvers = require('./serverQueriesResolver');
 const mutationResolvers = require('./serverMutationsResolver');
+const auth = require("./authMiddleware");
 
 const fileName = process.argv[2] || "./data.js";
 const port = process.argv[3] || 3500;
@@ -19,8 +20,8 @@ const app = express();
 const createServer = () => {
     delete require.cache[require.resolve(fileName)];
     setTimeout(() => {
-        router = jsonServer.router(fileName.endsWith(".js")
-        ? require(fileName)() : fileName );
+        router = jsonServer.router(fileName.endsWith(".js") ?
+            require(fileName)() : fileName );
         let schema = fs.readFileSync("./serverQueriesSchema.graphql", "utf-8") +
             fs.readFileSync("./serverMutationsSchema.graphql", "utf-8");
         let resolvers = {...queryResolvers, ...mutationResolvers};
@@ -37,6 +38,7 @@ createServer();
 
 app.use(cors());
 app.use(jsonServer.bodyParser);
+app.use(auth);
 app.use("/api", (req, res, next) => router(req, res, next));
 app.use("/graphql", (req, res, next) => graph(req, res, next));
 
