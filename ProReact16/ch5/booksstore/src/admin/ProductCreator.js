@@ -33,8 +33,10 @@ export class ProductCreator extends Component {
 
     render = () => 
         <div className="container-fluid">
-            <div className="bg-dark text-white p-2">
-                <div className="navbar-brand">BOOKS STORE</div>
+            <div className="row">
+                <div className="col bg-dark text-white p-2">
+                    <div className="navbar-brand">BOOKS STORE</div>
+                </div>
             </div>
             <div className="row">
                 <div className="col m-2">

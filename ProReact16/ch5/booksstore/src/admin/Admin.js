@@ -3,6 +3,11 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { GraphQlUrl } from "../data/Urls";
 import { OrdersConnector } from "./OrdersConnector";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { ToggleLink } from "../ToggleLink";
+import { ProductsConnector } from "./ProductsConnector";
+import { ProductCreator } from "./ProductCreator";
+import { ProductEditor } from "./ProductEditor";
 
 const graphQlClient = new ApolloClient({
     uri: GraphQlUrl
@@ -18,8 +23,22 @@ export class Admin extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col p-2">
-                        <OrdersConnector />
+                    <div className="col-3 p-2">
+                        <ToggleLink to="/admin/orders">Orders</ToggleLink>
+                        <ToggleLink to="/admin/products">Products</ToggleLink>
+                    </div>
+                    <div className="col-9 p-2">
+                        <Switch>
+                            <Route path="/admin/orders"
+                            component={OrdersConnector} />
+                            <Route path="/admin/products/create"
+                            component={ProductCreator} />
+                            <Route path="/admin/products/:id"
+                            component={ProductEditor} />
+                            <Route path="/admin/products"
+                            component={ProductsConnector} />
+                            <Redirect to="/admin/orders" />
+                        </Switch>
                     </div>
                 </div>
             </div>
