@@ -5,17 +5,20 @@ import { ShopConnector } from "./shop/ShopConnector";
 import { BooksStoreDataStore } from "./data/DataStore";
 import { Provider } from "react-redux";
 import { Admin } from "./admin/Admin";
+import { AuthProviderImpl } from "./auth/AuthProviderImpl";
 
 export default class App extends Component {
   render() {
     return <Provider store={BooksStoreDataStore}>
-      <Router>
-        <Switch>
-          <Route path="/shop" component={ShopConnector} />
-          <Route path="/admin" component={Admin} />
-          <Redirect to="/shop" />
-        </Switch>
-      </Router>
+      <AuthProviderImpl>
+        <Router>
+          <Switch>
+            <Route path="/shop" component={ShopConnector} />
+            <Route path="/admin" component={Admin} />
+            <Redirect to="/shop" />
+          </Switch>
+        </Router>
+      </AuthProviderImpl>
     </Provider>
   }
 }
