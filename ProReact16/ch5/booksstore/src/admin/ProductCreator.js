@@ -12,8 +12,8 @@ export class ProductCreator extends Component {
             {label: "Author"},
             {label: "Description"},
             {label: "Category"},
-            {label: "Price", attrs: {type: "number"}},
-            {label: "Image", attrs: {type: "file"}}
+            {label: "Price", attrs: {pattern: "[0-9]+([.][0-9]{2})?"}},
+            {label: "Image"}
         ];
         this.mutation = storeProduct;
         if (this.props.mode === "edit") {
@@ -23,8 +23,10 @@ export class ProductCreator extends Component {
                 ...this.formModel
             ].map(item => ({
                 ...item,
-                attrs: {...item.attrs,
-                    defaultValue: this.props.product[item.label.toLowerCase()] }
+                attrs: {
+                    ...item.attrs,
+                    defaultValue: this.props.product[item.label.toLowerCase()]
+                }
             }));
         }
     }
