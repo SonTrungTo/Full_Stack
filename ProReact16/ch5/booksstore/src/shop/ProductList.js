@@ -24,7 +24,7 @@ export class ProductList extends Component {
                     <h6 className="card-subtitle">{product.author}</h6>
                     <div>
                         <img src={product.image}
-                        alt={product.id} />
+                        alt={product.id} width="300" height="500" />
                     </div>
                     <div className="card-text bg-white p-1">
                         {product.description}
