@@ -1,0 +1,86 @@
+{
+    "categories": ["Economics", "Mathematics", "Computer Science", "Psychology"],
+    "products": [
+        {
+            "id": 1,
+            "name": "Microeconomic Theory",
+            "author": "MWG",
+            "category": "Economics",
+            "description": "A text for first-year graduate students in Microeconomics",
+            "price": 105.65
+        },
+        {
+            "id": 2,
+            "name": "Calculus",
+            "author": "Apostol",
+            "category": "Mathematics",
+            "description": "A text for freshmen at CalTech",
+            "price": 56.95
+        },
+        {
+            "id": 3,
+            "name": "Structure and Interpretations of Computer Program",
+            "author": "Abelson-Sussman",
+            "category": "Computer Science",
+            "description": "A text for freshmen in CS at MIT",
+            "price": 65
+        },
+        {
+            "id": 4,
+            "name": "Introduction to Algorithm",
+            "author": "CLRS",
+            "category": "Computer Science",
+            "description": "Textbook used by Berkeley EECS170 in 2005 by Mike Jordan",
+            "price": 62.99
+        },
+        {
+            "id": 5,
+            "name": "Probability",
+            "author": "Jim Pitman",
+            "category": "Mathematics",
+            "description": "What freshmen at Berkeley EECS study for statistics",
+            "price": 64.20
+        },
+        {
+            "id": 6,
+            "name": "A First Course in Probability",
+            "author": "M.Ross",
+            "category": "Mathematics",
+            "description": "Also a popular text for freshmen in probablity",
+            "price": 178.98
+        },
+        {
+            "id": 7,
+            "name": "Advanced Macroeconomics",
+            "author": "D.Romer",
+            "category": "Economics",
+            "description": "A final text for those who will not continue to study advanced macroeconomics",
+            "price": 77.48
+        },
+        {
+            "id": 8,
+            "name": "Operating Systems: Principles and Practices(Volume 1 of 4)",
+            "author": "Anderson-Dahlin",
+            "category": "Computer Science",
+            "description": "A definite text for CS students at UC Berkeley",
+            "price": 68.40
+        },
+        {
+            "id": 9,
+            "name": "Parallel Distributed Processing: Explorations in the Microstructure of Cognition: Foundations (Volume 1)",
+            "author": "David RumelHart",
+            "category": "Computer Science",
+            "description": "A classic text on the connection between neuroscience and CS",
+            "price": 14.24
+        },
+        {
+            "id": 10,
+            "name": "Game Theory",
+            "author": "Michael Maschler",
+            "category": "Computer Science",
+            "description": "A modern introduction to game theory",
+            "price": 64.99
+        }
+    ],
+    "orders": []
+}
