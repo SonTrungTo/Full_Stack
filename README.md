@@ -21,6 +21,7 @@
 1. [The Weather App](https://weather-app-son-to.herokuapp.com/)
 1. [Learn About Me](https://learn-about-me-son-to.herokuapp.com/)
 1. [To Do List](https://to-do-list-son-to.herokuapp.com/)
+1. [Books Store](https://github.com/SonTrungTo/BooksStore)
 
 ## Other projects (waiting to be improved)
 1. [Son's Website (with oudated CSS 960)](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/HTML_CSS/ch15/example/example.html)
