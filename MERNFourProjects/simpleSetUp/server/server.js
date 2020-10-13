@@ -12,6 +12,10 @@ const port = process.env.PORT || 3000;
 const url = process.env.MONGODB_URI ||
     `mongodb+srv://${process.env.REACT_APP_MONGODB_USERNAME}:${process.env.REACT_APP_MONGODB_PASSWORD}@cluster0.a2uik.azure.mongodb.net/${process.env.REACT_APP_MONGODB_DB}?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`;
 
+MongoClient.connect(url, (err, db) => {
+    console.log("Connected successfully to mongodb server");
+    db.close();
+});
 devBundle.compile(app);
 app.use("/dist", express.static(path.join(CURRENT_WORKING_DIR, "dist")));
 app.get("/", (req, res) => {
