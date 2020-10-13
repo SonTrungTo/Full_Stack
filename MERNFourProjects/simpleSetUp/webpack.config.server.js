@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const CURRENT_WORKING_DIR = process.pwd();
+const CURRENT_WORKING_DIR = process.cwd();
 const nodeExternals = require('webpack-node-externals');
 
 const config = {
@@ -11,7 +11,7 @@ const config = {
     target: "node",
     output: {
         path: path.join(CURRENT_WORKING_DIR, '/dist'),
-        fileName: "server.generated.js",
+        filename: "server.generated.js",
         publicPath: "/dist/",
         libraryTarget: "commonjs2"
     },

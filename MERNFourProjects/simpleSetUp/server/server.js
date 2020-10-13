@@ -7,10 +7,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
-const CURRENT_WORKING_DIR = process.pwd();
+const CURRENT_WORKING_DIR = process.cwd();
 const port = process.env.PORT || 3000;
-const url = process.env.MONGODB_URI ||
-    `mongodb+srv://${process.env.REACT_APP_MONGODB_USERNAME}:${process.env.REACT_APP_MONGODB_PASSWORD}@cluster0.a2uik.azure.mongodb.net/${process.env.REACT_APP_MONGODB_DB}?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`;
+const url = process.env.REACT_APP_MONGODB_URI ||
+    `mongodb://localhost:27017/simpleMERNSetup`;
 
 MongoClient.connect(url, (err, db) => {
     console.log("Connected successfully to mongodb server");

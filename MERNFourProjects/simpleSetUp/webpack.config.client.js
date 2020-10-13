@@ -12,7 +12,7 @@ const config = {
     ],
     output: {
         path: path.join(CURRENT_WORKING_DIR, '/dist'),
-        fileName: "bundle.js",
+        filename: "bundle.js",
         publicPath: "/dist/"
     },
     module: {
