@@ -16,5 +16,8 @@
   },
   "scripts": {
     "development": "nodemon"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
