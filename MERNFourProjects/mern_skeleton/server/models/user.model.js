@@ -62,7 +62,7 @@ UserSchema.path('hashed_password').validate(function (v) {
     let password_pattern = 
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%&!?*&]).{8,}$/;
     if (this._password && !password_pattern.test(this._password)) {
-        this.invalidate('password', 'Password must contain at least 8 characters, ' +
+        this.invalidate('password', 'Password must contain at least 8 characters, in which there are at least ' +
         '1 lowercase letter, ' + '1 uppercase letter, ' +
         '1 digit and ' + '1 special character.');
     }
