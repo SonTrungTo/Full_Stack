@@ -23,7 +23,7 @@ const signin = async (req, res) => {
             user: {
                 _id: user._id,
                 name: user.name,
-                password: user.password
+                email: user.email
             }
         });
     } catch (err) {
@@ -43,12 +43,12 @@ const signout = (req, res) => {
 const requireSignin = expressJwt({
     secret: config.jwtSecret,
     userProperty: 'auth',
-    algorithms: ['RS256']
+    algorithms: ['HS256']
 });
 
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.auth
-        && req.profile._id === req.auth._id;
+        && String(req.profile._id) === String(req.auth._id);
     if (!authorized) {
         return res.status(403).json({
             error: "User is not authorized!"
