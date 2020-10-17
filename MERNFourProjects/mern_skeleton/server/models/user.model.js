@@ -45,7 +45,7 @@ UserSchema.methods = {
             return '';
         }
         try {
-            return crypto
+            return require('crypto')
                     .createHmac('sha256', this.salt)
                     .update(password)
                     .digest('hex');
@@ -54,7 +54,7 @@ UserSchema.methods = {
         }
     },
     makeSalt: function () {
-        return Math.round(new Date.now().valueOf() * Math.random()) + '';
+        return Math.round(new Date().valueOf() * Math.random()) + '';
     }
 };
 
