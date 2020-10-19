@@ -9,7 +9,9 @@ import userRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
 
 import devBundle from "./devBundle"; // Comment out when in production
+import path from "path";
 
+const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 devBundle.compile(app); // Comment out when in production
 
@@ -19,6 +21,8 @@ app.use(cookieParser());
 app.use(compression());
 app.use(helmet());
 app.use(cors());
+app.use("/dist", express.static(
+    path.join(CURRENT_WORKING_DIR, '/dist')));
 app.use("/", userRoutes);
 app.use("/", authRoutes);
 app.use((err, req, res, next) => {
