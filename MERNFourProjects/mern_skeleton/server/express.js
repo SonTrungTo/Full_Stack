@@ -8,7 +8,10 @@ import Template from "../template";
 import userRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
 
+import devBundle from "./devBundle"; // Comment out when in production
+
 const app = express();
+devBundle.compile(app); // Comment out when in production
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
