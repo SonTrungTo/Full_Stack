@@ -6,11 +6,11 @@ const nodeExternals = require("webpack-node-externals");
 const config = {
     name: "server",
     entry: [
-        path.join(CURRENT_WORKING_DIR, 'server/server.js')
+        path.join(CURRENT_WORKING_DIR, '/server/server.js')
     ],
     target: "node",
     output: {
-        path: path.join(CURRENT_WORKING_DIR, 'dist/'),
+        path: path.join(CURRENT_WORKING_DIR, '/dist'),
         filename: "server.generated.js",
         publicPath: '/dist/',
         libraryTarget: 'commonjs2'
@@ -22,6 +22,10 @@ const config = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
+            },
+            {
+                test: /\.(jpeg|jpg|ttf|eot|svg|gif|png)(\?[\s\S]+)?$/,
+                use: ['file-loader']
             }
         ]
     }
