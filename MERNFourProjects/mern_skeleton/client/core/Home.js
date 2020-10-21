@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -25,17 +26,20 @@ const useStyles = makeStyles( theme => ({
 export default function Home() {
     const classes = useStyles();
     return (
-        <Card className={ classes.card }>
-            <Typography variant="h6" className={ classes.title }>
-                HOME PAGE
-            </Typography>
-            <CardMedia component="img" className={ classes.media }
-            image={ madokaImg } title="Magical Girls" />
-            <CardContent>
-                <Typography variant="body2" component="p">
-                    Welcome to SonBook-A social media for nerds
+        <div>
+            <Link to="/users">Users</Link>
+            <Card className={ classes.card }>
+                <Typography variant="h6" className={ classes.title }>
+                    HOME PAGE
                 </Typography>
-            </CardContent>
-        </Card>
+                <CardMedia component="img" className={ classes.media }
+                image={ madokaImg } title="Magical Girls" />
+                <CardContent>
+                    <Typography variant="body2" component="p">
+                        Welcome to SonBook-A social media for nerds
+                    </Typography>
+                </CardContent>
+            </Card>
+        </div>
     );
 };
