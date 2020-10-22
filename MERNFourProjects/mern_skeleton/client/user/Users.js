@@ -42,8 +42,8 @@ export default function Users() {
         const token = auth.isAuthenticated();
 
         list({t: token}, signal).then(data => {
-            if (data && data.err) {
-                console.log(data.err);
+            if (data && data.error) {
+                console.log(data.error);
             } else {
                 setUsers(data);
             }

@@ -20,6 +20,11 @@ const useStyles = makeStyles( theme => ({
     },
     media: {
         minHeight: 400
+    },
+    menu: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap'
     }
 }));
 
@@ -27,7 +32,10 @@ export default function Home() {
     const classes = useStyles();
     return (
         <div>
-            <Link to="/users">Users</Link>
+            <div className={ classes.menu }>
+                <Link to="/users">Users</Link>
+                <Link to="/signup">Sign Up</Link>
+            </div>
             <Card className={ classes.card }>
                 <Typography variant="h6" className={ classes.title }>
                     HOME PAGE
