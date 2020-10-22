@@ -47,6 +47,7 @@ export default function Signup() {
         name: '',
         email: '',
         password: '',
+        retypePassword: '',
         open: false,
         error: ''
     };
@@ -60,7 +61,8 @@ export default function Signup() {
         const user = {
             name: values.name || undefined,
             email: values.email || undefined,
-            password: values.password || undefined
+            password: values.password || undefined,
+            retypePassword: values.retypePassword || undefined
         };
 
         create(user).then( data => {
@@ -91,6 +93,10 @@ export default function Signup() {
                     <TextField id="password" label="Password" type="password"
                     value={ values.password }
                     onChange={ handleChange("password") } margin="normal" />
+                    <br />
+                    <TextField id="retypePassword" label="Confirm password" type="password"
+                    value={ values.retypePassword }
+                    onChange={ handleChange("retypePassword") } margin="normal" />
                     <br />
                 </div>
                 {

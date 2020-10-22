@@ -36,6 +36,15 @@ UserSchema
         return this._password;
     });
 
+UserSchema
+    .virtual("retypePassword")
+    .set(function (retypePassword) {
+        this._retypePassword = retypePassword;
+    })
+    .get(function () {
+        return this._retypePassword;
+    });
+
 UserSchema.methods = {
     authenticate: function (plainText) {
         return this.encryptPassword(plainText) === this.hashed_password;
@@ -65,10 +74,13 @@ UserSchema.path('hashed_password').validate(function (v) {
         this.invalidate('password', 'Password must contain at least 8 characters, in which there are at least ' +
         '1 lowercase letter, ' + '1 uppercase letter, ' +
         '1 digit and ' + '1 special character.');
-    }
+    };
     if (this.isNew && !this._password) {
         this.invalidate('password', 'Password is required');
-    }
+    };
+    if (this._password !== this._retypePassword) {
+        this.invalidate('password', 'Password checks do not match');
+    };
 }, null);
 
 export default mongoose.model('User', UserSchema);
