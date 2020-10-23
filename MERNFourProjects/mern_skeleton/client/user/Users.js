@@ -39,9 +39,9 @@ export default function Users() {
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
-        const token = auth.isAuthenticated();
+        const res = auth.isAuthenticated();
 
-        list({t: token}, signal).then(data => {
+        list({t: res.token}, signal).then(data => {
             if (data && data.error) {
                 console.log(data.error);
             } else {

@@ -35,6 +35,7 @@ export default function Home() {
             <div className={ classes.menu }>
                 <Link to="/users">Users</Link>
                 <Link to="/signup">Sign Up</Link>
+                <Link to="/signin">Sign In</Link>
             </div>
             <Card className={ classes.card }>
                 <Typography variant="h6" className={ classes.title }>
