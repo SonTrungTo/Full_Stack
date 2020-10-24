@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
@@ -34,6 +34,7 @@ const useStyles = makeStyles( theme => ({
 
 export default function Users() {
     const [users, setUsers] = useState([]);
+    const [redirectToSignin, setRedirectToSignin] = useState(false);
     const classes = useStyles();
 
     useEffect(() => {
@@ -44,6 +45,7 @@ export default function Users() {
         list({t: res.token}, signal).then(data => {
             if (data && data.error) {
                 console.log(data.error);
+                setRedirectToSignin(true);
             } else {
                 setUsers(data);
             }
@@ -52,6 +54,10 @@ export default function Users() {
             abortController.abort();
         };
     }, []);
+
+    if (redirectToSignin) {
+        return (<Redirect to="/signin" />);
+    }
 
     return (
         <Paper elevation={4} className={ classes.root }>
