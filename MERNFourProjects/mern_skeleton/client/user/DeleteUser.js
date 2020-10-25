@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { remove } from "./api-user";
 import auth from "../auth/auth-helper";
@@ -10,6 +11,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+
+DeleteUser.propTypes = {
+    userId: PropTypes.string.isRequired
+};
 
 export default function DeleteUser(props) {
     const [open, setOpen] = useState(false);
