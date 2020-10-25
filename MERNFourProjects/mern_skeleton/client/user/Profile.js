@@ -11,9 +11,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import Person from "@material-ui/icons/Person";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Delete from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import Edit from "@material-ui/icons/Edit";
+import DeleteUser from "./DeleteUser";
 import { Typography } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 
@@ -89,9 +89,7 @@ export default function Profile(props) {
                                 <Edit />
                             </IconButton>
                         </Link>
-                        <IconButton>
-                            <Delete />
-                        </IconButton>
+                        <DeleteUser userId={ user._id } />
                     </ListItemSecondaryAction>
         )
                     }
