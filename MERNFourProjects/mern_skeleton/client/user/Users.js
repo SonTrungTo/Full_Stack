@@ -34,7 +34,6 @@ const useStyles = makeStyles( theme => ({
 
 export default function Users() {
     const [users, setUsers] = useState([]);
-    const [redirectToSignin, setRedirectToSignin] = useState(false);
     const classes = useStyles();
 
     useEffect(() => {
@@ -54,10 +53,6 @@ export default function Users() {
             abortController.abort();
         };
     }, []);
-
-    if (redirectToSignin) {
-        return (<Redirect to="/signin" />);
-    }
 
     return (
         <Paper elevation={4} className={ classes.root }>
