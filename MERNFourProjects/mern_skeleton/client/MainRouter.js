@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./auth/PrivateRoute";
 import Home from "./core/Home";
+import Menu from "./core/Menu";
 import Users from "./user/Users";
 import Signup from "./user/Signup";
 import Signin from "./auth/Signin";
@@ -11,6 +12,7 @@ import EditProfile from "./user/EditProfile";
 const MainRouter = () => {
     return (
         <div>
+            <Menu />
             <Switch>
                 <Route exact={true} path="/" component={ Home } />
                 <PrivateRoute path="/users" component={ Users } />
