@@ -1,3 +1,4 @@
+// Back-End codes
 import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
@@ -8,8 +9,17 @@ import Template from "../template";
 import userRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
 
+// Front-End bundling for dev
 import devBundle from "./devBundle"; // Comment out when in production
 import path from "path";
+
+// Server-side rendering
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+import StaticRouter from "react-router-dom/StaticRouter";
+import MainRouter from "../client/MainRouter";
+import { ServerStyleSheets, ThemeProvider } from "@material-ui/core/styles";
+import theme from "../client/theme";
 
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
@@ -37,8 +47,27 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.get("/", (req, res) => {
-    res.status(200).send(Template());
+app.get("*", (req, res) => {
+    const sheets = new ServerStyleSheets();
+    const context = {};
+    const markup = ReactDOMServer.renderToString(
+        sheets.collect(
+            <StaticRouter location={ req.url } context={ context }>
+                <ThemeProvider theme={theme}>
+                    <MainRouter />
+                </ThemeProvider>
+            </StaticRouter>
+        )
+    );
+
+    if (context.url) {
+        return res.redirect(303, context.url);
+    }
+    const css = sheets.toString();
+    res.status(200).send(Template({
+        markup: markup,
+        css: css
+    }));
 });
 
 export default app;
