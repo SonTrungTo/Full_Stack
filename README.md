@@ -8,6 +8,10 @@
 
 (to be continued)
 
+## MOOC courses (2 certificates in total)
+1. [FullStack Open 2020](https://github.com/SonTrungTo/Fullstack-2020-Helsinki)
+1. [DevOps 2020](https://github.com/SonTrungTo/DevOps-2020-Helsinki)
+
 ## Projects
 1. [Son's Website](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/Bootstrap_Flexbox/project.html)
 1. [Robot Delivery](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/EloquentJS/ch7/project1.html)
