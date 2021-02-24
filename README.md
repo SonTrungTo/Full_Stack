@@ -8,7 +8,7 @@
 
 (to be continued)
 
-## MOOC courses (2 certificates in total)
+## MOOC courses (3 certificates in total)
 1. [FullStack Open 2020](https://github.com/SonTrungTo/Fullstack-2020-Helsinki)
 1. [DevOps 2020](https://github.com/SonTrungTo/DevOps-2020-Helsinki)
 
@@ -25,8 +25,12 @@
 1. [The Weather App](https://weather-app-son-to.herokuapp.com/)
 1. [Learn About Me](https://learn-about-me-son-to.herokuapp.com/)
 1. [To Do List](https://to-do-list-son-to.herokuapp.com/)
+
+## Important Projects
 1. [Books Store](https://github.com/SonTrungTo/BooksStore)
 1. [SonBook-A Facebook clone](https://github.com/SonTrungTo/TheSocialNetwork)
+1. [SonSera-A Coursera clone](https://github.com/SonTrungTo/Online_studies_platform) (in progress...)
+1. [Rating Repository App](https://github.com/SonTrungTo/ReactNative_part10_2020)
 
 ## Other projects (waiting to be improved)
 1. [Son's Website (with oudated CSS 960)](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/HTML_CSS/ch15/example/example.html)
