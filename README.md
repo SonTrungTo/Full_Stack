@@ -31,6 +31,7 @@
 1. [SonBook-A Facebook clone](https://github.com/SonTrungTo/TheSocialNetwork)
 1. [SonSera-A Coursera clone](https://github.com/SonTrungTo/Online_studies_platform) (in progress...)
 1. [Rating Repository App](https://github.com/SonTrungTo/ReactNative_part10_2020)
+1. [Reaktor Internship App](https://github.com/SonTrungTo/Reaktor_Internship)
 
 ## Other projects (waiting to be improved)
 1. [Son's Website (with oudated CSS 960)](https://htmlpreview.github.io/?https://github.com/SonTrungTo/Full_Stack/blob/master/HTML_CSS/ch15/example/example.html)
